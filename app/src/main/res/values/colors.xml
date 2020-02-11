@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2D3436</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#000</color>
+    <color name="yellow">#fff748</color>
+    <color name="white">#ffffff</color>
+    <color name="violet">#9C27B0</color>
+    <color name="black">#000000</color>
+    <color name="logo">#ffcc00</color>
+    <color name="bg2">#5ce1e6</color>
+    <color name="green">#7ed957</color>
+    <color name="yell">#51ebe1</color>
+    <color name="darkblue">#7800ff</color>
+    <color name="newyell">#ff65dd</color>
+    <color name="orange">#ff4b2b</color>
+    <color name="soda">#FBB034</color>
+    <color name="hodors_sentence">#2A2A72</color>
+</resources>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/grad4"
+    tools:context=".upvolun">
+
+  <Space
+      android:layout_width="match_parent"
+      android:layout_height="18dp" />
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Volunteer Registration"
+      android:textColor="@color/violet"
+      android:layout_gravity="center_horizontal"
+      android:textSize="26dp"
+      android:textStyle="bold"/>
+
+  <Space
+      android:layout_width="match_parent"
+      android:layout_height="16dp" />
+
+  <EditText
+      android:id="@+id/nam"
+      android:layout_width="311dp"
+      android:layout_height="55dp"
+      android:layout_gravity="center_horizontal"
+      android:drawableLeft="@drawable/ic_account_box_black_24dp"
+      android:hint="  Full Name" />
+
+  <Space
+      android:layout_width="match_parent"
+      android:layout_height="15dp" />
+
+  <EditText
+      android:id="@+id/ema"
+      android:layout_width="314dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:drawableLeft="@drawable/ic_email_black_24dp"
+      android:hint="  E-mail ID" />
+
+  <Space
+      android:layout_width="match_parent"
+      android:layout_height="18dp" />
+
+  <EditText
+      android:id="@+id/p1"
+      android:layout_width="312dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:drawableLeft="@drawable/ic_lock_black_24dp"
+      android:hint="  Password"
+      android:inputType="textPassword" />
+
+  <Space
+      android:layout_width="match_parent"
+      android:layout_height="18dp" />
+
+  <EditText
+      android:id="@+id/p2"
+      android:layout_width="315dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:drawableLeft="@drawable/ic_lock_black_24dp"
+      android:hint="  Confirm Password"
+      android:inputType="textPassword" />
+
+  <Space
+      android:layout_width="match_parent"
+      android:layout_height="19dp" />
+
+  <EditText
+      android:id="@+id/phn"
+      android:layout_width="312dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:drawableLeft="@drawable/ic_phone_black_24dp"
+      android:hint="  Phone No."
+      android:inputType="phone" />
+
+  <Space
+      android:layout_width="match_parent"
+      android:layout_height="21dp" />
+
+  <EditText
+      android:id="@+id/add"
+      android:layout_width="313dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:drawableLeft="@drawable/ic_info_black_24dp"
+      android:hint="  Address"
+      android:inputType="textLongMessage" />
+
+  <Space
+      android:layout_width="match_parent"
+      android:layout_height="43dp" />
+    <Button
+        android:id="@+id/b"
+        android:layout_width="201dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/grad1"
+        android:text="SIgn up"
+        android:textColor="@color/white" />
+</LinearLayout>

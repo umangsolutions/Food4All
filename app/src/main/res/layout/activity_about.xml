@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutActivity"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_gravity="center">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_width="209dp"
+        android:layout_height="203dp"
+        android:src="@drawable/appicc"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="34dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Department of Information Technology\n"
+        android:fontFamily="@font/open_sans"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textSize="15sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        android:text="     GMR Institute of Technology\n           Andhra Pradesh, India "
+        android:fontFamily="@font/open_sans"
+        android:textColor="#000"
+        android:textSize="15sp" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="23dp" />
+    <ImageView
+        android:layout_width="209dp"
+        android:layout_height="123dp"
+        android:layout_marginLeft="100dp"
+        android:src="@drawable/gmrit" />
+
+
+
+
+</LinearLayout>

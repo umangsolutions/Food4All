@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Issues"
+    android:orientation="vertical"
+    android:background="#fff">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="36dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Suggestions/Compliants"
+        android:textColor="#000"
+        android:textSize="28dp"
+        android:fontFamily="@font/open_sans"/>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="53dp" />
+
+    <EditText
+        android:id="@+id/e"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content"
+        android:hint="Email Id"
+        android:fontFamily="@font/open_sans"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textEmailAddress"
+        />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="39dp" />
+
+    <EditText
+        android:id="@+id/report"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:hint="Report Problems Here"
+        android:fontFamily="@font/open_sans"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textLongMessage"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="66dp" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="208dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button"
+        android:text="Submit"
+        android:textColor="#ffffff" />
+
+
+</LinearLayout>

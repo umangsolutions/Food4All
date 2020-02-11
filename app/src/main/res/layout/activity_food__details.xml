@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="255dp"
+        android:layout_above="@+id/input_group"
+        android:layout_alignStart="@+id/input_group"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="31dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:text="Help Other People Eat (HOPE)"
+            android:textColor="#000"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:layout_width="312dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="196dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/smiling" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/input_group"
+        android:layout_width="364dp"
+        android:layout_height="283dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="23dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+       <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/input_group"
+            android:background="@drawable/edit_text_top"
+            android:hint="Full Name"
+            android:fontFamily="@font/open_sans"
+            android:inputType="textPersonName"
+            android:padding="15dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_middle"
+            android:hint="Phone"
+            android:maxLength="10"
+            android:fontFamily="@font/open_sans"
+            android:inputType="phone"
+            android:padding="15dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+
+        <EditText
+            android:id="@+id/add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_middle"
+            android:hint="Address"
+            android:fontFamily="@font/open_sans"
+            android:inputType="textPostalAddress"
+            android:padding="15dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <Spinner
+            android:id="@+id/spin"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:background="@drawable/edit_text_bottom"
+            android:entries="@array/placetype"
+            android:padding="15dp" />
+
+        <Button
+            android:id="@+id/sub"
+            android:layout_width="208dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/input_group"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button"
+            android:fontFamily="@font/open_sans"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="SUBMIT DETAILS"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="17sp" />
+
+        <!--<TextView
+            android:id="@+id/signIn_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:padding="10dp"
+            android:text="Already Have an Account?  Sign in"
+            android:textAllCaps="true"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:textColor="#FAD0E1"
+            android:fontFamily="sans-serif"/>-->
+
+    </LinearLayout>
+</RelativeLayout>

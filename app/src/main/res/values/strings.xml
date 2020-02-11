@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">Food 4 All</string>
+    <string name="title_activity_regvolunteer">regvolunteer</string>
+    <string-array name="placetype">
+        <item>Choose Place</item>
+        <item>Restaurant</item>
+        <item>Commercial Place</item>
+        <item>House</item>
+        <item>Function</item>
+    </string-array>
+    <string name="Multiline_Text_By_N">
+        Line number 1 \nLine number 2
+    </string>
+    <string name="gallery">Gallery</string>
+    <string name="profile">Profile</string>
+    <string name="upload">Upload Photos</string>
+    <string name="message">We feel very Happy to see you Here.\nYou will be notified when there is a Donation\n\nHappy Volunteering !</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_login2">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="yes">Clicked Yes !</string>
+    <string name="no">Clicked No !</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="links">links</string>
+    <string name="enter_message">Enter Message</string>
+    <string name="send">SEND</string>
+    <string name="search_donor">Search Donor</string>
+    <string name="chat_room">Chat Room</string>
+    <string name="events">Events</string>
+    <string name="login">Login</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="new_user_click_here_to_register">New User ? Click here to Register</string>
+    <string name="register">Register</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_mobile">Enter Mobile</string>
+    <string name="enter_pin_code">Enter Pin Code</string>
+    <string name="sign_up">Sign up</string>
+    <string name="already_a_member_click_here">Already a Member Click Here !</string>
+    <string name="blood_donation_camp">Blood donation camp</string>
+    <string name="vizag">vizag</string>
+    <string name="date_20_02_2018">Date: 20/02/2018</string>
+    <string name="select_date">Select Date</string>
+    <string name="location">Location</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="signout">Sign Out</string>
+    <string name="no_internet_connection_available">No Internet Connection Available</string>
+    <string name="enter_location">Enter Location</string>
+    <string name="enter_description">Enter Description</string>
+    <string name="last_blood_donation_date">Last Blood Donation Date</string>
+    <string name="save">save</string>
+    <string name="enter_age">Enter Age</string>
+    <string name="forgot_password_click_here">Forgot Password ? Click here</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="enter_email_id">Enter Email ID</string>
+    <string name="close">Close</string>
+    <string name="last_blood_donation">Last Donation</string>
+    <string name="no_events_to_display">No Events to Display</string>
+    <string name="welcome_message">Welcome</string>
+</resources>
