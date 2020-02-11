@@ -27,7 +27,10 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".RecyclerView_Gallery"></activity>
+        <activity android:name=".OrphangeActivity"></activity>
+        <activity android:name=".Orphanage_login" />
+        <activity android:name=".OrphangeRegistration" />
+        <activity android:name=".RecyclerView_Gallery" />
         <activity android:name=".Upload_Photos" />
         <activity android:name=".Image_Gallery" />
         <activity

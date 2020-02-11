@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.food4all.utilities.MyAppPrefsManager;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,8 +28,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context context;
     List<Fooddetails> fooddetails;
-    DatabaseReference ref, databaseReference;
-    String nam, ph, pl, add, dat, status;
+    DatabaseReference myRef, databaseReference;
+    String nam, ph, pl, add, dat, status,email;
+    MyAppPrefsManager myAppPrefsManager;
+    FirebaseAuth firebaseAuth;
 
     public MyAdapter(Context c, List<Fooddetails> f) {
         context = c;
@@ -44,8 +48,34 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
         final String phone, message;
+        /*myAppPrefsManager=new MyAppPrefsManager(context);
+        email=myAppPrefsManager.getUserName();*/
+        firebaseAuth=FirebaseAuth.getInstance();
         phone = fooddetails.get(position).getPhone();
-        message = "I'm coming to pickup the Food.Please feel free to contact me at this number. Thanks for donation!";
+
+        myRef= FirebaseDatabase.getInstance().getReference("Volunteers");
+        myRef.keepSynced(true);
+        Query query = myRef.orderByChild("email").equalTo(email);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+                    // dataSnapshot is the "issue" node with all children with id 0
+                    for (DataSnapshot issue : dataSnapshot.getChildren()) {
+                        nam=issue.getValue(Volunteer.class).getName();
+                        ph=issue.getValue(Volunteer.class).getPhone();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        message = "Food Robin is on his way to Pickup the Food.\nPlease feel free to contact this number.\nThanks for donation!";
         holder.name.setText(fooddetails.get(position).getName());
         holder.phone.setText(fooddetails.get(position).getPhone());
         holder.type.setText(fooddetails.get(position).getPlace());
@@ -71,6 +101,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                             for (DataSnapshot stat : dataSnapshot.getChildren()) {
                                 stat.getRef().child("status").setValue("Booked");
                             }
+
                             notifyDataSetChanged();
                         }
 

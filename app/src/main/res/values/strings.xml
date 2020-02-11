@@ -8,6 +8,13 @@
         <item>House</item>
         <item>Function</item>
     </string-array>
+    <string-array name="organization_type">
+        <item>Type of Organization</item>
+        <item>Hostel</item>
+        <item>Mess</item>
+        <item>Orphanages</item>
+        <item>Old Age Homes</item>
+    </string-array>
     <string name="Multiline_Text_By_N">
         Line number 1 \nLine number 2
     </string>

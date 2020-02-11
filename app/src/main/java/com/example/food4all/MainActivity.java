@@ -32,6 +32,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public Button b1, b2;
     private FirebaseAuth firebaseAuth;
@@ -111,6 +112,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent g = new Intent(MainActivity.this,RecyclerView_Gallery.class);
                 g.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(g);
+                break;
+            case R.id.nav_org:
+                Intent intent = new Intent(MainActivity.this,Orphanage_login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);

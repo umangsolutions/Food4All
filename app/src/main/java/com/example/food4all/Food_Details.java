@@ -123,8 +123,9 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
                             String phone = dataSnapshot.getValue(Volunteer.class).toString();
                             SmsManager smsManager = SmsManager.getDefault();
                             String m = "Hello Volunteer," + "\n" + s1 + " is willing to Donate Food from a " + msg + "\nAddress is " + s3 + "\nContact :" + s2;
-                            String res = m + "\n\nReply YES if you want to Pickup";
-                            smsManager.sendTextMessage(phone, null, res, null, null);
+                            String res = m + "\n\nPlease login to app,";
+                            String fina = res + "and update your Pickup Status";
+                            smsManager.sendTextMessage(phone, null, fina, null, null);
 
                         }
 

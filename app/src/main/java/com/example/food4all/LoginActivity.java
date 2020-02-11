@@ -112,7 +112,6 @@ public class LoginActivity extends AppCompatActivity {
         s2 = t2.getText().toString().trim();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-
         if (s1.equals("admin@gmail.com") && s2.equals("Admin@123")) {
             Intent i = new Intent(LoginActivity.this, AdminActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -133,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         else if(s2.length()<8) {
-            Toast.makeText(this, "Password should be more than 8 Characters !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid Password !", Toast.LENGTH_SHORT).show();
             //t2.setError("Password should be more than 8 Characters !");
         }
         else {

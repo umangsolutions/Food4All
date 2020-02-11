@@ -78,7 +78,6 @@ public class Upload_Photos extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
         storage=FirebaseStorage.getInstance();
         storageReference= storage.getReference();
 
