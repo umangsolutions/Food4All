@@ -6,7 +6,7 @@
 
              <item android:id="@+id/nav_org"
                  android:icon="@drawable/ic_account_balance_black_24dp"
-                 android:title="Organization"></item>
+                 android:title="Recipients"></item>
 
              <item android:id="@+id/nav_message"
                  android:icon="@drawable/ic_poll_black_24dp"

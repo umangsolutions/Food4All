@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:hint="Enter Donor Name"
         android:drawableLeft="@drawable/ic_search_black_24dp"
         android:drawablePadding="10dp"/>
     <androidx.recyclerview.widget.RecyclerView

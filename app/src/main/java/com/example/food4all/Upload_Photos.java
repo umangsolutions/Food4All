@@ -88,6 +88,7 @@ public class Upload_Photos extends AppCompatActivity {
 
         myRef= FirebaseDatabase.getInstance().getReference("Volunteers");
         myRef.keepSynced(true);
+
         Query query = myRef.orderByChild("email").equalTo(email);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

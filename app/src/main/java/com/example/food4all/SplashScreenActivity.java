@@ -122,8 +122,7 @@ public class SplashScreenActivity extends Activity {
 
 
     }
-
-
+    
 //-************************ permission check ***********************************************************************
 
     private void permissioncheck() {

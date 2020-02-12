@@ -43,9 +43,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Food 4 All");
+
         drawer = findViewById(R.id.drawer_layout);
+
+
         myAppPrefsManager=new MyAppPrefsManager(this);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

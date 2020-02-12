@@ -1,3 +1,4 @@
+
 package com.example.food4all;
 
 
@@ -55,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
             connected = true;
         } else
             connected = false;
-
         if (!connected) {
             Toast.makeText(LoginActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
         }

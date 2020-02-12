@@ -27,7 +27,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".OrphangeActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".OrphangeActivity" />
         <activity android:name=".Orphanage_login" />
         <activity android:name=".OrphangeRegistration" />
         <activity android:name=".RecyclerView_Gallery" />
@@ -81,7 +82,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".openvolun"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden1"/>
         <activity
             android:name=".regrest"
             android:screenOrientation="portrait" />

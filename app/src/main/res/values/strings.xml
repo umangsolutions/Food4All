@@ -9,7 +9,7 @@
         <item>Function</item>
     </string-array>
     <string-array name="organization_type">
-        <item>Type of Organization</item>
+        <item>Type of Recipient</item>
         <item>Hostel</item>
         <item>Mess</item>
         <item>Orphanages</item>

@@ -157,6 +157,13 @@ public class openvolun extends AppCompatActivity {
 
             return true;
         }
+
+        if(item.getItemId() == R.id.action_profile) {
+            Intent prof = new Intent(openvolun.this,ProfileActivity.class);
+            prof.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(prof);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
