@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity"
+    tools:context=".Activities.Volunteer.VolunteerProfile"
     android:layout_gravity="center_vertical"
     android:orientation="vertical">
 
@@ -58,6 +58,26 @@
         android:layout_gravity="left"
         android:layout_marginLeft="50dp"
         android:text="knvrssaikiran@gmail.com"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginTop="15dp"
+            android:textColor="#000"
+            android:layout_gravity="left"
+            android:layout_marginLeft="50dp"
+            android:text="Total No. of Deliveries :"></TextView>
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="2"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="-30dp"></TextView>
     </LinearLayout>
 
 </LinearLayout>

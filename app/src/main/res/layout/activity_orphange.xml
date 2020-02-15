@@ -4,18 +4,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrphangeActivity">
+    tools:context=".Activities.Recipients.RecipientActivity"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:layout_marginLeft="60dp"
+        android:layout_gravity="center_horizontal"
         android:text="Welcome Recipients !"
         android:textColor="#000"
+        android:layout_marginTop="25dp"
         android:textStyle="bold"
         android:textSize="25dp"></TextView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/donname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="25dp"
+            android:inputType="text"
+            android:hint="Name of Donor" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/volname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:layout_margin="25dp"
+            android:hint="Volunteer Name" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/volphone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:layout_margin="25dp"
+            android:maxLength="10"
+            android:hint="Volunteer Phone Number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/noofpeople"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="25dp"
+            android:maxLength="3"
+            android:inputType="number"
+            android:hint="No. of People Benefitted"
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="208dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Submit"
+        android:textColor="#fff"
+        android:background="@drawable/button"></Button>
+
 
 
 </LinearLayout>

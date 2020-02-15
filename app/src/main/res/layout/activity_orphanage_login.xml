@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Orphanage_login"
+    tools:context=".Activities.Recipients.Recipient_login"
     android:orientation="vertical">
 
     <LinearLayout
@@ -21,13 +21,12 @@
         android:orientation="vertical">
 
 
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="Recipients Login !"
-            android:textColor="#000"
-            android:textSize="30sp" />
+            android:src="@drawable/cir"
+            android:layout_margin="35dp"></ImageView>
+
 
     </LinearLayout>
     <LinearLayout
@@ -98,22 +97,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/open_sans"
             android:padding="10dp"
-            android:text="New User ? CLick here to Register"
-            android:textAllCaps="false"
-            android:textColor="#000"
-            android:textSize="15dp"
-            android:textStyle="normal" />
-
-        <TextView
-            android:id="@+id/reset"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_alignBottom="@+id/input_group"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="-5dp"
-            android:fontFamily="@font/open_sans"
-            android:padding="10dp"
-            android:text="Forgot your Password ? Click here"
+            android:text="New Recipient ? CLick here to Register"
             android:textAllCaps="false"
             android:textColor="#000"
             android:textSize="15dp"

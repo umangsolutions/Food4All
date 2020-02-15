@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".FireApp"
+        android:name=".Modal_Class.FireApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -27,31 +27,40 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".OrphangeActivity" />
-        <activity android:name=".Orphanage_login" />
-        <activity android:name=".OrphangeRegistration" />
-        <activity android:name=".RecyclerView_Gallery" />
-        <activity android:name=".Upload_Photos" />
-        <activity android:name=".Image_Gallery" />
+        <activity android:name=".Activities.Donor.DonorCelebrate"></activity>
+        <activity android:name=".Activities.Volunteer.VolunteerProfile" />
         <activity
-            android:name=".AdminActivity"
+            android:name=".Activities.Recipients.RecipientActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Activities.Recipients.Recipient_login"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Activities.Recipients.RecipientRegistration"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".RecyclerView.RecyclerView_Gallery" />
+        <activity
+            android:name=".Activities.Volunteer.Upload_Photos"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Activities.Administrator.AdminActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ResetPassword"
+            android:name=".Activities.Volunteer.ResetPassword"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Issues"
-            android:screenOrientation="portrait" />
+            android:name=".Activities.General.Issues"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".AboutActivity"
+            android:name=".Activities.General.AboutActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.LoginActivity2"
             android:label="@string/title_activity_login2"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".Activities.General.SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,53 +69,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StartActivity"
+            android:name=".Activities.General.HungerStatistics"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".Food_Details"
+            android:name=".Activities.Donor.Food_Details"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".Activities.Volunteer.VolunteerRegistration"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Donate"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".openrest"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".openvolun"
+            android:name=".Activities.Volunteer.VolunteerLogin"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden1"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".regrest"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".upvolun"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".uprest"
-            android:screenOrientation="portrait" />
-        <!--
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="@xml/grad" />
-        -->
-        <activity
-            android:name=".regvolun"
-            android:screenOrientation="portrait" />
+            android:name=".Activities.Volunteer.VolunteerActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".regvolunteer"
             android:label="@string/title_activity_regvolunteer"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.General.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

@@ -4,13 +4,21 @@
     tools:showIn="navigation_view">
          <group android:checkableBehavior="single">
 
-             <item android:id="@+id/nav_org"
-                 android:icon="@drawable/ic_account_balance_black_24dp"
-                 android:title="Recipients"></item>
+             <item android:id="@+id/nav_happy"
+                 android:icon="@drawable/ic_cake_black_24dp"
+                 android:title="Celebrate Birthday"></item>
 
              <item android:id="@+id/nav_message"
                  android:icon="@drawable/ic_poll_black_24dp"
                  android:title="Hunger Statistics"/>
+
+             <item android:id="@+id/nav_gallery"
+                 android:icon="@drawable/ic_photo_black_24dp"
+                 android:title="@string/gallery"></item>
+
+             <item android:id="@+id/nav_org"
+                 android:icon="@drawable/ic_account_balance_black_24dp"
+                 android:title="Recipients"></item>
 
              <item android:id="@+id/nav_info"
                  android:icon="@drawable/ic_info_black_24dp"
@@ -19,11 +27,5 @@
              <item android:id="@+id/nav_about"
                  android:icon="@drawable/ic_warning_black_24dp"
                  android:title="Report Issues"/>
-
-             <item android:id="@+id/nav_gallery"
-                 android:icon="@drawable/ic_photo_black_24dp"
-                 android:title="@string/gallery"></item>
-
-
          </group>
 </menu>

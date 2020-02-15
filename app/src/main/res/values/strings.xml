@@ -8,6 +8,23 @@
         <item>House</item>
         <item>Function</item>
     </string-array>
+
+    <string-array name="timetaken">
+        <item>Select Time Period</item>
+        <item>1 Hour</item>
+        <item>2 Hours</item>
+        <item>3 Hours</item>
+        <item>4 Hours</item>
+        <item>5 Hours</item>
+    </string-array>
+
+    <string-array name="recipient">
+        <item>Select Recipient</item>
+        <item>Deaf and Dumb School</item>
+        <item>Orphans Old Age Home</item>
+    </string-array>
+
+
     <string-array name="organization_type">
         <item>Type of Recipient</item>
         <item>Hostel</item>

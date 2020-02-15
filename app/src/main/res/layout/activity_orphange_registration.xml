@@ -1,52 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrphangeRegistration"
+    tools:context=".Activities.Recipients.RecipientRegistration"
     android:orientation="vertical"
     android:background="#fff">
 
     <LinearLayout
-        android:layout_width="386dp"
+        android:layout_width="match_parent"
         android:layout_height="202dp"
-        android:layout_above="@id/input_group"
-        android:layout_alignParentTop="true"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="0dp"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="14dp"
         android:gravity="center"
+        android:layout_gravity="center_horizontal"
         android:orientation="vertical">
+
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans"
-            android:layout_marginTop="-35dp"
             android:textStyle="bold"
-            android:text="Recipients Registration"
+            android:padding="15dp"
+            android:text="Spirit of Giving"
             android:textColor="#000"
-            android:textSize="22sp"/>
-
-    </LinearLayout>
+            android:textSize="24sp"/>
 
 
-    <LinearLayout
-        android:id="@+id/input_group"
-        android:layout_width="367dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="-30dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="240dp"
+            android:src="@drawable/re"
+            android:layout_gravity="center_horizontal"></ImageView>
+
+
 
         <EditText
             android:id="@+id/name"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_top"
@@ -151,7 +147,4 @@
             android:textSize="13dp" />
 
     </LinearLayout>
-
-
-
-</RelativeLayout>
+</ScrollView>

@@ -4,19 +4,145 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminActivity"
+    tools:context=".Activities.Administrator.AdminActivity"
     android:orientation="vertical"
     android:background="#fff">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome Adminstrator !"
+        android:text="Welcome Administrator !"
         android:textColor="#000"
         android:layout_gravity="center_horizontal"
         android:textSize="30dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/open_sans"
         android:textStyle="bold" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="0dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/volphone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:maxLength="10"
+            android:layout_margin="25dp"
+            android:inputType="number"
+            android:hint="Volunteer Phone Number"
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/sear"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="-75dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button"
+        android:drawable="@drawable/ic_mail"
+        android:src="@drawable/search"
+        android:text="Search"
+        android:textColor="#fff"></Button>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volunteer Name :"
+        android:layout_marginLeft="10dp"
+        android:textSize="18dp"
+        android:layout_marginTop="50dp"
+        android:textColor="#000"></TextView>
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="-27dp"
+        android:textSize="18dp"></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact Number :"
+        android:layout_marginLeft="10dp"
+        android:textSize="18dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#000"></TextView>
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="-27dp"
+        android:textSize="18dp"></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email ID                :"
+        android:layout_marginLeft="10dp"
+        android:textSize="18dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#000"></TextView>
+    <TextView
+        android:id="@+id/emailid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="-27dp"
+        android:textSize="16dp"></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deliveries             :"
+        android:layout_marginLeft="10dp"
+        android:textSize="18dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#000"></TextView>
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="-27dp"
+        android:textSize="18dp"></TextView>
+
+    <TextView
+        android:id="@+id/high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="High Status"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="70dp"
+        android:textColor="#000"
+        android:visibility="gone"
+        android:textSize="25dp"></TextView>
+    <TextView
+        android:id="@+id/norma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Normal Status"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="70dp"
+        android:textColor="#000"
+        android:visibility="gone"
+        android:textSize="25dp"></TextView>
+
+
 
 </LinearLayout>
