@@ -1,117 +1,132 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.food4all">
+<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+package="com.example.food4all">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.SEND_SMS" />
+<uses-permission android:name="android.permission.RECEIVE_SMS" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <application
-        android:name=".Modal_Class.FireApp"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        tools:ignore="GoogleAppIndexingWarning"
-        tools:targetApi="m">
-        <activity android:name=".Activities.Donor.DonorCelebrate"></activity>
-        <activity android:name=".Activities.Volunteer.VolunteerProfile" />
-        <activity
-            android:name=".Activities.Recipients.RecipientActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Activities.Recipients.Recipient_login"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Activities.Recipients.RecipientRegistration"
-            android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".RecyclerView.RecyclerView_Gallery" />
-        <activity
-            android:name=".Activities.Volunteer.Upload_Photos"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Activities.Administrator.AdminActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.Volunteer.ResetPassword"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.General.Issues"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Activities.General.AboutActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.login.LoginActivity2"
-            android:label="@string/title_activity_login2"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.General.SplashScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<application
+    android:name=".modals.FireApp"
+    android:allowBackup="true"
+    android:fullBackupContent="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme"
+    android:usesCleartextTraffic="true"
+    tools:ignore="GoogleAppIndexingWarning"
+    tools:targetApi="m">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Activities.General.HungerStatistics"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".Activities.Donor.Food_Details"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Activities.Volunteer.VolunteerRegistration"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Activities.Volunteer.VolunteerLogin"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Activities.Volunteer.VolunteerActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".regvolunteer"
-            android:label="@string/title_activity_regvolunteer"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.General.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+    <activity android:name=".activities.donor.DonorCelebrate" />
+    <activity android:name=".activities.volunteer.VolunteerProfile" />
+    <activity
+        android:name=".activities.recipients.RecipientActivity"
+        android:windowSoftInputMode="stateHidden" />
+    <activity
+        android:name=".activities.recipients.Recipient_login"
+        android:windowSoftInputMode="stateHidden" />
+    <activity
+        android:name=".activities.recipients.RecipientRegistration"
+        android:windowSoftInputMode="stateHidden" />
+    <activity android:name=".recyclerView.RecyclerView_Gallery" />
+    <activity
+        android:name=".activities.volunteer.Upload_Photos"
+        android:windowSoftInputMode="stateHidden" />
+    <activity
+        android:name=".activities.administrator.AdminActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".activities.volunteer.ResetPassword"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".activities.general.Issues"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="stateHidden" />
+    <activity
+        android:name=".activities.general.AboutActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".ui.login.LoginActivity2"
+        android:label="@string/title_activity_login2"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".activities.general.SplashScreenActivity"
+        android:theme="@style/AppTheme.NoActionBar">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+    <activity
+        android:name=".activities.general.HungerStatistics"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustResize" />
+    <activity
+        android:name=".activities.donor.Food_Details"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="stateHidden" />
+    <activity
+        android:name=".activities.volunteer.VolunteerRegistration"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="stateHidden" />
+    <activity
+        android:name=".activities.volunteer.VolunteerLogin"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="stateHidden" />
+    <activity
+        android:name=".activities.volunteer.VolunteerActivity"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="stateHidden" />
+    <activity
+        android:name=".regvolunteer"
+        android:label="@string/title_activity_regvolunteer"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".activities.general.MainActivity"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+    </activity>
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+    <uses-library
+        android:name="org.apache.http.legacy"
+        android:required="false" />
 
-        <receiver android:name=".NotificationReceiver" />
-    </application>
+    <meta-data
+        android:name="preloaded_fonts"
+        android:resource="@array/preloaded_fonts" />
+
+
+    <receiver android:name=".NotificationReceiver" />
+
+
+
+    <service
+        android:name=".firebase.MyFirebaseMessagingService"
+        android:permission="com.google.android.c2dm.permission.SEND">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        </intent-filter>
+    </service>
+
+
+</application>
 
 </manifest>

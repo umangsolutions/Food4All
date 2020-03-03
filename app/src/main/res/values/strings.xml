@@ -99,4 +99,11 @@
     <string name="last_blood_donation">Last Donation</string>
     <string name="no_events_to_display">No Events to Display</string>
     <string name="welcome_message">Welcome</string>
+
+
+
+    <string name="fcm_token">FCM Token: %s</string>
+    <string name="default_notification_channel_id" >
+        admin_channel
+    </string>
 </resources>

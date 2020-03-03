@@ -10,7 +10,7 @@
     android:paddingLeft="16dp"
     android:id="@+id/activity_main"
     android:background="#fff"
-    tools:context=".Activities.General.HungerStatistics">
+    tools:context=".activities.general.HungerStatistics">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"

@@ -36,6 +36,8 @@ import static com.example.food4all.receiver.NetworkStateChangeReceiver.IS_NETWOR
     public static final String SHARE = "Share";
     public static final String SINGLE_HYPHEN = "-";
 
+    public final static String AUTH_KEY_FCM = "AAAAoWtN3bc:APA91bG9Z4KOlBSVCNztc-FsSzkrdniGY9FAJPu5pXFD6D9JwxrNUkWoDsqRFng2C-y8FbK173ZEsb8A93E90nFaEImOsdZHX7IwzsjbzvkbulOwdcABL1ODifgeiwznElRKPEojo7jt";
+
     /*   Validating Fileds */
     // Validating email id
     public static boolean isValidEmail(String email1) {
