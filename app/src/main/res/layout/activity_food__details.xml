@@ -1,122 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff">
+    android:background="@color/white"
+    tools:ignore="Autofill">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:fontFamily="@font/open_sans"
-            android:text="Help Other People Eat (HOPE)"
-            android:layout_gravity="center_horizontal"
-            android:textColor="#000"
+            android:gravity="center"
+            android:text="@string/help_other_people_eat_hope"
+            android:textColor="@color/black"
             android:textSize="22sp" />
 
         <ImageView
             android:layout_width="312dp"
             android:layout_height="196dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/smiling" />
-        <EditText
-            android:id="@+id/name"
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/input_group"
-            android:background="@drawable/edit_text_top"
-            android:fontFamily="@font/open_sans"
-            android:hint="Full Name"
-            android:inputType="textPersonName"
-            android:padding="15dp" />
+            android:layout_margin="5dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
-
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_middle"
-            android:fontFamily="@font/open_sans"
-            android:hint="Phone"
-            android:inputType="phone"
-            android:maxLength="10"
-            android:padding="15dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:hint="@string/full_name"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-        <EditText
-            android:id="@+id/add"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_middle"
-            android:fontFamily="@font/open_sans"
-            android:hint="Address"
-            android:inputType="textPostalAddress"
-            android:padding="15dp" />
+            android:layout_margin="5dp">
 
-        <View
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:hint="@string/phone"
+                android:inputType="phone"
+                android:maxLength="10" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:hint="@string/address"
+                android:inputType="textPostalAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
             android:id="@+id/time"
+            style="@style/AppTheme.FilterSpinner"
             android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:background="@drawable/edit_text_bottom"
-            android:entries="@array/timetaken"
-            android:padding="15dp" />
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:entries="@array/timetaken" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
         <Spinner
             android:id="@+id/spin"
+            style="@style/AppTheme.FilterSpinner"
             android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:background="@drawable/edit_text_bottom"
-            android:entries="@array/placetype"
-            android:padding="15dp" />
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
-
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:entries="@array/placetype" />
 
 
         <Button
             android:id="@+id/sub"
-            android:layout_width="208dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/input_group"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
             android:background="@drawable/button"
             android:fontFamily="@font/open_sans"
-            android:layout_gravity="center_horizontal"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:text="SUBMIT DETAILS"
-            android:textAllCaps="false"
-            android:textColor="#fff"
+            android:padding="10dp"
+            android:text="@string/submit_details"
+            android:textColor="@color/white"
             android:textSize="17sp" />
 
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

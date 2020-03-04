@@ -99,11 +99,26 @@
     <string name="last_blood_donation">Last Donation</string>
     <string name="no_events_to_display">No Events to Display</string>
     <string name="welcome_message">Welcome</string>
-
-
-
     <string name="fcm_token">FCM Token: %s</string>
-    <string name="default_notification_channel_id" >
-        admin_channel
-    </string>
+    <string name="default_notification_channel_id">admin_channel</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="_17341a1236_gmrit_edu_in">17341A1236@gmrit.edu.in</string>
+    <string name="_91_63031_49161">+91 63031 49161</string>
+    <string name="department_of_information_technology">Department of Information Technology</string>
+    <string name="gmr_institute_of_technology">GMR Institute of Technology</string>
+    <string name="andhra_pradesh_india">Andhra Pradesh, India</string>
+    <string name="welcome_administrator">Welcome Administrator !</string>
+    <string name="volunteer_phone_number">Volunteer Phone Number</string>
+    <string name="search">Search</string>
+    <string name="volunteer_name">Volunteer Name :</string>
+    <string name="contact_number">Contact Number :</string>
+    <string name="email_id">Email ID :</string>
+    <string name="deliveries">Deliveries :</string>
+    <string name="normal_status">Normal Status</string>
+    <string name="high_status">High Status</string>
+    <string name="help_other_people_eat_hope">Help Other People Eat (HOPE)</string>
+    <string name="submit_details">SUBMIT DETAILS</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
 </resources>
