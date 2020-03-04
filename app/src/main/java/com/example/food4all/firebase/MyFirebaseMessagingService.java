@@ -53,12 +53,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onNewToken(@NonNull String s) {
         super.onNewToken(s);
         FirebaseMessaging.getInstance().subscribeToTopic(SUBSCRIBE_TO);
-
-
     }
-
-
-
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
@@ -67,7 +62,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         int notificationID = new Random().nextInt(3000);
 
       /*
-        Apps targeting SDK 26 or above (Android O) must implement notification channels and add its notifications
+        Apps targeting SDK 26 or above/ (Android O) must implement notification channels and add its notifications
         to at least one of them. Therefore, confirm if version is Oreo or higher, then setup notification channel
       */
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

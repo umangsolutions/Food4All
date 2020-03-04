@@ -8,11 +8,12 @@ public class Fooddetails  {
     private String status;
     private String time;
     private String date;
+    private String no_of_people;
 
     public Fooddetails() {
     }
 
-    public Fooddetails(String name, String phone, String address, String place, String status, String time, String date) {
+    public Fooddetails(String name, String phone, String address, String place, String status, String time, String date, String no_of_people) {
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -20,6 +21,7 @@ public class Fooddetails  {
         this.status = status;
         this.time = time;
         this.date = date;
+        this.no_of_people = no_of_people;
     }
 
     public String getName() {
@@ -76,5 +78,13 @@ public class Fooddetails  {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getNo_of_people() {
+        return no_of_people;
+    }
+
+    public void setNo_of_people(String no_of_people) {
+        this.no_of_people = no_of_people;
     }
 }

@@ -2,7 +2,7 @@
     <string name="app_name">Food 4 All</string>
     <string name="title_activity_regvolunteer">regvolunteer</string>
     <string-array name="placetype">
-        <item>Choose Place</item>
+        <item>Choose Type of Place</item>
         <item>Restaurant</item>
         <item>Commercial Place</item>
         <item>House</item>
@@ -10,7 +10,7 @@
     </string-array>
 
     <string-array name="timetaken">
-        <item>Select Time Period</item>
+        <item>Cooked Before</item>
         <item>1 Hour</item>
         <item>2 Hours</item>
         <item>3 Hours</item>

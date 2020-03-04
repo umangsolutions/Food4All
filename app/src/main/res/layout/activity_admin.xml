@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".activities.administrator.AdminActivity"
     android:orientation="vertical"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
     android:background="#fff">
 
     <TextView
@@ -15,7 +17,7 @@
         android:textColor="#000"
         android:layout_gravity="center_horizontal"
         android:textSize="30dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="0dp"
         android:fontFamily="@font/open_sans"
         android:textStyle="bold" />
 

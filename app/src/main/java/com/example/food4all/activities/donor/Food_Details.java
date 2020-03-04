@@ -52,7 +52,7 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
     private TextView userEmail;
     DatabaseReference reff, databaseReference;
     DatabaseReference ref;
-    EditText nam, phone, spin, add;
+    EditText nam, phone, spin, add,number;
     Fooddetails fooddetails;
     boolean connected = false;
 
@@ -63,6 +63,7 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
     final private String contentType = "application/json";
     String TOPIC;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +71,7 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
         firebaseAuth = FirebaseAuth.getInstance();
         submit = (Button) findViewById(R.id.sub);
         nam = (EditText) findViewById(R.id.name);
+        number = (EditText)findViewById(R.id.numberofpeople);
         phone = (EditText) findViewById(R.id.phone);
         add = (EditText) findViewById(R.id.add);
         fooddetails = new Fooddetails();
@@ -104,6 +106,7 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/userABC1");
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +117,7 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
                 final String s2 = phone.getText().toString().trim();
                 final String s3 = add.getText().toString().trim();
                 final String tim = time.getSelectedItem().toString();
+                final String num = number.getText().toString().trim();
 
                 Date cd = Calendar.getInstance().getTime();
                 System.out.println("Current time => " + cd);
@@ -122,11 +126,15 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
                 String currdate = df.format(cd);
 
                 SmsManager sms = SmsManager.getDefault();
-                String inf = "Thank You for your Donation" + "\nWe Recieved Your Details and a Volunteer will pick food from your Doorstep Shortly." + "\n\nFor any Queries Contact us on +91 938 1384 234";
+                String inf = "Thank You for your Donation" + "\nWe Received Your Details and a Volunteer will pick food from your Doorstep Shortly." + "\n\nFor any Queries Contact us on +91 938 1384 234";
                 if (s1.isEmpty()) {
                     Toast.makeText(Food_Details.this, "Please enter Name", Toast.LENGTH_LONG).show();
                 } else if (s2.isEmpty()) {
                     Toast.makeText(Food_Details.this, "Please enter Phone Number", Toast.LENGTH_LONG).show();
+                } else if(s2.length()<10) {
+                    Toast.makeText(Food_Details.this, "Phone Number is Invalid ", Toast.LENGTH_SHORT).show();
+                } else if(num.isEmpty()) {
+                    Toast.makeText(Food_Details.this, "Please enter Food Sufficient to People", Toast.LENGTH_SHORT).show();
                 } else if (s3.isEmpty()) {
                     Toast.makeText(Food_Details.this, "Please enter Address", Toast.LENGTH_LONG).show();
                 } else if (msg.equals("Choose Place")) {
@@ -141,18 +149,12 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
                     fooddetails.setDate(currdate);
                     fooddetails.setStatus("");
                     fooddetails.setTime(tim);
+                    fooddetails.setNo_of_people(num);
                     reff.push().setValue(fooddetails);
-
 
                     openDialog();
 
-
                     //sms.sendTextMessage(s2, null, inf, null, null);
-
-
-
-
-
 
                     /*ref.addChildEventListener(new ChildEventListener() {
                         @Override
@@ -194,11 +196,12 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
 
                         String url = "https://fcm.googleapis.com/fcm/send";
 
-                        String m = s1 + " is willing to Donate Food from a ";
-                        String res = m + msg + ", Address is " + s3;
-                        String add = "Food Cooked Before :" + tim;
+                        String m ="Mr./Mrs." + s1 + " is willing to Donate Food from ";
+                        String mid = m + msg + " which is sufficient to " + num + "person(s)";
+                        String res = mid + ", Address is " + s3;
+                        String add = "\nFood Cooked Before : " + tim;
                         String gmr = res + add;
-                        String fina = gmr + "Contact: " + s2;
+                        String fina = gmr + "\nContact: " + s2;
 
                         TOPIC = "/topics/donateFood";
                         JSONObject data = new JSONObject();
@@ -212,7 +215,6 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
                         notification_data.put("to", TOPIC);
 
                         Log.e(TAG, "" + notification_data);
-
 
                         JsonObjectRequest request = new JsonObjectRequest(url, notification_data, new Response.Listener<JSONObject>() {
                             @Override

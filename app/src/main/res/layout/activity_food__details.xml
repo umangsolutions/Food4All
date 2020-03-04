@@ -4,22 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#fff">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
         android:orientation="vertical"
         android:layout_marginLeft="30dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginRight="30dp">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans"
+            android:layout_margin="10dp"
             android:text="Help Other People Eat (HOPE)"
             android:layout_gravity="center_horizontal"
             android:textColor="#000"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
         <ImageView
             android:layout_width="312dp"
@@ -59,7 +62,6 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray" />
 
-
         <EditText
             android:id="@+id/add"
             android:layout_width="match_parent"
@@ -68,6 +70,21 @@
             android:fontFamily="@font/open_sans"
             android:hint="Address"
             android:inputType="textPostalAddress"
+            android:padding="15dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+        <EditText
+            android:id="@+id/numberofpeople"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_middle"
+            android:fontFamily="@font/open_sans"
+            android:hint="Food can feed (No. of People)"
+            android:inputType="number"
             android:padding="15dp" />
 
         <View
