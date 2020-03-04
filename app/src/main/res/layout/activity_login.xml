@@ -1,113 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#fff">
+    android:background="@color/white">
 
 
-
-    <LinearLayout
-
-        android:layout_width="386dp"
-        android:layout_height="325dp"
-        android:layout_above="@id/input_group"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="-14dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="-20dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="Welcome back !"
-            android:textColor="#000"
-            android:textSize="30sp" />
-
-        <ImageView
-            android:layout_width="301dp"
-            android:layout_height="218dp"
-            android:src="@drawable/volun2002"
-            android:layout_marginTop="10dp"/>
-    </LinearLayout>
     <LinearLayout
         android:id="@+id/input_group"
-        android:layout_width="386dp"
-        android:layout_height="300dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <!--<EditText
-            android:id="@+id/tf1"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/input_group"
-            android:layout_alignEnd="@+id/input_group"
-            android:background="@drawable/edit_text_top"
-            android:hint="E-mail ID"
-            android:layout_marginTop="-40dp"
             android:fontFamily="@font/open_sans"
-            android:inputType="textPersonName"
-            android:padding="15dp" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:gravity="center"
+            android:text="@string/welcome_back"
+            android:textColor="@color/black"
+            android:textSize="21sp" />
 
-        <EditText
-            android:id="@+id/tf2"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_bottom"
-            android:hint="Password"
-            android:fontFamily="@font/open_sans"
-            android:inputType="textPassword"
-            android:padding="15dp" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
--->
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/volun2002" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp">
+            android:layout_margin="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tf1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textEmailAddress"
                 android:hint="@string/enter_email"
-                android:padding="10dp" />
+                android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tf2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
                 android:ems="10"
-                android:inputType="textPassword"
+                android:fontFamily="sans-serif"
                 android:hint="@string/enter_password"
-                android:padding="10dp" />
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,58 +68,37 @@
             android:id="@+id/b"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-100dp"
-            android:fontFamily="@font/open_sans"
+            android:layout_margin="10dp"
             android:background="@drawable/button"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:text="SIGN IN"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/sign_in"
             android:textAllCaps="false"
-            android:textColor="#fff"
+            android:textColor="@color/white"
             android:textSize="17sp" />
 
         <TextView
             android:id="@+id/register"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_alignBottom="@+id/input_group"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:fontFamily="@font/open_sans"
-            android:padding="10dp"
-            android:text="New User ? CLick here to Register"
-            android:textAllCaps="false"
-            android:textColor="#000"
-            android:textSize="15dp"
-            android:textStyle="normal" />
+            android:gravity="center"
+            android:text="@string/new_user_click_here_to_register"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/reset"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_alignBottom="@+id/input_group"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="-5dp"
-            android:fontFamily="@font/open_sans"
-            android:padding="10dp"
-            android:text="Forgot your Password ? Click here"
-            android:textAllCaps="false"
-            android:textColor="#000"
-            android:textSize="15dp"
-            android:textStyle="normal" />
-
-        <!--<TextView
-            android:id="@+id/signUp_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:fontFamily="sans-serif"
-            android:padding="10dp"
-            android:text="Don't Have an Account?  Sign Up"
-            android:textAllCaps="true"
-            android:textColor="#ffffff"
-            android:textSize="13dp"
-            android:textStyle="bold" />-->
+            android:layout_margin="10dp"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="@string/forgot_password_click_here"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
 
     </LinearLayout>
-
-</RelativeLayout>
+</androidx.core.widget.NestedScrollView>

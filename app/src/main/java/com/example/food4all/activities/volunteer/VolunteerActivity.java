@@ -40,10 +40,9 @@ public class VolunteerActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     private ProgressDialog progressDialog;
     RecyclerView recyclerView;
-    ListView listView;
     ArrayList<Fooddetails> list;
     MyAdapter myAdapter;
-    boolean doubleBackToExitPressedOnce = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +51,11 @@ public class VolunteerActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        this.setTitle("Food Details");
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Food Details");
+        }
         EditText editText = findViewById(R.id.edittext);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -129,12 +132,9 @@ public class VolunteerActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_settings) {
             // Set UserLoggedIn in MyAppPrefsManager
             MyAppPrefsManager myAppPrefsManager = new MyAppPrefsManager(VolunteerActivity.this);
-
-            // Set isLogged_in of ConstantValues
-            ConstantValues.IS_USER_LOGGED_IN = myAppPrefsManager.isUserLoggedIn();
             FirebaseAuth.getInstance().signOut();
-            Intent intent=new Intent(VolunteerActivity.this, VolunteerLogin.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Intent intent = new Intent(VolunteerActivity.this, VolunteerLogin.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             myAppPrefsManager.setUserLoggedIn(false);
             myAppPrefsManager.setUserName("");
@@ -151,39 +151,20 @@ public class VolunteerActivity extends AppCompatActivity {
 
         if (item.getItemId() == R.id.action_settings) {
 
-
             return true;
         }
 
-        if(item.getItemId() == R.id.action_profile) {
+        if (item.getItemId() == R.id.action_profile) {
             Intent prof = new Intent(VolunteerActivity.this, VolunteerProfile.class);
             prof.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(prof);
             return true;
         }
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
 
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-
-                doubleBackToExitPressedOnce=false;
-
-
-            }
-        }, 2000);
-    }
 }

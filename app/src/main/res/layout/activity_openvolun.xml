@@ -4,92 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.volunteer.VolunteerActivity"
-    android:orientation="vertical">
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    tools:context=".activities.volunteer.VolunteerActivity">
 
     <EditText
         android:id="@+id/edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="Enter Donor Name"
-        android:drawableLeft="@drawable/ic_search_black_24dp"
-        android:drawablePadding="10dp"/>
+        android:layout_margin="2dp"
+        android:drawableStart="@drawable/ic_search_black_24dp"
+        android:drawablePadding="10dp"
+        android:hint="@string/enter_donor_name"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill" />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myrecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/myrecycler">
+        android:layout_margin="2dp" />
 
-    </androidx.recyclerview.widget.RecyclerView>
-    <!--<Space
-        android:layout_width="match_parent"
-        android:layout_height="24dp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/violet"
-        android:text="Welcome"
-        android:textSize="30dp"
-        android:layout_gravity="center_horizontal"/>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="12dp" />
-<TextView
-    android:id="@+id/txtview"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textColor="@color/violet"
-    android:textSize="30dp"
-    android:layout_gravity="center_horizontal" />
-
-    <View
-        android:layout_width="370dp"
-        android:layout_height="241dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/white"
-    </View>-->
-    <!--<LinearLayout
-        android:layout_width="380dp"
-        android:layout_height="277dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/grad4"
-        android:orientation="vertical">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Sorry, No Restaurants are Available !"
-            android:textColor="@color/design_default_color_primary"
-            android:textSize="22dp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="29dp" />
-
-        <ImageView
-            android:layout_width="222dp"
-            android:layout_height="173dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/sorry" />
-    </LinearLayout>
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="match_parent"
-        android:layout_height="418dp"
-        android:divider="@android:color/transparent"></ListView>
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/violet"
-        android:text="Logout"
-        android:textColor="@color/yellow" />-->
 </LinearLayout>
