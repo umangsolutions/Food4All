@@ -4,66 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.general.Issues"
-    android:layout_gravity="center_vertical"
-    android:gravity="center_vertical"
+    android:background="@color/white"
+    android:gravity="center"
     android:orientation="vertical"
-    android:background="#fff">
+    tools:context=".activities.general.Issues"
+    tools:ignore="Autofill">
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="36dp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Suggestions/Compliants"
-        android:textColor="#000"
-        android:textSize="28dp"
-        android:fontFamily="@font/open_sans"/>
-    <Space
         android:layout_width="match_parent"
-        android:layout_height="53dp" />
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/open_sans"
+        android:gravity="center"
+        android:text="@string/suggestions_compliants"
+        android:textColor="#000"
+        android:textSize="25sp" />
 
     <EditText
         android:id="@+id/e"
         android:layout_width="match_parent"
-        android:layout_margin="20dp"
         android:layout_height="wrap_content"
-        android:hint="Email Id"
-        android:fontFamily="@font/open_sans"
-        android:textSize="20sp"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/open_sans"
+        android:hint="@string/email_id"
         android:inputType="textEmailAddress"
-        />
+        android:textSize="20sp" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="39dp" />
 
     <EditText
         android:id="@+id/report"
         android:layout_width="match_parent"
-        android:layout_margin="20dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:hint="Report Problems Here"
-        android:fontFamily="@font/open_sans"
         android:layout_gravity="center_horizontal"
-        android:inputType="textLongMessage"/>
+        android:layout_margin="16dp"
+        android:fontFamily="@font/open_sans"
+        android:hint="@string/report_problems_here"
+        android:inputType="textLongMessage"
+        android:textSize="20sp" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="66dp" />
+
     <Button
         android:id="@+id/button"
-        android:layout_width="208dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
         android:background="@drawable/button"
-        android:text="Submit"
-        android:textColor="#ffffff" />
+        android:text="@string/submit"
+        android:textColor="@color/white" />
 
 
 </LinearLayout>

@@ -27,6 +27,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class VolunteerLogin extends AppCompatActivity {
     public Button b1, b2;
     EditText t1, t2;
@@ -47,12 +49,10 @@ public class VolunteerLogin extends AppCompatActivity {
         myAppPrefsManager = new MyAppPrefsManager(VolunteerLogin.this);
         ConstantValues.internetCheck(VolunteerLogin.this);
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-            //we are connected to a network
-            connected = true;
-        } else
-            connected = false;
+        //we are connected to a network
+        assert connectivityManager != null;
+        connected = Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)).getState() == NetworkInfo.State.CONNECTED ||
+                Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)).getState() == NetworkInfo.State.CONNECTED;
         if (!connected) {
             Toast.makeText(VolunteerLogin.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
         }
@@ -95,15 +95,6 @@ public class VolunteerLogin extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            this.finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void userLogin() {
         s1 = t1.getText().toString().trim();
         s2 = t2.getText().toString().trim();
@@ -120,20 +111,15 @@ public class VolunteerLogin extends AppCompatActivity {
         if (s1.isEmpty()) {
             t1.setError("Please enter Email ID");
             //Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
-        }else if(!s1.matches(emailPattern))
-        {
+        } else if (!s1.matches(emailPattern)) {
             t1.setError("Email is Invalid");
-        }
-        else if (s2.isEmpty()) {
+        } else if (s2.isEmpty()) {
             Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
             //t2.setError("Please enter Password");
-            return;
-        }
-        else if(s2.length()<8) {
+        } else if (s2.length() < 8) {
             Toast.makeText(this, "Invalid Password !", Toast.LENGTH_SHORT).show();
             //t2.setError("Password should be more than 8 Characters !");
-        }
-        else {
+        } else {
             progressDialog.setMessage("Logging in...");
             progressDialog.show();
             firebaseAuth.signInWithEmailAndPassword(s1, s2)
@@ -155,8 +141,7 @@ public class VolunteerLogin extends AppCompatActivity {
 
 
                                 Intent intent = new Intent(VolunteerLogin.this, VolunteerActivity.class);
-                            /*intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);*/
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 finish();
                                 Toast.makeText(VolunteerLogin.this, "Success", Toast.LENGTH_SHORT).show();
@@ -167,5 +152,16 @@ public class VolunteerLogin extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

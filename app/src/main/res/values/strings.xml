@@ -99,11 +99,54 @@
     <string name="last_blood_donation">Last Donation</string>
     <string name="no_events_to_display">No Events to Display</string>
     <string name="welcome_message">Welcome</string>
-
-
-
     <string name="fcm_token">FCM Token: %s</string>
-    <string name="default_notification_channel_id" >
-        admin_channel
-    </string>
+    <string name="default_notification_channel_id">admin_channel</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="_17341a1236_gmrit_edu_in">17341A1236@gmrit.edu.in</string>
+    <string name="_91_63031_49161">+91 63031 49161</string>
+    <string name="department_of_information_technology">Department of Information Technology</string>
+    <string name="gmr_institute_of_technology">GMR Institute of Technology \n Andhra Pradesh, India</string>
+    <string name="welcome_administrator">Welcome Administrator !</string>
+    <string name="volunteer_phone_number">Volunteer Phone Number</string>
+    <string name="search">Search</string>
+    <string name="volunteer_name">Volunteer Name :</string>
+    <string name="contact_number">Contact Number :</string>
+    <string name="email_id">Email ID :</string>
+    <string name="deliveries">Deliveries :</string>
+    <string name="normal_status">Normal Status</string>
+    <string name="high_status">High Status</string>
+    <string name="help_other_people_eat_hope">Help Other People Eat (HOPE)</string>
+    <string name="submit_details">SUBMIT DETAILS</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="celebrate">Celebrate \n Happy Moments with Us!</string>
+    <string name="name_of_donor">Name of Donor</string>
+    <string name="donor_phone_number">Donor Phone Number</string>
+    <string name="donor_email_id">Donor Email ID</string>
+    <string name="donor_address">Donor Address</string>
+    <string name="date_of_celebration">Date of Celebration</string>
+    <string name="donation_money">Donation Money</string>
+    <string name="report_problems_here">Report Problems Here</string>
+    <string name="suggestions_compliants">Suggestions/Compliants</string>
+    <string name="welcome_back">Welcome back !</string>
+    <string name="donate_food">Donate Food</string>
+    <string name="volunteer">Volunteer</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="try_again">Try Again</string>
+    <string name="doing_good_does_you_good">Doing Good Does You Good.</string>
+    <string name="name">Name</string>
+    <string name="already_have_an_account_sign_in">Already Have an Account? Sign in</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="email_id1">Email ID</string>
+    <string name="type">Type :</string>
+    <string name="phone_no">Phone No :</string>
+    <string name="status">Status</string>
+    <string name="ready">Ready</string>
+    <string name="enter_donor_name">Enter Donor Name</string>
+    <string name="saikiran_kopparthi">Saikiran Kopparthi</string>
+    <string name="_9908721573">9908721573</string>
+    <string name="knvrssaikiran_gmail_com">knvrssaikiran@gmail.com</string>
+    <string name="total_no_of_deliveries">Total No. of Deliveries :</string>
 </resources>

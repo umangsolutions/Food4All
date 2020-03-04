@@ -25,6 +25,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
@@ -65,8 +66,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 if (dataSnapshot.exists()) {
                     // dataSnapshot is the "issue" node with all children with id 0
                     for (DataSnapshot issue : dataSnapshot.getChildren()) {
-                        nam=issue.getValue(Volunteer.class).getName();
-                        ph=issue.getValue(Volunteer.class).getPhone();
+                        nam= Objects.requireNonNull(issue.getValue(Volunteer.class)).getName();
+                        ph= Objects.requireNonNull(issue.getValue(Volunteer.class)).getPhone();
                     }
                 }
             }
@@ -86,7 +87,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         holder.book.setVisibility(View.VISIBLE);
         if (fooddetails.get(position).getStatus().equals("Booked")) {
-            holder.book.setVisibility(View.INVISIBLE);
+            holder.book.setVisibility(View.GONE);
         }
         if (fooddetails.get(position).getStatus().isEmpty()) {
             holder.book.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +115,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                     });
                     //notifyDataSetChanged();
                     swap(fooddetails);
-                    holder.book.setVisibility(View.INVISIBLE);
+                    holder.book.setVisibility(View.GONE);
                     SmsManager smsManager = SmsManager.getDefault();
                     smsManager.sendTextMessage(phone, null, message, null, null);
 
@@ -147,7 +148,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView name, phone, type, address, status1;
         Button book;

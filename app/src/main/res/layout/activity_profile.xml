@@ -1,83 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.volunteer.VolunteerProfile"
-    android:layout_gravity="center_vertical"
-    android:orientation="vertical">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".activities.volunteer.VolunteerProfile">
+
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="241dp"
-        android:layout_marginTop="45dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/volun2002"></ImageView>
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:contentDescription="@string/app_name"
+        android:padding="10dp"
+        android:src="@drawable/volun2002" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal">
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp"
-        android:textColor="#000"
-        android:textSize="23dp"
-        android:drawablePadding="15dp"
-        android:drawableLeft="@drawable/ic_name"
-        android:text="Saikiran Kopparthi"></TextView>
+        android:layout_margin="5dp"
+        android:drawableStart="@drawable/ic_name"
+        android:drawablePadding="10dp"
+        android:text="@string/saikiran_kopparthi"
+        android:textColor="@color/black"
+        android:textSize="19sp" />
 
     <TextView
         android:id="@+id/phone"
         android:layout_width="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:textColor="#000"
-        android:layout_marginLeft="50dp"
-        android:textSize="23dp"
-        android:drawablePadding="15dp"
-        android:drawableLeft="@drawable/ic_phone"
-        android:text="9908721573"></TextView>
+        android:layout_margin="5dp"
+        android:drawableStart="@drawable/ic_phone"
+        android:drawablePadding="10dp"
+        android:text="@string/_9908721573"
+        android:textColor="@color/black"
+        android:textSize="19sp" />
 
     <TextView
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="23dp"
-        android:layout_marginTop="15dp"
+        android:layout_margin="5dp"
+        android:drawableStart="@drawable/ic_mail"
+        android:drawablePadding="10dp"
+        android:text="@string/knvrssaikiran_gmail_com"
         android:textColor="#000"
-        android:drawableLeft="@drawable/ic_mail"
-        android:drawablePadding="15dp"
-        android:layout_gravity="left"
-        android:layout_marginLeft="50dp"
-        android:text="knvrssaikiran@gmail.com"></TextView>
+        android:textSize="19sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:layout_marginTop="15dp"
-            android:textColor="#000"
-            android:layout_gravity="left"
-            android:layout_marginLeft="50dp"
-            android:text="Total No. of Deliveries :"></TextView>
-        <TextView
-            android:id="@+id/count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="2"
-            android:textSize="20dp"
-            android:textColor="#000"
-            android:layout_marginRight="60dp"
-            android:layout_marginTop="-30dp"></TextView>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/total_no_of_deliveries"
+        android:textColor="@color/black"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
 
 </LinearLayout>
+

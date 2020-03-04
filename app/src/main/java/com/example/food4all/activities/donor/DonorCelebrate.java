@@ -30,10 +30,9 @@ import java.util.Calendar;
 
 public class DonorCelebrate extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    EditText don_name,don_email,don_phone,don_money,don_add;
+    EditText don_name,don_email,don_phone,don_money,don_add,don_date;
     String name,email,phone,money,recip,key,address,date;
     Button submit;
-    TextView textView;
     String admin_1,admin_2,admin_3,msg;
     DatabaseReference myref;
     @Override
@@ -46,10 +45,10 @@ public class DonorCelebrate extends AppCompatActivity implements AdapterView.OnI
         don_phone=(EditText)findViewById(R.id.donphone);
         don_money=(EditText)findViewById(R.id.donmoney);
         don_add = (EditText)findViewById(R.id.donaddress);
-        textView = (TextView)findViewById(R.id.celebdate);
+        don_date = (EditText) findViewById(R.id.celebdate);
 
 
-        final ImageView imageViewuE=(ImageView)findViewById(R.id.imageViewup);
+
 
         submit=(Button)findViewById(R.id.submit);
 
@@ -63,7 +62,7 @@ public class DonorCelebrate extends AppCompatActivity implements AdapterView.OnI
         admin_2 = "8639796138";
         admin_3 = "6303149161";
 
-        imageViewuE.setOnClickListener(new View.OnClickListener() {
+        don_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar c = Calendar.getInstance();
@@ -76,9 +75,10 @@ public class DonorCelebrate extends AppCompatActivity implements AdapterView.OnI
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        textView.setText("" + (month + 1) + "/" + dayOfMonth + "/" + year);
+                        don_date.setText("" + (month + 1) + "/" + dayOfMonth + "/" + year);
                     }
                 }, mYear, mMonth, mDay);
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 datePickerDialog.show();
             }
         });
@@ -98,7 +98,7 @@ public class DonorCelebrate extends AppCompatActivity implements AdapterView.OnI
                 money=don_money.getText().toString().trim();
                 recip=spinner.getSelectedItem().toString();
                 address = don_add.getText().toString().trim();
-                date = textView.getText().toString().trim();
+                date = don_date.getText().toString().trim();
 
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 

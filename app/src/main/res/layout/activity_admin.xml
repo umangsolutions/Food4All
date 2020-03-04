@@ -1,150 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.administrator.AdminActivity"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:layout_gravity="center_vertical"
-    android:gravity="center_vertical"
-    android:background="#fff">
+    tools:context=".activities.administrator.AdminActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome Administrator !"
-        android:textColor="#000"
-        android:layout_gravity="center_horizontal"
-        android:textSize="30dp"
-        android:layout_marginTop="0dp"
-        android:fontFamily="@font/open_sans"
-        android:textStyle="bold" />
-
-
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="-10dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginBottom="0dp">
+        android:layout_margin="10dp"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/volphone"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/welcome_administrator"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:maxLength="10"
-            android:layout_margin="25dp"
-            android:inputType="number"
-            android:hint="Volunteer Phone Number"
-            android:padding="10dp" />
+            android:layout_margin="10dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="0.5">
 
-    <Button
-        android:id="@+id/sear"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_gravity="right"
-        android:layout_marginTop="-75dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button"
-        android:drawable="@drawable/ic_mail"
-        android:src="@drawable/search"
-        android:text="Search"
-        android:textColor="#fff"></Button>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/volphone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/volunteer_phone_number"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:padding="10dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Volunteer Name :"
-        android:layout_marginLeft="10dp"
-        android:textSize="18dp"
-        android:layout_marginTop="50dp"
-        android:textColor="#000"></TextView>
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_marginLeft="180dp"
-        android:layout_marginTop="-27dp"
-        android:textSize="18dp"></TextView>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contact Number :"
-        android:layout_marginLeft="10dp"
-        android:textSize="18dp"
-        android:layout_marginTop="20dp"
-        android:textColor="#000"></TextView>
-    <TextView
-        android:id="@+id/phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_marginLeft="180dp"
-        android:layout_marginTop="-27dp"
-        android:textSize="18dp"></TextView>
+            <Button
+                android:id="@+id/sear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_weight="1.5"
+                android:background="@drawable/button"
+                android:drawable="@drawable/ic_mail"
+                android:src="@drawable/search"
+                android:text="@string/search"
+                android:textColor="@color/white" />
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email ID                :"
-        android:layout_marginLeft="10dp"
-        android:textSize="18dp"
-        android:layout_marginTop="20dp"
-        android:textColor="#000"></TextView>
-    <TextView
-        android:id="@+id/emailid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_marginLeft="180dp"
-        android:layout_marginTop="-27dp"
-        android:textSize="16dp"></TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Deliveries             :"
-        android:layout_marginLeft="10dp"
-        android:textSize="18dp"
-        android:layout_marginTop="20dp"
-        android:textColor="#000"></TextView>
-    <TextView
-        android:id="@+id/count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_marginLeft="180dp"
-        android:layout_marginTop="-27dp"
-        android:textSize="18dp"></TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/high"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="High Status"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="70dp"
-        android:textColor="#000"
-        android:visibility="gone"
-        android:textSize="25dp"></TextView>
-    <TextView
-        android:id="@+id/norma"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Normal Status"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="70dp"
-        android:textColor="#000"
-        android:visibility="gone"
-        android:textSize="25dp"></TextView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/volunteer_name"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/contact_number"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
 
-</LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/email_id"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/deliveries"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:id="@+id/emailid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/high"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/high_status"
+            android:textColor="#000"
+            android:textSize="21sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/norma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/normal_status"
+            android:textColor="#000"
+            android:textSize="21sp"
+            android:visibility="gone" />
+
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

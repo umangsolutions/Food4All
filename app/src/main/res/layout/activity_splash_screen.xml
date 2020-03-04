@@ -1,54 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_marginTop="-10dp"
-    android:id="@+id/activity_login"
-    android:background="@drawable/spalsh"
-    android:layout_marginBottom="-10dp">
+    android:layout_marginBottom="-10dp"
+    android:background="@drawable/aha"
+    android:orientation="vertical">
 
-   <ProgressBar
-       android:id="@+id/progressBar"
-       android:layout_width="wrap_content"
-       android:layout_gravity="center"
-       android:layout_alignParentBottom="true"
-       android:layout_margin="10dp"
-       android:layout_centerInParent="true"
-       android:layout_height="wrap_content" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/white" />
 
-   <LinearLayout
-       android:id="@+id/internetNotAvailable"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_centerInParent="true"
-       android:gravity="center"
-       android:background="#fff"
-       android:orientation="vertical"
-       android:visibility="gone">
-
-
-
-      <TextView
-          android:id="@+id/errorText"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/no_internet_connection_available"
-          android:textColor="@color/colorPrimary"
-          android:textSize="19sp" />
+    <LinearLayout
+        android:id="@+id/internetNotAvailable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="#fff"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
 
 
-      <Button
-          android:id="@+id/tryAgain"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:layout_marginTop="10dp"
-          android:backgroundTint="@color/colorPrimary"
-          android:text="Try Again"
-          android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/errorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_internet_connection_available"
+            android:textColor="@color/colorPrimary"
+            android:textSize="19sp" />
 
-   </LinearLayout>
+
+        <Button
+            android:id="@+id/tryAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/try_again"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
 </RelativeLayout>
