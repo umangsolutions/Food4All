@@ -28,29 +28,25 @@ import com.android.volley.toolbox.Volley;
 import com.example.food4all.modals.Fooddetails;
 import com.example.food4all.R;
 import com.example.food4all.utilities.ConstantValues;
+import com.example.food4all.utilities.Dialog;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class Food_Details extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class FoodDetailsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     public Button submit;
     private FirebaseAuth firebaseAuth;
     private TextView userEmail;
-    DatabaseReference reff, databaseReference;
+    DatabaseReference reff;
     DatabaseReference ref;
     EditText nam, phone, spin, add;
     Fooddetails fooddetails;
@@ -73,11 +69,18 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
         phone = (EditText) findViewById(R.id.phone);
         add = (EditText) findViewById(R.id.add);
         fooddetails = new Fooddetails();
-        this.setTitle("Donate Food");
+
+        //remove this use getSupportActionBar
+        //this.setTitle("Donate Food");
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Donate Food");
+        }
+
 
         ref = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Volunteers");
         reff = FirebaseDatabase.getInstance().getReference().child("Food_Details");
-        databaseReference = FirebaseDatabase.getInstance().getReference("tokens");
         final Spinner spinner = findViewById(R.id.spin);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.placetype, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -99,11 +102,9 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
             connected = false;
 
         if (!connected) {
-            Toast.makeText(Food_Details.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
+            Toast.makeText(FoodDetailsActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
         }
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/userABC1");
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -124,24 +125,28 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
                 SmsManager sms = SmsManager.getDefault();
                 String inf = "Thank You for your Donation" + "\nWe Recieved Your Details and a Volunteer will pick food from your Doorstep Shortly." + "\n\nFor any Queries Contact us on +91 938 1384 234";
                 if (s1.isEmpty()) {
-                    Toast.makeText(Food_Details.this, "Please enter Name", Toast.LENGTH_LONG).show();
+                    Toast.makeText(FoodDetailsActivity.this, "Please enter Name", Toast.LENGTH_LONG).show();
                 } else if (s2.isEmpty()) {
-                    Toast.makeText(Food_Details.this, "Please enter Phone Number", Toast.LENGTH_LONG).show();
+                    Toast.makeText(FoodDetailsActivity.this, "Please enter Phone Number", Toast.LENGTH_LONG).show();
                 } else if (s3.isEmpty()) {
-                    Toast.makeText(Food_Details.this, "Please enter Address", Toast.LENGTH_LONG).show();
+                    Toast.makeText(FoodDetailsActivity.this, "Please enter Address", Toast.LENGTH_LONG).show();
                 } else if (msg.equals("Choose Place")) {
-                    Toast.makeText(Food_Details.this, "Please choose Type of Place", Toast.LENGTH_LONG).show();
+                    Toast.makeText(FoodDetailsActivity.this, "Please choose Type of Place", Toast.LENGTH_LONG).show();
                 } else if (tim.equals("Select Time Period")) {
-                    Toast.makeText(Food_Details.this, "Please select Time of Period", Toast.LENGTH_LONG).show();
+                    Toast.makeText(FoodDetailsActivity.this, "Please select Time of Period", Toast.LENGTH_LONG).show();
                 } else {
-                    fooddetails.setName(s1);
+
+
+                    /*fooddetails.setName(s1);
                     fooddetails.setPhone(s2);
                     fooddetails.setAddress(s3);
                     fooddetails.setPlace(msg);
                     fooddetails.setDate(currdate);
                     fooddetails.setStatus("");
-                    fooddetails.setTime(tim);
-                    reff.push().setValue(fooddetails);
+                    fooddetails.setTime(tim);*/
+
+                    //use Constructor for push Data in DataBase
+                    reff.push().setValue(new Fooddetails(s1, s2, s3, msg, "", tim, currdate));
 
 
                     openDialog();
@@ -190,7 +195,7 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
 
                     try {
 
-                        RequestQueue queue = Volley.newRequestQueue(Food_Details.this);
+                        RequestQueue queue = Volley.newRequestQueue(FoodDetailsActivity.this);
 
                         String url = "https://fcm.googleapis.com/fcm/send";
 
@@ -250,7 +255,10 @@ public class Food_Details extends AppCompatActivity implements AdapterView.OnIte
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            this.finish();
+
+            //remove this.finish() use onBackPressed()
+            //this.finish();
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }

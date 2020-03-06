@@ -1,15 +1,15 @@
 package com.example.food4all.modals;
 
-public class Recipients_Update {
+public class RecipientsUpdate {
     private String don_name;
     private String vol_name;
     private String vol_phone;
     private String no_of_people;
 
-    public Recipients_Update() {
+    public RecipientsUpdate() {
     }
 
-    public Recipients_Update(String don_name, String vol_name, String vol_phone, String no_of_people) {
+    public RecipientsUpdate(String don_name, String vol_name, String vol_phone, String no_of_people) {
         this.don_name = don_name;
         this.vol_name = vol_name;
         this.vol_phone = vol_phone;

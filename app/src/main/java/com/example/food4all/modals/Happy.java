@@ -1,6 +1,6 @@
 package com.example.food4all.modals;
 
-public class Happy_Modal {
+public class Happy {
     private String name;
     private String email;
     private String phone;
@@ -9,10 +9,10 @@ public class Happy_Modal {
     private String address;
     private String date;
 
-    public Happy_Modal() {
+    public Happy() {
     }
 
-    public Happy_Modal(String name, String email, String phone, String money, String recip, String address, String date) {
+    public Happy(String name, String email, String phone, String money, String recip, String address, String date) {
         this.name = name;
         this.email = email;
         this.phone = phone;

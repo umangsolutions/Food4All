@@ -23,10 +23,10 @@
             android:textSize="22sp" />
 
         <ImageView
-            android:layout_width="312dp"
-            android:layout_height="196dp"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
+            android:padding="10dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/smiling" />
 

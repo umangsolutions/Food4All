@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-public class VolunteerProfile extends AppCompatActivity {
+public class VolunteerProfileActivity extends AppCompatActivity {
 
     TextView name, phone, email, inc;
     String mail, nam, ph, em;
@@ -34,8 +34,8 @@ public class VolunteerProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         overridePendingTransition(0, 0);
-        ConstantValues.internetCheck(VolunteerProfile.this);
-        myAppPrefsManager = new MyAppPrefsManager(VolunteerProfile.this);
+        ConstantValues.internetCheck(VolunteerProfileActivity.this);
+        myAppPrefsManager = new MyAppPrefsManager(VolunteerProfileActivity.this);
         mail = myAppPrefsManager.getUserName();
         name = (TextView) findViewById(R.id.name);
         phone = (TextView) findViewById(R.id.phone);

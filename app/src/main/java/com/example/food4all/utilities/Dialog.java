@@ -1,4 +1,4 @@
-package com.example.food4all.activities.donor;
+package com.example.food4all.utilities;
 
 import android.content.DialogInterface;
 import android.content.Intent;

@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 import java.util.Objects;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyViewHolder> {
 
     Context context;
     List<Fooddetails> fooddetails;
@@ -36,7 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     MyAppPrefsManager myAppPrefsManager;
     FirebaseAuth firebaseAuth;
 
-    public MyAdapter(Context c, List<Fooddetails> f) {
+    public VolunteerAdapter(Context c, List<Fooddetails> f) {
         context = c;
         fooddetails = f;
     }

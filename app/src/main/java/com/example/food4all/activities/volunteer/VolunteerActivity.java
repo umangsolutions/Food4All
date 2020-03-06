@@ -8,21 +8,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.food4all.adapter.MyAdapter;
+import com.example.food4all.adapter.VolunteerAdapter;
 import com.example.food4all.modals.Fooddetails;
 import com.example.food4all.R;
-import com.example.food4all.utilities.ConstantValues;
 import com.example.food4all.utilities.MyAppPrefsManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -41,7 +38,7 @@ public class VolunteerActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     RecyclerView recyclerView;
     ArrayList<Fooddetails> list;
-    MyAdapter myAdapter;
+    VolunteerAdapter volunteerAdapter;
 
 
     @Override
@@ -95,8 +92,8 @@ public class VolunteerActivity extends AppCompatActivity {
                     list.add(f);
                 }
 
-                myAdapter = new MyAdapter(VolunteerActivity.this, list);
-                recyclerView.setAdapter(myAdapter);
+                volunteerAdapter = new VolunteerAdapter(VolunteerActivity.this, list);
+                recyclerView.setAdapter(volunteerAdapter);
                 progressDialog.dismiss();
 
             }
@@ -117,7 +114,7 @@ public class VolunteerActivity extends AppCompatActivity {
             }
         }
 
-        myAdapter.filterList(filteredlist);
+        volunteerAdapter.filterList(filteredlist);
     }
 
     @Override
@@ -133,7 +130,7 @@ public class VolunteerActivity extends AppCompatActivity {
             // Set UserLoggedIn in MyAppPrefsManager
             MyAppPrefsManager myAppPrefsManager = new MyAppPrefsManager(VolunteerActivity.this);
             FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(VolunteerActivity.this, VolunteerLogin.class);
+            Intent intent = new Intent(VolunteerActivity.this, VolunteerLoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             myAppPrefsManager.setUserLoggedIn(false);
@@ -143,7 +140,7 @@ public class VolunteerActivity extends AppCompatActivity {
         }
 
         if (item.getItemId() == R.id.action_gallery) {
-            Intent gall = new Intent(VolunteerActivity.this, Upload_Photos.class);
+            Intent gall = new Intent(VolunteerActivity.this, UploadPhotosActivity.class);
             gall.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(gall);
             return true;
@@ -155,7 +152,7 @@ public class VolunteerActivity extends AppCompatActivity {
         }
 
         if (item.getItemId() == R.id.action_profile) {
-            Intent prof = new Intent(VolunteerActivity.this, VolunteerProfile.class);
+            Intent prof = new Intent(VolunteerActivity.this, VolunteerProfileActivity.class);
             prof.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(prof);
             return true;

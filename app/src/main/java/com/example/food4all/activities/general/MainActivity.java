@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -17,13 +18,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.food4all.activities.donor.DonorCelebrate;
-import com.example.food4all.activities.donor.Food_Details;
-import com.example.food4all.activities.recipients.Recipient_login;
+import com.example.food4all.activities.donor.DonorCelebrateActivity;
+import com.example.food4all.activities.donor.FoodDetailsActivity;
+import com.example.food4all.activities.recipients.RecipientLoginActivity;
 import com.example.food4all.activities.volunteer.VolunteerActivity;
-import com.example.food4all.activities.volunteer.VolunteerLogin;
+import com.example.food4all.activities.volunteer.VolunteerLoginActivity;
 import com.example.food4all.R;
-import com.example.food4all.recyclerView.RecyclerView_Gallery;
+import com.example.food4all.adapter.BannerAdapter;
+import com.example.food4all.modals.Banners;
+import com.example.food4all.recyclerView.RecyclerViewGallery;
 import com.example.food4all.utilities.ConstantValues;
 import com.example.food4all.utilities.MyAppPrefsManager;
 
@@ -32,6 +35,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.smarteist.autoimageslider.IndicatorAnimations;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,6 +55,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String TAG = "MAIN_ACTIVITY";
     boolean doubleBackToExitPressedOnce = false;
 
+    SliderView sliderImage;
+
+
+    List<Banners> modelList = new ArrayList<>();
+
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -52,7 +71,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Food 4 All");
 
+
         drawer = findViewById(R.id.drawer_layout);
+
+        sliderImage = findViewById(R.id.slider_image);
+
 
 
         myAppPrefsManager = new MyAppPrefsManager(this);
@@ -64,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         firebaseAuth = FirebaseAuth.getInstance();
+        listAllFiles();
+
 
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/donateFood")
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -88,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     } else {
 
-                        Intent intent = new Intent(getBaseContext(), VolunteerLogin.class);
+                        Intent intent = new Intent(getBaseContext(), VolunteerLoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
@@ -101,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         findViewById(R.id.rest).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, Food_Details.class);
+                Intent i = new Intent(MainActivity.this, FoodDetailsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
             }
@@ -109,11 +134,65 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+
+    public void listAllFiles() {
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference().child("bannerImages");
+        StorageReference storageRef1 = storage.getReference();
+
+
+        storageRef.listAll()
+                .addOnSuccessListener(listResult -> {
+
+
+                    modelList.clear();
+                    for (StorageReference item : listResult.getItems()) {
+                        // All the items under listRef.
+                        Log.d(TAG, "onSuccess1: " + item.getPath());
+
+                        // [START download_via_url]
+                        storageRef1.child(item.getPath()).getDownloadUrl().addOnSuccessListener(uri -> {
+
+
+                            Log.d(TAG, "listAllFiles: " + item.getName() + uri.toString());
+                            modelList.add(new Banners(item.getName(), uri.toString()));
+                            BannerAdapter adapter = new BannerAdapter(MainActivity.this, modelList);
+                            sliderImage.setSliderAdapter(adapter);
+                            sliderImage.setIndicatorAnimation(IndicatorAnimations.WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+                            sliderImage.setSliderTransformAnimation(SliderAnimations.CUBEINROTATIONTRANSFORMATION);
+                            sliderImage.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+                            sliderImage.setIndicatorRadius(5);
+                            sliderImage.setIndicatorSelectedColor(Color.WHITE);
+                            sliderImage.setIndicatorUnselectedColor(Color.GRAY);
+                            sliderImage.startAutoCycle();
+                            sliderImage.setOnIndicatorClickListener(position ->
+                                    sliderImage.setCurrentPagePosition(position));
+
+                        }).addOnFailureListener(exception -> {
+                            // Handle any errors
+
+                        });
+
+
+                    }
+
+
+                })
+                .addOnFailureListener(e -> {
+                    // Uh-oh, an error occurred!
+
+                });
+
+
+    }
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_about:
-                Intent b = new Intent(MainActivity.this, Issues.class);
+                Intent b = new Intent(MainActivity.this, IssuesActivity.class);
                 b.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(b);
                 break;
@@ -123,22 +202,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(a);
                 break;
             case R.id.nav_message:
-                Intent i = new Intent(MainActivity.this, HungerStatistics.class);
+                Intent i = new Intent(MainActivity.this, HungerStatisticsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 break;
             case R.id.nav_gallery:
-                Intent g = new Intent(MainActivity.this, RecyclerView_Gallery.class);
+                Intent g = new Intent(MainActivity.this, RecyclerViewGallery.class);
                 g.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(g);
                 break;
             case R.id.nav_org:
-                Intent intent = new Intent(MainActivity.this, Recipient_login.class);
+                Intent intent = new Intent(MainActivity.this, RecipientLoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
             case R.id.nav_happy:
-                Intent intent1 = new Intent(MainActivity.this, DonorCelebrate.class);
+                Intent intent1 = new Intent(MainActivity.this, DonorCelebrateActivity.class);
                 intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent1);
                 break;
@@ -146,8 +225,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 
 
     @Override
@@ -166,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void run() {
 
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
 
 
             }

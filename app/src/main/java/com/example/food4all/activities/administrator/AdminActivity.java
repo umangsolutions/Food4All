@@ -22,73 +22,82 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AdminActivity extends AppCompatActivity {
 
-    TextView name,email,phone,count,high,normal;
-    Button search;
-    EditText vol_phone;
-    String nam,em,ph;
-    int cou;
+    TextView txtName, txtPhone, txtEmail, txtCount, txtNormal, txtHigh;
+    Button btnSearch;
+    EditText edtPhone;
+    String name, email, phone;
+    int count;
     DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-        this.setTitle("Administrator");
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Administrator");
         }
 
-        name = (TextView)findViewById(R.id.name);
-        email=(TextView)findViewById(R.id.emailid);
-        phone=(TextView)findViewById(R.id.phone);
-        count=(TextView)findViewById(R.id.count);
+        txtName = (TextView) findViewById(R.id.txtName);
+        txtPhone = (TextView) findViewById(R.id.txtPhone);
+        txtEmail = (TextView) findViewById(R.id.txtEmail);
+        txtCount = (TextView) findViewById(R.id.txtCount);
 
 
-        high = (TextView)findViewById(R.id.high);
-        normal=(TextView)findViewById(R.id.norma);
+        txtNormal = (TextView) findViewById(R.id.txtNormal);
+        txtHigh = (TextView) findViewById(R.id.txtHigh);
 
-        vol_phone=(EditText)findViewById(R.id.volphone);
+        edtPhone = (EditText) findViewById(R.id.edtPhone);
 
-        search=(Button)findViewById(R.id.sear);
+        btnSearch = (Button) findViewById(R.id.btnSearch);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Volunteers");
 
-        search.setOnClickListener(new View.OnClickListener() {
+        //keep the data in Offline Mode also
+        databaseReference.keepSynced(true);
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String volphone = vol_phone.getText().toString().trim();
+                String volPhone = edtPhone.getText().toString().trim();
 
-                if (volphone.isEmpty()) {
-                    vol_phone.setError("Please enter Volunteer Phone Number ");
-                }
-                else if (volphone.length()<10) {
-                    vol_phone.setError("Phone Number is Invalid !");
+                if (volPhone.isEmpty()) {
+                    edtPhone.setError("Please enter Volunteer Phone Number ");
+                } else if (volPhone.length() < 10) {
+                    edtPhone.setError("Phone Number is Invalid !");
 
-                }else {
+                } else {
                     //Toast.makeText(AdminActivity.this, ""+volphone, Toast.LENGTH_SHORT).show();
 
-                    Query query = databaseReference.orderByChild("phone").equalTo(volphone);
+                    Query query = databaseReference.orderByChild("phone").equalTo(volPhone);
 
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
                                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                    nam = dataSnapshot1.getValue(Volunteer.class).getName();
-                                    em = dataSnapshot1.getValue(Volunteer.class).getEmail();
-                                    ph = dataSnapshot1.getValue(Volunteer.class).getPhone();
-                                    cou = dataSnapshot1.getValue(Volunteer.class).getCount();
-                                }
-                                name.setText(nam);
-                                email.setText(em);
-                                phone.setText(ph);
-                                count.setText(Integer.toString(cou));
 
-                                if (cou > 10) {
-                                    high.setVisibility(View.VISIBLE);
+                                    Volunteer volunteer = dataSnapshot1.getValue(Volunteer.class);
+                                    if (volunteer != null) {
+                                        name = volunteer.getName();
+                                        email = volunteer.getEmail();
+                                        phone = volunteer.getPhone();
+                                        count = volunteer.getCount();
+                                    }else {
+                                        Toast.makeText(AdminActivity.this, "No Data Found !", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                                txtName.setText(name);
+                                txtPhone.setText(phone);
+                                txtEmail.setText(email);
+                                txtCount.setText(String.valueOf(count));
+
+                                if (count > 10) {
+                                    txtHigh.setVisibility(View.VISIBLE);
                                 } else {
-                                    normal.setVisibility(View.VISIBLE);
+                                    txtNormal.setVisibility(View.VISIBLE);
                                 }
                             } else {
                                 Toast.makeText(AdminActivity.this, "No Data Found !", Toast.LENGTH_SHORT).show();
@@ -97,14 +106,12 @@ public class AdminActivity extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Toast.makeText(AdminActivity.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminActivity.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
             }
         });
-
-
 
 
     }
@@ -113,7 +120,9 @@ public class AdminActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            this.finish();
+
+            onBackPressed();
+
         }
         return super.onOptionsItemSelected(item);
     }

@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.food4all.activities.general.MainActivity;
-import com.example.food4all.modals.Recipients_Update;
+import com.example.food4all.modals.RecipientsUpdate;
 import com.example.food4all.modals.Volunteer;
 import com.example.food4all.R;
 import com.google.firebase.database.DataSnapshot;
@@ -84,8 +84,8 @@ public class RecipientActivity extends AppCompatActivity {
 
 
                     databaseReference = FirebaseDatabase.getInstance().getReference().child("Recipients_Updation").child(key);
-                    Recipients_Update recipients_update = new Recipients_Update(don_name, vol_name, vol_phone, noof_people);
-                    databaseReference.setValue(recipients_update);
+                    RecipientsUpdate recipients_Update_update = new RecipientsUpdate(don_name, vol_name, vol_phone, noof_people);
+                    databaseReference.setValue(recipients_Update_update);
 
 
                     Toast.makeText(RecipientActivity.this, "Details Successfully Submitted !", Toast.LENGTH_SHORT).show();

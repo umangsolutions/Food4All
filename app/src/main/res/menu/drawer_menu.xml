@@ -6,26 +6,26 @@
 
              <item android:id="@+id/nav_happy"
                  android:icon="@drawable/ic_cake_black_24dp"
-                 android:title="Celebrate Birthday"></item>
+                 android:title="@string/celebrate_birthday"/>
 
              <item android:id="@+id/nav_message"
                  android:icon="@drawable/ic_poll_black_24dp"
-                 android:title="Hunger Statistics"/>
+                 android:title="@string/hunger_statistics"/>
 
              <item android:id="@+id/nav_gallery"
                  android:icon="@drawable/ic_photo_black_24dp"
-                 android:title="@string/gallery"></item>
+                 android:title="@string/gallery"/>
 
              <item android:id="@+id/nav_org"
                  android:icon="@drawable/ic_account_balance_black_24dp"
-                 android:title="Recipients"></item>
+                 android:title="@string/recipients"/>
 
              <item android:id="@+id/nav_info"
                  android:icon="@drawable/ic_info_black_24dp"
-                 android:title="About "/>
+                 android:title="@string/about"/>
 
              <item android:id="@+id/nav_about"
                  android:icon="@drawable/ic_warning_black_24dp"
-                 android:title="Report Issues"/>
+                 android:title="@string/report_issues"/>
          </group>
 </menu>

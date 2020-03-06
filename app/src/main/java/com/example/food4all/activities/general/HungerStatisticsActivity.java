@@ -15,7 +15,7 @@ import com.example.food4all.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HungerStatistics extends AppCompatActivity {
+public class HungerStatisticsActivity extends AppCompatActivity {
     GradientDrawable gradientdrawable;
     ViewPager viewPager;
 
@@ -53,7 +53,7 @@ public class HungerStatistics extends AppCompatActivity {
 
         @Override
         public void run() {
-            HungerStatistics.this.runOnUiThread(new Runnable() {
+            HungerStatisticsActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     if (viewPager.getCurrentItem() == 0) {

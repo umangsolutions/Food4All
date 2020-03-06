@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.food4all.modals.Recipient_Modal;
+import com.example.food4all.modals.Recipient;
 import com.example.food4all.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class Recipient_login extends AppCompatActivity {
+public class RecipientLoginActivity extends AppCompatActivity {
 
     TextView login;
     EditText usname,pwd;
@@ -38,7 +38,7 @@ public class Recipient_login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Recipient_login.this, RecipientRegistration.class);
+                Intent intent = new Intent(RecipientLoginActivity.this, RecipientRegistrationActivity.class);
                 startActivity(intent);
             }
         });
@@ -71,15 +71,15 @@ public class Recipient_login extends AppCompatActivity {
                                 // dataSnapshot is the "issue" node with all children with id 0
                                 for (DataSnapshot issue : dataSnapshot.getChildren()) {
                                     // do something with the individual "issues"
-                                    dbpass=issue.getValue(Recipient_Modal.class).getPassword();
+                                    dbpass=issue.getValue(Recipient.class).getPassword();
                                 }
                                 if(pw.equals(dbpass)) {
-                                    Toast.makeText(Recipient_login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(Recipient_login.this, RecipientActivity.class);
+                                    Toast.makeText(RecipientLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(RecipientLoginActivity.this, RecipientActivity.class);
                                     startActivity(intent);
                                 }
                                 else {
-                                    Toast.makeText(Recipient_login.this, "login Failed !", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RecipientLoginActivity.this, "login Failed !", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }

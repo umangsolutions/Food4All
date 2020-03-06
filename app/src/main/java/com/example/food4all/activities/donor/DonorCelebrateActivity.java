@@ -15,20 +15,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.food4all.activities.general.MainActivity;
-import com.example.food4all.modals.Happy_Modal;
+import com.example.food4all.modals.Happy;
 import com.example.food4all.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
-public class DonorCelebrate extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class DonorCelebrateActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     EditText don_name,don_email,don_phone,don_money,don_add,don_date;
     String name,email,phone,money,recip,key,address,date;
@@ -69,7 +67,7 @@ public class DonorCelebrate extends AppCompatActivity implements AdapterView.OnI
                 int mYear = c.get(Calendar.YEAR);
                 int mMonth = c.get(Calendar.MONTH);
                 int mDay = c.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(DonorCelebrate.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(DonorCelebrateActivity.this, new DatePickerDialog.OnDateSetListener() {
                     //DatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
 
                     @SuppressLint("SetTextI18n")
@@ -87,7 +85,7 @@ public class DonorCelebrate extends AppCompatActivity implements AdapterView.OnI
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.recipient, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(DonorCelebrate.this);
+        spinner.setOnItemSelectedListener(DonorCelebrateActivity.this);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,9 +116,9 @@ public class DonorCelebrate extends AppCompatActivity implements AdapterView.OnI
                 else if(address.isEmpty()) {
                     don_add.setError("Please enter Address ");
                 } else if(date.isEmpty()) {
-                    Toast.makeText(DonorCelebrate.this, "Please choose Date of Celebration", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DonorCelebrateActivity.this, "Please choose Date of Celebration", Toast.LENGTH_SHORT).show();
                 } else if(recip.equals("Select Recipient")) {
-                    Toast.makeText(DonorCelebrate.this, "Please select Recipient", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DonorCelebrateActivity.this, "Please select Recipient", Toast.LENGTH_SHORT).show();
                 } else if(money.isEmpty()) {
                     don_money.setError("Please enter Money");
                 } else {
@@ -128,8 +126,8 @@ public class DonorCelebrate extends AppCompatActivity implements AdapterView.OnI
                     key = myref.push().getKey();
 
                     myref = FirebaseDatabase.getInstance().getReference("Happy_Moments").child(key);
-                    Happy_Modal happy_modal = new Happy_Modal(name, email, phone, money, recip, address, date);
-                    myref.setValue(happy_modal);
+                    Happy happy_1_modal = new Happy(name, email, phone, money, recip, address, date);
+                    myref.setValue(happy_1_modal);
 
                     msg = "Dear Administrator,\n" + name + " is ready to donate a sum of ";
                     String res = msg + "Rs." + money + " to " + recip;
@@ -144,9 +142,9 @@ public class DonorCelebrate extends AppCompatActivity implements AdapterView.OnI
                     smsManager.sendTextMessage(admin_2, null, re, null, null);
                     smsManager.sendTextMessage(admin_3, null, re, null, null);
 
-                    Toast.makeText(DonorCelebrate.this, "Details Successfully Submitted !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DonorCelebrateActivity.this, "Details Successfully Submitted !", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(DonorCelebrate.this, MainActivity.class);
+                    Intent intent = new Intent(DonorCelebrateActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
             }

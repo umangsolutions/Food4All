@@ -27,7 +27,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="190dp"
             android:layout_gravity="center"
             android:contentDescription="@string/app_name"
             android:padding="10dp"

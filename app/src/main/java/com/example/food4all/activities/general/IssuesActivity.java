@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Issues extends AppCompatActivity {
+public class IssuesActivity extends AppCompatActivity {
     public Button b;
     EditText email, report;
     private FirebaseAuth firebaseAuth;
@@ -51,25 +51,25 @@ public class Issues extends AppCompatActivity {
             connected = false;
 
         if (!connected) {
-            Toast.makeText(Issues.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
+            Toast.makeText(IssuesActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
         }
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!connected) {
-                    Toast.makeText(Issues.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(IssuesActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
                 }
                 s1 = email.getText().toString().trim();
                 s2 = report.getText().toString().trim();
                 if (s1.isEmpty()) {
-                    Toast.makeText(Issues.this, "Please enter Email", Toast.LENGTH_LONG).show();
+                    Toast.makeText(IssuesActivity.this, "Please enter Email", Toast.LENGTH_LONG).show();
                 } else if (s2.isEmpty()) {
-                    Toast.makeText(Issues.this, "Please enter the Problem", Toast.LENGTH_LONG).show();
+                    Toast.makeText(IssuesActivity.this, "Please enter the Problem", Toast.LENGTH_LONG).show();
                 } else {
                     rep.setEmail(email.getText().toString().trim());
                     rep.setReport(report.getText().toString().trim());
                     ref.push().setValue(rep);
-                    Toast.makeText(Issues.this, "We will Contact you Shortly!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(IssuesActivity.this, "We will Contact you Shortly!", Toast.LENGTH_SHORT).show();
                 }
 
             }
