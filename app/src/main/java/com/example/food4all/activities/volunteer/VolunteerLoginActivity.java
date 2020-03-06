@@ -29,7 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
-public class VolunteerLogin extends AppCompatActivity {
+public class VolunteerLoginActivity extends AppCompatActivity {
     public Button b1, b2;
     EditText t1, t2;
     String s1, s2;
@@ -46,15 +46,15 @@ public class VolunteerLogin extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         reset = (TextView) findViewById(R.id.reset);
         this.setTitle("Volunteer Login");
-        myAppPrefsManager = new MyAppPrefsManager(VolunteerLogin.this);
-        ConstantValues.internetCheck(VolunteerLogin.this);
+        myAppPrefsManager = new MyAppPrefsManager(VolunteerLoginActivity.this);
+        ConstantValues.internetCheck(VolunteerLoginActivity.this);
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         //we are connected to a network
         assert connectivityManager != null;
         connected = Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)).getState() == NetworkInfo.State.CONNECTED ||
                 Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)).getState() == NetworkInfo.State.CONNECTED;
         if (!connected) {
-            Toast.makeText(VolunteerLogin.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
+            Toast.makeText(VolunteerLoginActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
         }
         progressDialog = new ProgressDialog(this);
         t1 = (EditText) findViewById(R.id.tf1);
@@ -76,7 +76,7 @@ public class VolunteerLogin extends AppCompatActivity {
         findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(VolunteerLogin.this, VolunteerRegistration.class);
+                Intent i = new Intent(VolunteerLoginActivity.this, VolunteerRegistrationActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
@@ -86,7 +86,7 @@ public class VolunteerLogin extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(VolunteerLogin.this, ResetPassword.class);
+                Intent i = new Intent(VolunteerLoginActivity.this, ResetPasswordActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
@@ -101,7 +101,7 @@ public class VolunteerLogin extends AppCompatActivity {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
         if (s1.equals("admin@gmail.com") && s2.equals("Admin@123")) {
-            Intent i = new Intent(VolunteerLogin.this, AdminActivity.class);
+            Intent i = new Intent(VolunteerLoginActivity.this, AdminActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             finish();
@@ -130,7 +130,7 @@ public class VolunteerLogin extends AppCompatActivity {
 
 
                                 progressDialog.dismiss();
-                                Toast.makeText(VolunteerLogin.this, "Please Enter Valid Email/Password", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(VolunteerLoginActivity.this, "Please Enter Valid Email/Password", Toast.LENGTH_SHORT).show();
 
                             } else {
                                 myAppPrefsManager.setUserLoggedIn(true);
@@ -140,11 +140,11 @@ public class VolunteerLogin extends AppCompatActivity {
                                 ConstantValues.IS_USER_LOGGED_IN = myAppPrefsManager.isUserLoggedIn();
 
 
-                                Intent intent = new Intent(VolunteerLogin.this, VolunteerActivity.class);
+                                Intent intent = new Intent(VolunteerLoginActivity.this, VolunteerActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 finish();
-                                Toast.makeText(VolunteerLogin.this, "Success", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(VolunteerLoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
 
 

@@ -1,16 +1,16 @@
 package com.example.food4all.modals;
 
-public class Image_Modal {
+public class Image {
     private String name;
     private String date;
     private String noofplaces;
     private String area;
     private String url;
 
-    public Image_Modal() {
+    public Image() {
     }
 
-    public Image_Modal(String name, String date, String noofplaces, String area, String url) {
+    public Image(String name, String date, String noofplaces, String area, String url) {
         this.name = name;
         this.date = date;
         this.noofplaces = noofplaces;

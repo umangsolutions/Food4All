@@ -16,14 +16,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.food4all.modals.Recipient_Modal;
+import com.example.food4all.modals.Recipient;
 import com.example.food4all.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class RecipientRegistration extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class RecipientRegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     TextView signin;
     EditText name,usname,pwd,phone,address;
@@ -57,7 +57,7 @@ public class RecipientRegistration extends AppCompatActivity implements AdapterV
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecipientRegistration.this, Recipient_login.class);
+                Intent intent = new Intent(RecipientRegistrationActivity.this, RecipientLoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -76,7 +76,7 @@ public class RecipientRegistration extends AppCompatActivity implements AdapterV
                 if(nam.isEmpty()) {
                     name.setError("Please enter Organization Name");
                 } else if(orgtype.isEmpty()) {
-                    Toast.makeText(RecipientRegistration.this, "Please choose Type !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RecipientRegistrationActivity.this, "Please choose Type !", Toast.LENGTH_SHORT).show();
                 } else if(usnam.isEmpty()) {
                     usname.setError("Username should not be Empty");
                 } else if(pw.isEmpty()) {
@@ -94,18 +94,18 @@ public class RecipientRegistration extends AppCompatActivity implements AdapterV
                 } else if(add.length()<10) {
                     address.setError("Address should be minimum of 10 Characters !");
                 } else {
-                    final ProgressDialog progressDialog = new ProgressDialog(RecipientRegistration.this);
+                    final ProgressDialog progressDialog = new ProgressDialog(RecipientRegistrationActivity.this);
                     progressDialog.setMessage("Registering...");
                     progressDialog.show();
 
                     databaseReference = FirebaseDatabase.getInstance().getReference().child("Organization_Details").child(id);
-                    Recipient_Modal orphanage_modal = new Recipient_Modal(nam,orgtype,usnam,pw,ph,add);
+                    Recipient orphanage_modal = new Recipient(nam,orgtype,usnam,pw,ph,add);
                     databaseReference.setValue(orphanage_modal).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             progressDialog.dismiss();
-                            Toast.makeText(RecipientRegistration.this, "Registered Successfully !", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(RecipientRegistration.this, Recipient_login.class);
+                            Toast.makeText(RecipientRegistrationActivity.this, "Registered Successfully !", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RecipientRegistrationActivity.this, RecipientLoginActivity.class);
                             startActivity(intent);
                         }
                     });

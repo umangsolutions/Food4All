@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import com.example.food4all.modals.Image_Modal;
-import com.example.food4all.adapter.MyAdapter_Gallery;
+import com.example.food4all.modals.Image;
+import com.example.food4all.adapter.GalleryAdapter;
 import com.example.food4all.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,14 +20,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class RecyclerView_Gallery extends AppCompatActivity {
+public class RecyclerViewGallery extends AppCompatActivity {
 
     DatabaseReference databaseReference;
     String doc,deg,photo,number;
     androidx.recyclerview.widget.RecyclerView recyclerView;
     ListView listView;
-    ArrayList<Image_Modal> list;
-    MyAdapter_Gallery myAdapter;
+    ArrayList<Image> list;
+    GalleryAdapter myAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +47,7 @@ public class RecyclerView_Gallery extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        list = new ArrayList<Image_Modal>();
+        list = new ArrayList<Image>();
 
         databaseReference= FirebaseDatabase.getInstance().getReference("Image_Gallery");
 
@@ -55,11 +55,11 @@ public class RecyclerView_Gallery extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    Image_Modal d = dataSnapshot1.getValue(Image_Modal.class);
+                    Image d = dataSnapshot1.getValue(Image.class);
                     list.add(d);
                 }
                 progressDialog.dismiss();
-                myAdapter = new MyAdapter_Gallery(RecyclerView_Gallery.this, list);
+                myAdapter = new GalleryAdapter(RecyclerViewGallery.this, list);
                 recyclerView.setAdapter(myAdapter);
             }
 

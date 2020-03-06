@@ -19,11 +19,11 @@
 
 
         <ImageView
-            android:layout_width="270dp"
-            android:layout_height="203dp"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
             android:contentDescription="@string/app_name"
+            android:padding="10dp"
             android:src="@drawable/appicc" />
 
         <TextView
@@ -72,19 +72,21 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/open_sans"
+            android:gravity="center"
             android:text="@string/gmr_institute_of_technology"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
 
         <ImageView
-            android:layout_width="209dp"
-            android:layout_height="123dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
             android:contentDescription="@string/app_name"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/gmrit" />
 
 

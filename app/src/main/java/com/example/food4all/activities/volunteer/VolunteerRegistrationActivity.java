@@ -35,7 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class VolunteerRegistration extends AppCompatActivity {
+public class VolunteerRegistrationActivity extends AppCompatActivity {
     public Button b;
     EditText p1, p2, em, phone, name, add;
     String s1, s2, s3 = "";
@@ -70,7 +70,7 @@ public class VolunteerRegistration extends AppCompatActivity {
             connected = false;
 
         if (!connected) {
-            Toast.makeText(VolunteerRegistration.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
+            Toast.makeText(VolunteerRegistrationActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -78,7 +78,7 @@ public class VolunteerRegistration extends AppCompatActivity {
         singin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(VolunteerRegistration.this, VolunteerLogin.class);
+                Intent in = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
                 startActivity(in);
             }
         });
@@ -111,11 +111,11 @@ public class VolunteerRegistration extends AppCompatActivity {
                         em.setError("Please enter Valid Email");
                         return;
                     } else if (p.isEmpty()) {
-                        Toast.makeText(VolunteerRegistration.this, "Please Enter Password", Toast.LENGTH_LONG).show();
+                        Toast.makeText(VolunteerRegistrationActivity.this, "Please Enter Password", Toast.LENGTH_LONG).show();
                        // p1.setError("Please enter Password");
                         return;
                     } else if (p.length() < 8) {
-                        Toast.makeText(VolunteerRegistration.this, "Password should be more than 8 characters", Toast.LENGTH_LONG).show();
+                        Toast.makeText(VolunteerRegistrationActivity.this, "Password should be more than 8 characters", Toast.LENGTH_LONG).show();
                        // p1.setError("Password should be more than 8 Characters");
                         return;
                     } else if (ph.isEmpty()) {
@@ -129,14 +129,14 @@ public class VolunteerRegistration extends AppCompatActivity {
                 }
 
                 registerUser();
-                Intent broadcastIntent = new Intent(VolunteerRegistration.this, VolunteerRegistration.class);
+                Intent broadcastIntent = new Intent(VolunteerRegistrationActivity.this, VolunteerRegistrationActivity.class);
                 broadcastIntent.putExtra("toastMessage", "Hi man !");
                 //startActivity(broadcastIntent);
-                PendingIntent actionIntent = PendingIntent.getBroadcast(VolunteerRegistration.this,
+                PendingIntent actionIntent = PendingIntent.getBroadcast(VolunteerRegistrationActivity.this,
                         0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_arrow_forward_white);
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(
-                        VolunteerRegistration.this
+                        VolunteerRegistrationActivity.this
                 )
                         .setSmallIcon(R.drawable.flog)
                         .setContentTitle("Thank You for Registering !")
@@ -151,11 +151,11 @@ public class VolunteerRegistration extends AppCompatActivity {
                         .setLargeIcon(largeIcon)
                         .addAction(R.mipmap.ic_launcher, "Yes", actionIntent);
 
-                Intent intent1 = new Intent(VolunteerRegistration.this, VolunteerLogin.class);
+                Intent intent1 = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
                 intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent1.putExtra("message", msg);
 
-                PendingIntent pendingIntent = PendingIntent.getActivity(VolunteerRegistration.this,
+                PendingIntent pendingIntent = PendingIntent.getActivity(VolunteerRegistrationActivity.this,
                         0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
                 builder.setContentIntent(pendingIntent);
 
@@ -167,8 +167,8 @@ public class VolunteerRegistration extends AppCompatActivity {
                 if (!ph.isEmpty()) {
                     sms.sendTextMessage(ph, null, msg, null, null);
                 }
-                Toast.makeText(VolunteerRegistration.this, "Volunteer Created Successful!", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(VolunteerRegistration.this, VolunteerLogin.class);
+                Toast.makeText(VolunteerRegistrationActivity.this, "Volunteer Created Successful!", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
                 startActivity(i);
                 finish();
                 progressDialog.dismiss();
@@ -216,7 +216,7 @@ public class VolunteerRegistration extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                             } else {
-                                Toast.makeText(VolunteerRegistration.this, "Registration Error!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(VolunteerRegistrationActivity.this, "Registration Error!", Toast.LENGTH_LONG).show();
                             }
                             progressDialog.dismiss();
                         }

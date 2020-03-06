@@ -10,18 +10,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.food4all.modals.Image_Modal;
+import com.example.food4all.modals.Image;
 import com.example.food4all.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MyAdapter_Gallery extends RecyclerView.Adapter<MyAdapter_Gallery.MyViewHolder> {
+public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHolder> {
 
     Context context;
-    List<Image_Modal> imagemodal;
+    List<Image> imagemodal;
 
-    public MyAdapter_Gallery(Context c , List<Image_Modal> f) {
+    public GalleryAdapter(Context c , List<Image> f) {
         context = c;
         imagemodal = f;
     }
@@ -77,7 +77,7 @@ public class MyAdapter_Gallery extends RecyclerView.Adapter<MyAdapter_Gallery.My
         }
     }
 
-    public void filterList(List<Image_Modal> filteredList) {
+    public void filterList(List<Image> filteredList) {
         imagemodal = filteredList;
         notifyDataSetChanged();
     }

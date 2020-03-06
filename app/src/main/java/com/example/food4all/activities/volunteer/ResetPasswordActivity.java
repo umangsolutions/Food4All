@@ -19,7 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ResetPassword extends AppCompatActivity {
+public class ResetPasswordActivity extends AppCompatActivity {
 
     Button send;
     EditText reset;
@@ -47,7 +47,7 @@ public class ResetPassword extends AppCompatActivity {
             connected = false;
 
         if(!connected) {
-            Toast.makeText(ResetPassword.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ResetPasswordActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
         }
 
         send=(Button)findViewById(R.id.btn_send);
@@ -58,7 +58,7 @@ public class ResetPassword extends AppCompatActivity {
             public void onClick(View view) {
                 String e = reset.getText().toString().trim();
                  if(e.equals("")) {
-                     Toast.makeText(ResetPassword.this,"Please Enter Email",Toast.LENGTH_SHORT).show();
+                     Toast.makeText(ResetPasswordActivity.this,"Please Enter Email",Toast.LENGTH_SHORT).show();
                  }
                  else {
                      firebaseAuth.sendPasswordResetEmail(e).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -71,7 +71,7 @@ public class ResetPassword extends AppCompatActivity {
                              }
                              else {
                                  String error=task.getException().getMessage();
-                                 Toast.makeText(ResetPassword.this,error,Toast.LENGTH_SHORT).show();
+                                 Toast.makeText(ResetPasswordActivity.this,error,Toast.LENGTH_SHORT).show();
                              }
                          }
                      });

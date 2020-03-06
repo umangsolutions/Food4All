@@ -1,6 +1,6 @@
 package com.example.food4all.modals;
 
-public class Recipient_Modal {
+public class Recipient {
     private String org_name;
     private String type;
     private String usname;
@@ -8,10 +8,10 @@ public class Recipient_Modal {
     private String phone;
     private String address;
 
-    public Recipient_Modal() {
+    public Recipient() {
     }
 
-    public Recipient_Modal(String org_name, String type, String usname, String password, String phone, String address) {
+    public Recipient(String org_name, String type, String usname, String password, String phone, String address) {
         this.org_name = org_name;
         this.type = type;
         this.usname = usname;

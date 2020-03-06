@@ -10,6 +10,7 @@ public class DetectConnection {
         ConnectivityManager con_manager = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        assert con_manager != null;
         return con_manager.getActiveNetworkInfo() != null
                 && con_manager.getActiveNetworkInfo().isAvailable()
                 && con_manager.getActiveNetworkInfo().isConnected();

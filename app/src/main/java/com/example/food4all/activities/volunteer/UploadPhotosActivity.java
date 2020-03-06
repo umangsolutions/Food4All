@@ -14,11 +14,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.food4all.activities.general.MainActivity;
-import com.example.food4all.modals.Image_Modal;
+import com.example.food4all.modals.Image;
 import com.example.food4all.modals.Volunteer;
 import com.example.food4all.R;
 import com.example.food4all.utilities.ConstantValues;
@@ -43,12 +43,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
-public class Upload_Photos extends AppCompatActivity {
+public class UploadPhotosActivity extends AppCompatActivity {
 
     ImageView imageView;
     Button upload;
-    LinearLayout photo;
-    EditText place,people;
+    TextView photo;
+    EditText place, people;
     FirebaseStorage storage;
     StorageReference storageReference;
     private final int PICK_IMAGE_REQUEST = 22;
@@ -56,9 +56,9 @@ public class Upload_Photos extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     private Uri filePath;
     DatabaseReference myRef;
-    public int i=0;
-    private String email,currdate;
-    private String numberpeople,area;
+    public int i = 0;
+    private String email, currdate;
+    private String numberpeople, area;
     private String volname;
     private String pho;
     MyAppPrefsManager myAppPrefsManager;
@@ -68,29 +68,29 @@ public class Upload_Photos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload__photos);
 
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
 
-        ConstantValues.internetCheck(Upload_Photos.this);
-        myAppPrefsManager=new MyAppPrefsManager(Upload_Photos.this);
-        email=myAppPrefsManager.getUserName();
-        imageView= (ImageView)findViewById(R.id.image);
-        upload=(Button)findViewById(R.id.upload);
-        photo=(LinearLayout)findViewById(R.id.photo);
-        place=(EditText)findViewById(R.id.place);
-        people=(EditText)findViewById(R.id.numberofpeople);
+        ConstantValues.internetCheck(UploadPhotosActivity.this);
+        myAppPrefsManager = new MyAppPrefsManager(UploadPhotosActivity.this);
+        email = myAppPrefsManager.getUserName();
+        imageView = (ImageView) findViewById(R.id.image);
+        upload = (Button) findViewById(R.id.upload);
+        photo = (TextView) findViewById(R.id.photo);
+        place = (EditText) findViewById(R.id.place);
+        people = (EditText) findViewById(R.id.numberofpeople);
 
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        storage=FirebaseStorage.getInstance();
-        storageReference= storage.getReference();
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
         Date cd = Calendar.getInstance().getTime();
         System.out.println("Current time => " + cd);
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         currdate = df.format(cd);
 
-        myRef= FirebaseDatabase.getInstance().getReference("Volunteers");
+        myRef = FirebaseDatabase.getInstance().getReference("Volunteers");
         myRef.keepSynced(true);
 
         Query query = myRef.orderByChild("email").equalTo(email);
@@ -102,7 +102,7 @@ public class Upload_Photos extends AppCompatActivity {
                     // dataSnapshot is the "issue" node with all children with id 0
                     for (DataSnapshot issue : dataSnapshot.getChildren()) {
                         // do something with the individual "issues"
-                        volname=issue.getValue(Volunteer.class).getName();
+                        volname = issue.getValue(Volunteer.class).getName();
                     }
                 }
             }
@@ -123,14 +123,13 @@ public class Upload_Photos extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               uploadImage();
+                uploadImage();
             }
         });
     }
 
     // Select Image method
-    private void SelectImage()
-    {
+    private void SelectImage() {
 
         // Defining Implicit Intent to mobile gallery
         Intent intent = new Intent();
@@ -147,8 +146,7 @@ public class Upload_Photos extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode,
                                     int resultCode,
-                                    Intent data)
-    {
+                                    Intent data) {
 
         super.onActivityResult(requestCode,
                 resultCode,
@@ -175,9 +173,7 @@ public class Upload_Photos extends AppCompatActivity {
                                 getContentResolver(),
                                 filePath);
                 imageView.setImageBitmap(bitmap);
-            }
-
-            catch (IOException e) {
+            } catch (IOException e) {
                 // Log the exception
                 e.printStackTrace();
             }
@@ -185,15 +181,14 @@ public class Upload_Photos extends AppCompatActivity {
     }
 
     // UploadImage method
-    private void uploadImage()
-    {
+    private void uploadImage() {
         if (filePath != null) {
 
-           i++;
-            numberpeople=people.getText().toString().trim();
-            area=place.getText().toString().trim();
+            i++;
+            numberpeople = people.getText().toString().trim();
+            area = place.getText().toString().trim();
 
-            pho = "Image "+i;
+            pho = "Image " + i;
             // Code for showing progressDialog while uploading
             final ProgressDialog progressDialog
                     = new ProgressDialog(this);
@@ -210,33 +205,31 @@ public class Upload_Photos extends AppCompatActivity {
                             new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
                                 @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
-                                {
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     // Image uploaded successfully
                                     // Dismiss dialog
                                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                                    while (!uriTask.isSuccessful());
+                                    while (!uriTask.isSuccessful()) ;
                                     Uri downloadUrl = uriTask.getResult();
                                     String id = myRef.push().getKey();
-                                    firebaseDatabase= FirebaseDatabase.getInstance();
+                                    firebaseDatabase = FirebaseDatabase.getInstance();
                                     DatabaseReference databaseReference = firebaseDatabase.getReference().child("Image_Gallery").child(id);
-                                    Image_Modal image_modal = new Image_Modal(volname,currdate,numberpeople,area,downloadUrl.toString());
-                                    databaseReference.setValue(image_modal);
+                                    Image image_ = new Image(volname, currdate, numberpeople, area, downloadUrl.toString());
+                                    databaseReference.setValue(image_);
                                     progressDialog.dismiss();
-                                    Toast.makeText(Upload_Photos.this, "Image Uploaded Successfully !", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(UploadPhotosActivity.this, "Image Uploaded Successfully !", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                 }
                             })
 
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
-                        public void onFailure(@NonNull Exception e)
-                        {
+                        public void onFailure(@NonNull Exception e) {
 
                             // Error, Image not uploaded
                             progressDialog.dismiss();
                             Toast
-                                    .makeText(Upload_Photos.this,
+                                    .makeText(UploadPhotosActivity.this,
                                             "Failed " + e.getMessage(),
                                             Toast.LENGTH_SHORT)
                                     .show();
@@ -249,27 +242,24 @@ public class Upload_Photos extends AppCompatActivity {
                                 // percentage on the dialog box
                                 @Override
                                 public void onProgress(
-                                        UploadTask.TaskSnapshot taskSnapshot)
-                                {
+                                        UploadTask.TaskSnapshot taskSnapshot) {
                                     double progress
                                             = (100.0
                                             * taskSnapshot.getBytesTransferred()
                                             / taskSnapshot.getTotalByteCount());
                                     progressDialog.setMessage(
                                             "Uploaded "
-                                                    + (int)progress + "%");
+                                                    + (int) progress + "%");
                                 }
                             });
         }
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id= item.getItemId();
-        if (id == android.R.id.home)
-        {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
             this.finish();
         }
         return super.onOptionsItemSelected(item);

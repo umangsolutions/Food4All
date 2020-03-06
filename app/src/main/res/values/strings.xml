@@ -149,4 +149,21 @@
     <string name="_9908721573">9908721573</string>
     <string name="knvrssaikiran_gmail_com">knvrssaikiran@gmail.com</string>
     <string name="total_no_of_deliveries">Total No. of Deliveries :</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="new_recipient_click_here_to_register">New Recipient ? CLick here to Register</string>
+    <string name="welcome_recipients">Welcome Recipients !</string>
+    <string name="spirit_of_giving">Spirit of Giving</string>
+    <string name="name_of_organization">Name of Organization</string>
+    <string name="username">Username</string>
+    <string name="post_donated_photo">Post Donated Photo</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="enter_place">Enter Place</string>
+    <string name="no_of_people_benefitted">No. of People Benefitted</string>
+    <string name="posted_by">Posted By</string>
+    <string name="kakinada">Kakinada</string>
+    <string name="celebrate_birthday">Celebrate Birthday</string>
+    <string name="hunger_statistics">Hunger Statistics</string>
+    <string name="recipients">Recipients</string>
+    <string name="about">About</string>
+    <string name="report_issues">Report Issues</string>
 </resources>

@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".activities.general.Issues"
+    tools:context=".activities.general.IssuesActivity"
     tools:ignore="Autofill">
 
 

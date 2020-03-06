@@ -1,150 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.recipients.RecipientRegistration"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:background="#fff">
+    tools:context=".activities.recipients.RecipientRegistrationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="202dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="14dp"
-        android:gravity="center"
-        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
 
-
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans"
-            android:textStyle="bold"
-            android:padding="15dp"
-            android:text="Spirit of Giving"
-            android:textColor="#000"
-            android:textSize="24sp"/>
+            android:gravity="center"
+            android:text="@string/spirit_of_giving"
+            android:textColor="@color/black"
+            android:textSize="21sp"
+            android:textStyle="bold" />
 
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="240dp"
-            android:src="@drawable/re"
-            android:layout_gravity="center_horizontal"></ImageView>
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/app_name"
+            android:padding="10dp"
+            android:src="@drawable/re" />
 
 
-
-        <EditText
-            android:id="@+id/name"
-            android:layout_marginTop="15dp"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_top"
-            android:hint="Name of Organization"
-            android:fontFamily="@font/open_sans"
-            android:inputType="textPersonName"
-            android:padding="15dp" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:layout_margin="10dp">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:hint="@string/name_of_organization"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
         <Spinner
             android:id="@+id/spin"
+            style="@style/AppTheme.FilterSpinner"
             android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:background="@drawable/edit_text_bottom"
-            android:entries="@array/organization_type"
-            android:padding="5dp" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:entries="@array/organization_type" />
 
-        <EditText
-            android:id="@+id/usname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_middle"
-            android:hint="Username"
-            android:fontFamily="@font/open_sans"
-            android:inputType="textEmailAddress"
-            android:padding="15dp" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
 
-        <EditText
-            android:id="@+id/pwd"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_middle"
-            android:hint="Password"
-            android:fontFamily="@font/open_sans"
-            android:inputType="textPassword"
-            android:padding="15dp" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:layout_margin="10dp">
 
-        <EditText
-            android:id="@+id/phone"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/usname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:hint="@string/username"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_middle"
-            android:hint="Phone Number"
-            android:fontFamily="@font/open_sans"
-            android:inputType="phone"
-            android:maxLength="10"
-            android:padding="15dp" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
-        <EditText
-            android:id="@+id/address"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_middle"
-            android:hint="Address"
-            android:fontFamily="@font/open_sans"
-            android:inputType="text"
-            android:padding="15dp" />
-        <View
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:maxLength="10" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:hint="@string/address"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/register"
-            android:layout_width="208dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_margin="10dp"
             android:background="@drawable/button"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:text="REGISTER"
             android:fontFamily="@font/open_sans"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="17sp" />
+            android:text="@string/register"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/signin"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_margin="10dp"
             android:fontFamily="@font/open_sans"
-            android:padding="10dp"
-            android:text="Already Have an Account?  Sign in"
-            android:textAllCaps="true"
-            android:textColor="#000"
-            android:textSize="13dp" />
+            android:gravity="center"
+            android:text="@string/already_have_an_account_sign_in"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
 
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
