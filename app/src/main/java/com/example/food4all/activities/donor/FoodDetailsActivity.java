@@ -48,7 +48,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
     private TextView userEmail;
     DatabaseReference reff;
     DatabaseReference ref;
-    EditText nam, phone, spin, add;
+    EditText nam, phone, spin, add,foodcanfeed;
     Fooddetails fooddetails;
     boolean connected = false;
 
@@ -68,6 +68,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         nam = (EditText) findViewById(R.id.name);
         phone = (EditText) findViewById(R.id.phone);
         add = (EditText) findViewById(R.id.add);
+        foodcanfeed = (EditText)findViewById(R.id.noofpeople);
         fooddetails = new Fooddetails();
 
         //remove this use getSupportActionBar
@@ -115,11 +116,12 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                 final String s2 = phone.getText().toString().trim();
                 final String s3 = add.getText().toString().trim();
                 final String tim = time.getSelectedItem().toString();
+                final String foodno = foodcanfeed.getText().toString().trim();
 
                 Date cd = Calendar.getInstance().getTime();
                 System.out.println("Current time => " + cd);
                 @SuppressLint("SimpleDateFormat")
-                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 String currdate = df.format(cd);
 
                 SmsManager sms = SmsManager.getDefault();
@@ -128,8 +130,12 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Name", Toast.LENGTH_LONG).show();
                 } else if (s2.isEmpty()) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Phone Number", Toast.LENGTH_LONG).show();
+                } else if(s2.length()<10) {
+                    Toast.makeText(FoodDetailsActivity.this, "Phone Number is Invalid", Toast.LENGTH_SHORT).show();
                 } else if (s3.isEmpty()) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Address", Toast.LENGTH_LONG).show();
+                } else if(foodno.isEmpty()) {
+                    Toast.makeText(FoodDetailsActivity.this, "Please enter Food can feed Number", Toast.LENGTH_SHORT).show();
                 } else if (msg.equals("Choose Place")) {
                     Toast.makeText(FoodDetailsActivity.this, "Please choose Type of Place", Toast.LENGTH_LONG).show();
                 } else if (tim.equals("Select Time Period")) {
@@ -146,7 +152,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                     fooddetails.setTime(tim);*/
 
                     //use Constructor for push Data in DataBase
-                    reff.push().setValue(new Fooddetails(s1, s2, s3, msg, "", tim, currdate));
+                    reff.push().setValue(new Fooddetails(s1, s2, s3, msg, "", tim, currdate,foodno));
 
 
                     openDialog();
@@ -199,11 +205,11 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
 
                         String url = "https://fcm.googleapis.com/fcm/send";
 
-                        String m = s1 + " is willing to Donate Food from a ";
-                        String res = m + msg + ", Address is " + s3;
-                        String add = "Food Cooked Before :" + tim;
-                        String gmr = res + add;
-                        String fina = gmr + "Contact: " + s2;
+                        String m ="Mr./Mrs." +  s1 + " is willing to Donate Food from a ";
+                        String num = m + msg + " which can be fed to " + foodno + " person(s)";
+                        String res = num + "\nAddress is " + s3;
+                        String add = res + "\nFood Cooked Before :" + tim;
+                        String fina = add + "\nContact: " + s2;
 
                         TOPIC = "/topics/donateFood";
                         JSONObject data = new JSONObject();
@@ -213,7 +219,6 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
 
                         JSONObject notification_data = new JSONObject();
                         notification_data.put("data", data);
-
                         notification_data.put("to", TOPIC);
 
                         Log.e(TAG, "" + notification_data);

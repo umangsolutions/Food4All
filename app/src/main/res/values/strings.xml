@@ -166,4 +166,7 @@
     <string name="recipients">Recipients</string>
     <string name="about">About</string>
     <string name="report_issues">Report Issues</string>
+    <string name="hello_recip">Hello Recipients !</string>
+    <string name="no_of_people">Food can feed  (No. of People)</string>
+    <string name="saikiran">Saikiran</string>
 </resources>

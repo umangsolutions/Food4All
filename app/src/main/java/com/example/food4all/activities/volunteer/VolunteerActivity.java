@@ -28,7 +28,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class VolunteerActivity extends AppCompatActivity {
     public Button log;
@@ -39,8 +42,6 @@ public class VolunteerActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<Fooddetails> list;
     VolunteerAdapter volunteerAdapter;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,11 +79,14 @@ public class VolunteerActivity extends AppCompatActivity {
 
         list = new ArrayList<Fooddetails>();
 
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String currdate = simpleDateFormat.format(date);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait...");
         progressDialog.show();
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByChild("date").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

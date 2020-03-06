@@ -24,7 +24,7 @@
         android:layout_margin="5dp"
         android:drawableStart="@drawable/ic_name"
         android:drawablePadding="10dp"
-        android:text="@string/saikiran_kopparthi"
+        android:text="@string/saikiran"
         android:textColor="@color/black"
         android:textSize="19sp" />
 

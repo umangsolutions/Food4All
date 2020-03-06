@@ -1,20 +1,30 @@
 package com.example.food4all.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.food4all.activities.volunteer.VolunteerProfileActivity;
 import com.example.food4all.modals.Fooddetails;
 import com.example.food4all.modals.Volunteer;
 import com.example.food4all.R;
+import com.example.food4all.utilities.Dialog;
+import com.example.food4all.utilities.Dialog_Volunteer;
 import com.example.food4all.utilities.MyAppPrefsManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 import java.util.Objects;
 
-public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyViewHolder> {
+public class VolunteerAdapter  extends RecyclerView.Adapter<VolunteerAdapter.MyViewHolder> implements AdapterView.OnItemSelectedListener {
 
     Context context;
     List<Fooddetails> fooddetails;
@@ -96,36 +106,54 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
 
                     databaseReference = FirebaseDatabase.getInstance().getReference("Food_Details");
                     databaseReference.keepSynced(true);
-                    final Query que = databaseReference.orderByChild("name").equalTo(holder.name.getText().toString());
-                    //Toast.makeText(context, ""+name.getText().toString(), Toast.LENGTH_SHORT).show();
-                    que.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot stat : dataSnapshot.getChildren()) {
-                                stat.getRef().child("status").setValue("Booked");
-                            }
 
-                            notifyDataSetChanged();
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Toast.makeText(context, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder adb = new AlertDialog.Builder(context);
+                   // adb.setView(alertDialogView);
+                    adb.setTitle("Are you sure you want to Proceed ?");
+                    adb.setIcon(android.R.drawable.ic_dialog_alert);
+                    adb.setMessage("By clicking OK, you need to pickup food from Donor's Doorstep directly.Please feel free to contact the Donor");
+                    adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            final Query que = databaseReference.orderByChild("name").equalTo(holder.name.getText().toString());
+                            //Toast.makeText(context, ""+name.getText().toString(), Toast.LENGTH_SHORT).show();
+                            que.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot stat : dataSnapshot.getChildren()) {
+                                        stat.getRef().child("status").setValue("Booked");
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    Toast.makeText(context, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            SmsManager smsManager = SmsManager.getDefault();
+                            smsManager.sendTextMessage(phone, null, message, null, null);
+                            Intent intent = new Intent(context, VolunteerProfileActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            context.startActivity(intent);
+                            Toast.makeText(context, "Successfully Updated Delivery Count !", Toast.LENGTH_SHORT).show();
                         }
                     });
+                    adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                           // dialog.cancel();
+                            dialog.dismiss();
+                        }
+                    });
+                    adb.show();
+
                     //notifyDataSetChanged();
-                    swap(fooddetails);
-                    holder.book.setVisibility(View.GONE);
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(phone, null, message, null, null);
+                    //holder.book.setVisibility(View.GONE);
+
 
                 }
 
-                public void swap(List<Fooddetails> food) {
-                    fooddetails.clear();
-                    fooddetails.addAll(food);
-                    notifyDataSetChanged();
-                }
+
             });
 
 
@@ -145,6 +173,18 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
     @Override
     public int getItemViewType(int position) {
         return position;
+    }
+
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
 
@@ -169,4 +209,5 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
         fooddetails = filteredList;
         notifyDataSetChanged();
     }
+
 }
