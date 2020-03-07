@@ -32,6 +32,7 @@ import com.example.food4all.utilities.Dialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONObject;
@@ -43,16 +44,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FoodDetailsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
     public Button submit;
     private FirebaseAuth firebaseAuth;
     private TextView userEmail;
     DatabaseReference reff;
     DatabaseReference ref;
-    EditText nam, phone, spin, add,foodcanfeed;
+    EditText nam, phone, spin, add, foodcanfeed;
     Fooddetails fooddetails;
     boolean connected = false;
 
-    String TAG = "TOKENS_DATA";
+    private static String TAG = "TOKENS_DATA";
 
     final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
     final private String serverKey = "key=" + ConstantValues.AUTH_KEY_FCM;
@@ -68,8 +70,8 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         nam = (EditText) findViewById(R.id.name);
         phone = (EditText) findViewById(R.id.phone);
         add = (EditText) findViewById(R.id.add);
-        foodcanfeed = (EditText)findViewById(R.id.noofpeople);
-        fooddetails = new Fooddetails();
+        foodcanfeed = (EditText) findViewById(R.id.noofpeople);
+
 
         //remove this use getSupportActionBar
         //this.setTitle("Donate Food");
@@ -124,17 +126,18 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                 SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 String currdate = df.format(cd);
 
+
                 SmsManager sms = SmsManager.getDefault();
                 String inf = "Thank You for your Donation" + "\nWe Recieved Your Details and a Volunteer will pick food from your Doorstep Shortly." + "\n\nFor any Queries Contact us on +91 938 1384 234";
                 if (s1.isEmpty()) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Name", Toast.LENGTH_LONG).show();
                 } else if (s2.isEmpty()) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Phone Number", Toast.LENGTH_LONG).show();
-                } else if(s2.length()<10) {
+                } else if (s2.length() < 10) {
                     Toast.makeText(FoodDetailsActivity.this, "Phone Number is Invalid", Toast.LENGTH_SHORT).show();
                 } else if (s3.isEmpty()) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Address", Toast.LENGTH_LONG).show();
-                } else if(foodno.isEmpty()) {
+                } else if (foodno.isEmpty()) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Food can feed Number", Toast.LENGTH_SHORT).show();
                 } else if (msg.equals("Choose Place")) {
                     Toast.makeText(FoodDetailsActivity.this, "Please choose Type of Place", Toast.LENGTH_LONG).show();
@@ -152,7 +155,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                     fooddetails.setTime(tim);*/
 
                     //use Constructor for push Data in DataBase
-                    reff.push().setValue(new Fooddetails(s1, s2, s3, msg, "", tim, currdate,foodno));
+                    reff.push().setValue(new Fooddetails(s1, s2, s3, msg, "", tim, currdate, foodno));
 
 
                     openDialog();
@@ -205,7 +208,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
 
                         String url = "https://fcm.googleapis.com/fcm/send";
 
-                        String m ="Mr./Mrs." +  s1 + " is willing to Donate Food from a ";
+                        String m = "Mr./Mrs." + s1 + " is willing to Donate Food from a ";
                         String num = m + msg + " which can be fed to " + foodno + " person(s)";
                         String res = num + "\nAddress is " + s3;
                         String add = res + "\nFood Cooked Before :" + tim;
@@ -255,6 +258,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
             }
         });
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

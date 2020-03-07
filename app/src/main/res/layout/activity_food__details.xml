@@ -20,7 +20,7 @@
             android:gravity="center"
             android:text="@string/help_other_people_eat_hope"
             android:textColor="@color/black"
-            android:textSize="22sp" />
+            android:textSize="19sp" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans"
                 android:hint="@string/full_name"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName|textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans"
                 android:hint="@string/address"
-                android:inputType="textPostalAddress" />
+                android:inputType="textPostalAddress|textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -108,16 +108,16 @@
 
         <Button
             android:id="@+id/sub"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/button"
             android:fontFamily="@font/open_sans"
             android:padding="10dp"
             android:text="@string/submit_details"
-            android:textColor="@color/white"
-            android:textSize="17sp" />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

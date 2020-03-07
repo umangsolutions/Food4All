@@ -26,12 +26,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class VolunteerActivity extends AppCompatActivity {
     public Button log;
@@ -39,9 +42,11 @@ public class VolunteerActivity extends AppCompatActivity {
     private TextView userEmail;
     DatabaseReference databaseReference;
     private ProgressDialog progressDialog;
+    LinearLayoutManager linearLayoutManager;
     RecyclerView recyclerView;
     ArrayList<Fooddetails> list;
     VolunteerAdapter volunteerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,21 +77,20 @@ public class VolunteerActivity extends AppCompatActivity {
             }
         });
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Food_Details");
+        databaseReference.keepSynced(true);
+
 
         recyclerView = (RecyclerView) findViewById(R.id.myrecycler);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        list = new ArrayList<Fooddetails>();
+        list = new ArrayList<>();
 
-        Date date = Calendar.getInstance().getTime();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String currdate = simpleDateFormat.format(date);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait...");
         progressDialog.show();
-        databaseReference.orderByChild("date").addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -97,7 +101,14 @@ public class VolunteerActivity extends AppCompatActivity {
                 }
 
                 volunteerAdapter = new VolunteerAdapter(VolunteerActivity.this, list);
+
+                recyclerView.setHasFixedSize(true);
+                linearLayoutManager = new LinearLayoutManager(VolunteerActivity.this);
+                linearLayoutManager.setReverseLayout(true);
+                linearLayoutManager.setStackFromEnd(true);
+                recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setAdapter(volunteerAdapter);
+                volunteerAdapter.notifyDataSetChanged();
                 progressDialog.dismiss();
 
             }

@@ -28,27 +28,26 @@ import java.util.Calendar;
 
 public class DonorCelebrateActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    EditText don_name,don_email,don_phone,don_money,don_add,don_date;
-    String name,email,phone,money,recip,key,address,date;
+    EditText don_name, don_email, don_phone, don_money, don_add, don_date;
+    String name, email, phone, money, recip, key, address, date;
     Button submit;
-    String admin_1,admin_2,admin_3,msg;
+    String admin_1, admin_2, admin_3, msg;
     DatabaseReference myref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_happy);
 
-        don_name=(EditText)findViewById(R.id.donname);
-        don_email=(EditText)findViewById(R.id.donemail);
-        don_phone=(EditText)findViewById(R.id.donphone);
-        don_money=(EditText)findViewById(R.id.donmoney);
-        don_add = (EditText)findViewById(R.id.donaddress);
+        don_name = (EditText) findViewById(R.id.donname);
+        don_email = (EditText) findViewById(R.id.donemail);
+        don_phone = (EditText) findViewById(R.id.donphone);
+        don_money = (EditText) findViewById(R.id.donmoney);
+        don_add = (EditText) findViewById(R.id.donaddress);
         don_date = (EditText) findViewById(R.id.celebdate);
 
 
-
-
-        submit=(Button)findViewById(R.id.submit);
+        submit = (Button) findViewById(R.id.submit);
 
 
         if (getSupportActionBar() != null) {
@@ -90,36 +89,33 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name=don_name.getText().toString().trim();
-                email=don_email.getText().toString().trim();
-                phone=don_phone.getText().toString().trim();
-                money=don_money.getText().toString().trim();
-                recip=spinner.getSelectedItem().toString();
+                name = don_name.getText().toString().trim();
+                email = don_email.getText().toString().trim();
+                phone = don_phone.getText().toString().trim();
+                money = don_money.getText().toString().trim();
+                recip = spinner.getSelectedItem().toString();
                 address = don_add.getText().toString().trim();
                 date = don_date.getText().toString().trim();
 
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-                if(name.isEmpty()) {
+                if (name.isEmpty()) {
                     don_name.setError("Please enter Name !");
-                } else if(phone.isEmpty()) {
+                } else if (phone.isEmpty()) {
                     don_phone.setError("Please enter Phone Number ");
-                } else if(phone.length()<10) {
+                } else if (phone.length() < 10) {
                     don_phone.setError("Phone Number is Invalid");
-                }else if(email.isEmpty()) {
+                } else if (email.isEmpty()) {
                     don_email.setError("Please enter Email ID");
-                }
-                else if(!email.matches(emailPattern))
-                {
+                } else if (!email.matches(emailPattern)) {
                     don_email.setError("Email is Invalid");
-                }
-                else if(address.isEmpty()) {
+                } else if (address.isEmpty()) {
                     don_add.setError("Please enter Address ");
-                } else if(date.isEmpty()) {
+                } else if (date.isEmpty()) {
                     Toast.makeText(DonorCelebrateActivity.this, "Please choose Date of Celebration", Toast.LENGTH_SHORT).show();
-                } else if(recip.equals("Select Recipient")) {
+                } else if (recip.equals("Select Recipient")) {
                     Toast.makeText(DonorCelebrateActivity.this, "Please select Recipient", Toast.LENGTH_SHORT).show();
-                } else if(money.isEmpty()) {
+                } else if (money.isEmpty()) {
                     don_money.setError("Please enter Money");
                 } else {
 
@@ -165,7 +161,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            this.finish();
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -1,5 +1,7 @@
 package com.example.food4all.modals;
 
+import java.util.Map;
+
 public class Fooddetails  {
     private String name;
     private String phone;
@@ -25,6 +27,10 @@ public class Fooddetails  {
         this.date = date;
         this.no_of_people = no_of_people;
     }
+
+
+
+
 
     public String getName() {
         return name;
