@@ -74,19 +74,29 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
         myAppPrefsManager=new MyAppPrefsManager(context);
         String email=myAppPrefsManager.getUserName();
 
-        myRef = FirebaseDatabase.getInstance().getReference();
+        myRef = FirebaseDatabase.getInstance().getReference("Volunteers");
         myRef.keepSynced(true);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Food_Details");
         databaseReference.keepSynced(true);
 
 
-        holder.name.setText(fooddetails.get(position).getName());
-        holder.phone.setText(fooddetails.get(position).getPhone());
+        String donorname = fooddetails.get(position).getName();
+        String donorphone = fooddetails.get(position).getPhone();
+        String donoradd = fooddetails.get(position).getAddress();
+        String donorstatus = fooddetails.get(position).getStatus();
+        String place = fooddetails.get(position).getPlace();
+        String tim = fooddetails.get(position).getTime();
+        String noofpeople = fooddetails.get(position).getNo_of_people();
+        String dondate = fooddetails.get(position).getDate();
 
-        holder.address.setText(fooddetails.get(position).getAddress());
-        holder.status1.setText(fooddetails.get(position).getStatus());
-        holder.type.setText(fooddetails.get(position).getPlace());
+
+        holder.name.setText(donorname);
+        holder.phone.setText(donorphone);
+        holder.address.setText(donoradd);
+        holder.status1.setText(donorstatus);
+        holder.type.setText(place);
+
 
 
         @SuppressLint("SimpleDateFormat")
@@ -113,14 +123,40 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
 
 
                     AlertDialog.Builder adb = new AlertDialog.Builder(context);
-                    // adb.setView(alertDialogView);
                     adb.setTitle("Are you sure you want to Proceed ?");
-                    adb.setIcon(android.R.drawable.ic_dialog_alert);
                     adb.setMessage("By clicking OK, you need to pickup food from Donor's Doorstep directly.Please feel free to contact the Donor");
                     adb.setPositiveButton("OK", (dialog, which) -> {
 
+                        final Query query = myRef.orderByChild("email").equalTo(email);
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot datas : dataSnapshot.getChildren()) {
 
-                  /*      final Query que = databaseReference.orderByChild("name").equalTo(holder.name.getText().toString());
+                                    String key=datas.getKey();
+                                    assert key != null;
+
+                                    String volname = datas.getValue(Volunteer.class).getName();
+                                    //volphone[0] = datas.getValue(Volunteer.class).getPhone();
+                                    String key1=myRef.push().getKey();
+                                    assert key1 != null;
+                                    myRef.child(key).child("bookedData").child(key1).setValue(
+
+                                            new Fooddetails(donorname, donorphone, donoradd, place, "Went to Deliver", tim, dondate, noofpeople)
+                                    );
+                                }
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Toast.makeText(context, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+                        final Query que = databaseReference.orderByChild("name").equalTo(holder.name.getText().toString());
                         //Toast.makeText(context, ""+name.getText().toString(), Toast.LENGTH_SHORT).show();
                         que.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -134,44 +170,20 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
                             public void onCancelled(@NonNull DatabaseError databaseError) {
                                 Toast.makeText(context, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        });*/
-
-
-                        final Query query = myRef.orderByChild("email").equalTo(email);
-                        //Toast.makeText(context, ""+name.getText().toString(), Toast.LENGTH_SHORT).show();
-                        query.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot datas : dataSnapshot.getChildren()) {
-
-                                    String key=datas.getKey();
-                                    assert key != null;
-                                    String key1=myRef.getKey();
-                                    assert key1 != null;
-                                    myRef.child(key).child("bookedData").child(key1).push().setValue(
-
-                                            new Fooddetails("1", "2", "2", "4", "4", "5", "6", "7")
-                                    );
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                Toast.makeText(context, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
                         });
+
+
+
+
+
 
                         openDialog(position);
 
 
+                        String message = "Food Robin is on his way to Pickup Food from your Doorstep.Please feel free to contact this Number";
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage(donorphone, null, message, null, null);
 
-                        /*SmsManager smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage(phone, null, message, null, null);*/
-
-                        /*Intent intent = new Intent(context, VolunteerProfileActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        context.startActivity(intent);*/
-                        //Toast.makeText(context, "Successfully Updated Delivery Count !", Toast.LENGTH_SHORT).show();
                     });
                     adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
