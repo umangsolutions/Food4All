@@ -170,4 +170,14 @@
     <string name="no_of_people">Food can feed  (No. of People)</string>
     <string name="saikiran">Saikiran</string>
     <string name="time">Time</string>
+    <string name="enter_otp">Enter One Time Password</string>
+    <string name="validate">validate OTP</string>
+    <string name="code">code</string>
+    <string name="bun_name">name</string>
+    <string name="bun_place">place</string>
+    <string name="bun_address">address</string>
+    <string name="bun_phone">phone</string>
+    <string name="foodno">foodno</string>
+    <string name="bun_time">time</string>
+    <string name="currentdate">date</string>
 </resources>

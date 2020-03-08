@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -25,11 +26,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.food4all.OTP_ValidationActivity;
 import com.example.food4all.modals.Fooddetails;
 import com.example.food4all.R;
 import com.example.food4all.utilities.ConstantValues;
 import com.example.food4all.utilities.Dialog;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
@@ -42,6 +47,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class FoodDetailsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -53,6 +59,8 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
     EditText nam, phone, spin, add, foodcanfeed;
     Fooddetails fooddetails;
     boolean connected = false;
+    FirebaseAuth mAuth;
+    String name,place,address,phon,foodno,tim,currdate,codesent;
 
     private static String TAG = "TOKENS_DATA";
 
@@ -72,6 +80,8 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         add = (EditText) findViewById(R.id.add);
         foodcanfeed = (EditText) findViewById(R.id.noofpeople);
 
+        mAuth = FirebaseAuth.getInstance();
+
 
         //remove this use getSupportActionBar
         //this.setTitle("Donate Food");
@@ -83,7 +93,10 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
 
 
         ref = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Volunteers");
+
         reff = FirebaseDatabase.getInstance().getReference().child("Food_Details");
+
+
         final Spinner spinner = findViewById(R.id.spin);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.placetype, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -113,150 +126,57 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String msg = spinner.getSelectedItem().toString();
-                final String s1 = nam.getText().toString().trim();
-                final String s2 = phone.getText().toString().trim();
-                final String s3 = add.getText().toString().trim();
-                final String tim = time.getSelectedItem().toString();
-                final String foodno = foodcanfeed.getText().toString().trim();
+                place = spinner.getSelectedItem().toString();
+                name = nam.getText().toString().trim();
+                phon = phone.getText().toString().trim();
+                address = add.getText().toString().trim();
+                tim = time.getSelectedItem().toString();
+                foodno = foodcanfeed.getText().toString().trim();
+
+               // Toast.makeText(FoodDetailsActivity.this, ""+phon, Toast.LENGTH_SHORT).show();
 
                 Date cd = Calendar.getInstance().getTime();
                 System.out.println("Current time => " + cd);
                 @SuppressLint("SimpleDateFormat")
                 SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                String currdate = df.format(cd);
+                currdate = df.format(cd);
 
 
                 SmsManager sms = SmsManager.getDefault();
                 String inf = "Thank You for your Donation" + "\nWe Recieved Your Details and a Volunteer will pick food from your Doorstep Shortly." + "\n\nFor any Queries Contact us on +91 938 1384 234";
-                if (s1.isEmpty()) {
+                if (name.isEmpty()) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Name", Toast.LENGTH_LONG).show();
-                } else if (s2.isEmpty()) {
+                } else if (phon.isEmpty()) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Phone Number", Toast.LENGTH_LONG).show();
-                } else if (s2.length() < 10) {
+                } else if (phon.length() < 10) {
                     Toast.makeText(FoodDetailsActivity.this, "Phone Number is Invalid", Toast.LENGTH_SHORT).show();
-                } else if (s3.isEmpty()) {
+                } else if (address.isEmpty()) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Address", Toast.LENGTH_LONG).show();
                 } else if (foodno.isEmpty()) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Food can feed Number", Toast.LENGTH_SHORT).show();
-                } else if (msg.equals("Choose Place")) {
+                } else if (place.equals("Choose Place")) {
                     Toast.makeText(FoodDetailsActivity.this, "Please choose Type of Place", Toast.LENGTH_LONG).show();
-                } else if (tim.equals("Select Time Period")) {
+                } else if (tim.equals("Select Cooked Before Time")) {
                     Toast.makeText(FoodDetailsActivity.this, "Please select Time of Period", Toast.LENGTH_LONG).show();
                 } else {
 
 
-                    /*fooddetails.setName(s1);
-                    fooddetails.setPhone(s2);
-                    fooddetails.setAddress(s3);
-                    fooddetails.setPlace(msg);
-                    fooddetails.setDate(currdate);
-                    fooddetails.setStatus("");
-                    fooddetails.setTime(tim);*/
-
-                    //use Constructor for push Data in DataBase
-                    reff.push().setValue(new Fooddetails(s1, s2, s3, msg, "", tim, currdate, foodno));
-
-
-                    openDialog();
-
-
-                    //sms.sendTextMessage(s2, null, inf, null, null);
-
-
-
-
-
-
-                    /*ref.addChildEventListener(new ChildEventListener() {
-                        @Override
-                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                            String phone = Objects.requireNonNull(dataSnapshot.getValue(Volunteer.class)).toString();
-                            SmsManager smsManager = SmsManager.getDefault();
-                            String m = "Mr./Mrs."+ s1 + " is willing to Donate Food from a ";
-                            String res = m+ msg + ", Address is " + s3;
-                            String add ="\nFood Cooked Before :"+ tim;
-                            String gmr = res +add;
-                            String fina =gmr + "\nContact: " + s2;
-                            smsManager.sendTextMessage(phone, null,fina, null, null);
-                        }
-
-                        @Override
-                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                        }
-
-                        @Override
-                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                        }
-
-                        @Override
-                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });*/
-
-                    try {
-
-                        RequestQueue queue = Volley.newRequestQueue(FoodDetailsActivity.this);
-
-                        String url = "https://fcm.googleapis.com/fcm/send";
-
-                        String m = "Mr./Mrs." + s1 + " is willing to Donate Food from a ";
-                        String num = m + msg + " which can be fed to " + foodno + " person(s)";
-                        String res = num + "\nAddress is " + s3;
-                        String add = res + "\nFood Cooked Before :" + tim;
-                        String fina = add + "\nContact: " + s2;
-
-                        TOPIC = "/topics/donateFood";
-                        JSONObject data = new JSONObject();
-                        data.put("title", "Food Ready to Donate");
-                        data.put("message", fina);
-                        Log.e(TAG, "" + data);
-
-                        JSONObject notification_data = new JSONObject();
-                        notification_data.put("data", data);
-                        notification_data.put("to", TOPIC);
-
-                        Log.e(TAG, "" + notification_data);
-
-
-                        JsonObjectRequest request = new JsonObjectRequest(url, notification_data, new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                            }
-                        }) {
-                            @Override
-                            public Map<String, String> getHeaders() {
-
-                                Map<String, String> params = new HashMap<>();
-                                params.put("Authorization", serverKey);
-                                params.put("Content-Type", contentType);
-                                return params;
-                            }
-                        };
-
-                        queue.add(request);
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-
+                    sendVerificationCode(phon);
+                    Toast.makeText(FoodDetailsActivity.this, ""+phon, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(FoodDetailsActivity.this, "One Time Password has been sent to Your Mobile Number" + phon, Toast.LENGTH_SHORT).show();
+                   // startActivity(new Intent(getApplicationContext(),OTP_ValidationActivity.class));
                 }
             }
         });
+    }
+
+    public void sendVerificationCode(String phoneNumber) {
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                phoneNumber,        // Phone number to verify
+                60,                 // Timeout duration
+                TimeUnit.SECONDS,   // Unit of timeout
+                this,               // Activity (for callback binding)
+                mCallbacks);
     }
 
 
@@ -272,10 +192,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         return super.onOptionsItemSelected(item);
     }
 
-    public void openDialog() {
-        Dialog d = new Dialog();
-        d.show(getSupportFragmentManager(), "Dialog");
-    }
+
 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
@@ -287,5 +204,41 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
 
     }
 
+    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+        @Override
+        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+
+        }
+
+        @Override
+        public void onVerificationFailed(@NonNull FirebaseException e) {
+
+        }
+
+        @Override
+        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+
+            codesent = s;
+            goToNext();
+        }
+    };
+
+    public void goToNext() {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("name",name);
+        bundle.putString("phone",phon);
+        bundle.putString("address",address);
+        bundle.putString("place",place);
+        bundle.putString("foodno",foodno);
+        bundle.putString("time",tim);
+        bundle.putString("date",currdate);
+        bundle.putString("code",codesent);
+        Intent intent = new Intent(FoodDetailsActivity.this, OTP_ValidationActivity.class);
+        intent.putExtras(bundle);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
 }

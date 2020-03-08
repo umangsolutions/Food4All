@@ -176,7 +176,6 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
 
 
 
-
                         openDialog(position);
 
 
