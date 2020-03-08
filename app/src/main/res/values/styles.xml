@@ -33,4 +33,10 @@
         <item name="android:layout_marginBottom">4dp</item>
     </style>
 
+
+    <style name="AppTheme.Light.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
+    </style>
+
 </resources>

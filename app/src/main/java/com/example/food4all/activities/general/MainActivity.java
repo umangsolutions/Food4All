@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.food4all.SthreeRaksha;
 import com.example.food4all.activities.donor.DonorCelebrateActivity;
 import com.example.food4all.activities.donor.FoodDetailsActivity;
 import com.example.food4all.activities.recipients.RecipientLoginActivity;
@@ -221,6 +222,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent1);
                 break;
+            case R.id.nav_sthree:
+                Intent intent2 = new Intent(MainActivity.this, SthreeRaksha.class);
+                intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent2);
+                break;
+
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

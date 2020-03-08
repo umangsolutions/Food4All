@@ -180,4 +180,8 @@
     <string name="foodno">foodno</string>
     <string name="bun_time">time</string>
     <string name="currentdate">date</string>
+    <string name="verification_code">Verification Code</string>
+    <string name="please_enter_verification_code_sent_to_n_91xxxxxxx">Please enter Verification code sent to \n+91xxxxxxx</string>
+    <string name="validate_otp">Validate OTP</string>
+    <string name="sthree_raksha">Sthree Raksha</string>
 </resources>

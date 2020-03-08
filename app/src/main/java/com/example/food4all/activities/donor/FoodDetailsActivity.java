@@ -162,14 +162,13 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
 
 
                     sendVerificationCode(phon);
-                    Toast.makeText(FoodDetailsActivity.this, ""+phon, Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(FoodDetailsActivity.this, "One Time Password has been sent to Your Mobile Number" + phon, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(FoodDetailsActivity.this, ""+phon, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FoodDetailsActivity.this, "One Time Password has been sent to Your Mobile Number" + phon, Toast.LENGTH_SHORT).show();
                    // startActivity(new Intent(getApplicationContext(),OTP_ValidationActivity.class));
                 }
             }
         });
     }
-
     public void sendVerificationCode(String phoneNumber) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,        // Phone number to verify

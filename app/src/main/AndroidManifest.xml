@@ -28,7 +28,10 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".OTP_ValidationActivity"></activity>
+        <activity android:name=".SthreeRaksha"></activity>
+        <activity
+            android:name=".OTP_ValidationActivity"
+            android:theme="@style/AppTheme.Light.NoActionBar" />
         <activity android:name=".activities.donor.DonorCelebrateActivity" />
         <activity android:name=".activities.volunteer.VolunteerProfileActivity" />
         <activity
