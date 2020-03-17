@@ -184,4 +184,8 @@
     <string name="please_enter_verification_code_sent_to_n_91xxxxxxx">Please enter Verification code sent to \n+91xxxxxxx</string>
     <string name="validate_otp">Validate OTP</string>
     <string name="sthree_raksha">Sthree Raksha</string>
+    <string name="emergency">Emergency Alert</string>
+    <string name="contact_police">Contact Police</string>
+    <string name="road_safety">Road Safety</string>
+    <string name="important_phone">Important Phone</string>
 </resources>
