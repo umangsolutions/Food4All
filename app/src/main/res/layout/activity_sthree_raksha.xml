@@ -14,7 +14,8 @@
         android:layout_height="134dp"
         android:src="@drawable/thumbsup"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"></ImageView>
+        android:contentDescription="@string/app_name"
+        android:layout_marginStart="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,7 +38,7 @@
         android:weightSum="2"
         android:layout_marginTop="25dp">
         <LinearLayout
-            android:id="@+id/emergency"
+            android:id="@+id/layout_emergency"
             android:layout_width="match_parent"
             android:layout_height="190dp"
             android:layout_margin="10dp"
@@ -166,6 +167,7 @@
                 android:text="@string/important_phone"
                 android:textColor="@android:color/black"
                 android:textSize="19sp" />
+
         </LinearLayout>
     </LinearLayout>
 
