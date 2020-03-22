@@ -9,24 +9,30 @@
     tools:context=".SthreeRaksha">
 
 
-    <ImageView
-        android:layout_width="114dp"
-        android:layout_height="134dp"
-        android:src="@drawable/thumbsup"
-        android:layout_marginTop="10dp"
-        android:contentDescription="@string/app_name"
-        android:layout_marginStart="10dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sthree_raksha"
+        android:layout_gravity="center_horizontal"
+        android:drawableStart="@drawable/sthree_icon"
+        android:textSize="28sp"
+        android:drawablePadding="52dp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp">
+    </TextView>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sthree_raksha"
+        android:text="@string/stand_up_for_women_s_safety"
         android:layout_gravity="end"
-        android:textSize="33sp"
-        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:textColor="#5E5D5D"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="-75dp">
+        android:layout_marginTop="-42dp">
     </TextView>
 
 
@@ -34,9 +40,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:baselineAligned="false"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:weightSum="2"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="20dp">
         <LinearLayout
             android:id="@+id/layout_emergency"
             android:layout_width="match_parent"
@@ -67,11 +73,10 @@
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:textSize="19sp" />
-
         </LinearLayout>
 
-
         <LinearLayout
+            android:id="@+id/policelayout"
             android:layout_width="match_parent"
             android:layout_height="190dp"
             android:layout_gravity="center"
@@ -98,76 +103,6 @@
                 android:text="@string/contact_police"
                 android:textColor="@android:color/black"
                 android:textSize="19sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
-        android:weightSum="2"
-        android:layout_marginTop="0dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:contentDescription="@string/app_name"
-                android:padding="10dp"
-                android:src="@drawable/trafficlight" />
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:gravity="center"
-                android:text="@string/road_safety"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:textSize="19sp" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:background="@drawable/button_1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:contentDescription="@string/app_name"
-                android:padding="10dp"
-                android:src="@drawable/phonebook" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:text="@string/important_phone"
-                android:textColor="@android:color/black"
-                android:textSize="19sp" />
-
         </LinearLayout>
     </LinearLayout>
 

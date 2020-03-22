@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.telephony.SmsManager;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -96,6 +97,29 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
         holder.address.setText(donoradd);
         holder.status1.setText(donorstatus);
         holder.type.setText(place);
+
+
+       try {
+
+           holder.address.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   String map = "http://maps.google.co.in/maps?q=" + donoradd;
+                   Intent intent1 = new Intent(Intent.ACTION_VIEW,Uri.parse(map));
+                   context.startActivity(intent1);
+               }
+           });
+
+           holder.phone.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", donorphone, null));
+                   context.startActivity(intent);
+               }
+           });
+       } catch (SecurityException e) {
+           e.printStackTrace();
+       }
 
 
 

@@ -166,7 +166,7 @@
     <string name="recipients">Recipients</string>
     <string name="about">About</string>
     <string name="report_issues">Report Issues</string>
-    <string name="hello_recip">Hello Recipients !</string>
+    <string name="hello_recip">Lend a hand</string>
     <string name="no_of_people">Food can feed  (No. of People)</string>
     <string name="saikiran">Saikiran</string>
     <string name="time">Time</string>
@@ -188,4 +188,5 @@
     <string name="contact_police">Contact Police</string>
     <string name="road_safety">Road Safety</string>
     <string name="important_phone">Important Phone</string>
+    <string name="stand_up_for_women_s_safety">Stand up for Women\'s Safety</string>
 </resources>
