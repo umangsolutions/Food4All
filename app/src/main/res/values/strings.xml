@@ -189,4 +189,9 @@
     <string name="road_safety">Road Safety</string>
     <string name="important_phone">Important Phone</string>
     <string name="stand_up_for_women_s_safety">Stand up for Women\'s Safety</string>
+    <string name="donate_food_as_a_guest">Donate Food as a Guest</string>
+    <string name="donor_sign_in_activity">Donor Sign In Activity</string>
+    <string name="no_one_has_ever_become_poor_by_giving">No One has ever become Poor by Giving</string>
+    <string name="we_feel_very_happy_to_see_you_here">We feel very Happy to see you Here</string>
+    <string name="view_donations">View Donations</string>
 </resources>

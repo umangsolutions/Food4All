@@ -27,7 +27,11 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".SthreeRaksha"></activity>
+        <activity android:name=".DonorActivity"></activity>
+        <activity android:name=".DonorRegistrationActivity" />
+        <activity android:name=".DonorLoginActivity" />
+        <activity android:name=".Donor_Choose" />
+        <activity android:name=".SthreeRaksha" />
         <activity
             android:name=".OTP_ValidationActivity"
             android:theme="@style/AppTheme.Light.NoActionBar" />

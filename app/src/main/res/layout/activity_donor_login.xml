@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans"
             android:gravity="center"
-            android:text="@string/welcome_back"
+            android:text="@string/we_feel_very_happy_to_see_you_here"
             android:textColor="@color/black"
             android:textSize="21sp" />
 
@@ -28,7 +28,7 @@
             android:layout_height="190dp"
             android:padding="10dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/volun2002" />
+            android:src="@drawable/smiling" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
