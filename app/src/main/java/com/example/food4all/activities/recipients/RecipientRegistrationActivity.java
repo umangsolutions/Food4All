@@ -1,12 +1,13 @@
 package com.example.food4all.activities.recipients;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,12 +17,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.food4all.modals.Recipient;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.food4all.R;
+import com.example.food4all.modals.Recipient;
+import com.example.food4all.utilities.LocationTrack;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class RecipientRegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -29,6 +38,11 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
     EditText name,usname,pwd,phone,address;
     Button register;
     DatabaseReference databaseReference;
+    Geocoder geocoder;
+    List<Address> addresses;
+    LocationTrack locationTrack;
+    String location_address,lat,lon,knownName,city,postalCode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +58,13 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
         address=(EditText)findViewById(R.id.address);
         register=(Button)findViewById(R.id.register);
 
+        locationTrack = new LocationTrack(this);
+
+        lat = Double.toString(locationTrack.getLatitude());
+        lon = Double.toString(locationTrack.getLongitude());
+
+        geocoder = new Geocoder(this, Locale.getDefault());
+
         final Spinner spinner = findViewById(R.id.spin);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.organization_type, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -53,6 +74,45 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        address.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (address.getRight() - address.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        try {
+                            if(lat.equals("0.0") || lon.equals("0.0"))
+                                locationTrack.showSettingsAlert();
+                            else {
+                                //Toast.makeText(SthreeRaksha.this, "Latitude " + lat + "\n Longitude " + lon, Toast.LENGTH_SHORT).show();
+                                Log.d("Latitude", lat);
+                                Log.d("Longitude", lon);
+                                addresses = geocoder.getFromLocation(Double.parseDouble(lat),Double.parseDouble(lon),1);
+/*
+                                knownName = addresses.get(0).getFeatureName();
+                                city = addresses.get(0).getLocality();
+                                postalCode = addresses.get(0).getPostalCode();*/
+
+                                location_address = addresses.get(0).getAddressLine(0);
+
+                                //location_address = knownName + ", " +city + ", " +postalCode; // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                                Log.d("address",location_address);
+                                address.setText(location_address);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(RecipientRegistrationActivity.this, "Location set Successfully !", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override

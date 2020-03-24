@@ -1,16 +1,16 @@
 package com.example.food4all.activities.general;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
 
-import com.example.food4all.adapter.ViewPagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.food4all.R;
+import com.example.food4all.adapter.ViewPagerAdapter;
 
 import java.util.Timer;
 import java.util.TimerTask;

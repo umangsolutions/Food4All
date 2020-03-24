@@ -25,13 +25,13 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="190dp"
             android:contentDescription="@string/app_name"
             android:padding="10dp"
             android:src="@drawable/hands" />
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -87,12 +87,14 @@
             android:layout_margin="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/donaddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/donor_address"
-                android:inputType="textPostalAddress" />
+            android:id="@+id/donaddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:hint="@string/address"
+            android:drawablePadding="5dp"
+            android:drawableEnd="@drawable/ic_my_location_black_24dp"
+            android:inputType="textPostalAddress|textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
 
 

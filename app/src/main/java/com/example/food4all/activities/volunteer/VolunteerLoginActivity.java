@@ -2,9 +2,6 @@
 package com.example.food4all.activities.volunteer;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,8 +15,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.food4all.activities.administrator.AdminActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.food4all.R;
+import com.example.food4all.activities.administrator.AdminActivity;
 import com.example.food4all.utilities.ConstantValues;
 import com.example.food4all.utilities.MyAppPrefsManager;
 import com.google.android.gms.tasks.OnCompleteListener;

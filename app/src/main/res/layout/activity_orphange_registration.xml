@@ -113,7 +113,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans"
                 android:hint="@string/address"
-                android:inputType="text" />
+                android:drawablePadding="5dp"
+                android:drawableEnd="@drawable/ic_my_location_black_24dp"
+                android:inputType="textPostalAddress|textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

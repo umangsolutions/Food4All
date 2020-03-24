@@ -1,13 +1,5 @@
 package com.example.food4all.activities.general;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,24 +8,28 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.food4all.DonorLoginActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.example.food4all.R;
 import com.example.food4all.SthreeRaksha;
 import com.example.food4all.activities.donor.DonorCelebrateActivity;
 import com.example.food4all.activities.donor.FoodDetailsActivity;
 import com.example.food4all.activities.recipients.RecipientLoginActivity;
 import com.example.food4all.activities.volunteer.VolunteerActivity;
 import com.example.food4all.activities.volunteer.VolunteerLoginActivity;
-import com.example.food4all.R;
 import com.example.food4all.adapter.BannerAdapter;
 import com.example.food4all.modals.Banners;
 import com.example.food4all.recyclerView.RecyclerViewGallery;
 import com.example.food4all.utilities.ConstantValues;
 import com.example.food4all.utilities.MyAppPrefsManager;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -55,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     public TextView t, textView;
     MyAppPrefsManager myAppPrefsManager;
-    Dialog dialog;
 
     String TAG = "MAIN_ACTIVITY";
     boolean doubleBackToExitPressedOnce = false;
@@ -131,11 +126,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         findViewById(R.id.rest).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Intent i = new Intent(MainActivity.this, FoodDetailsActivity.class);
+                Intent i = new Intent(MainActivity.this, FoodDetailsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);*/
-                CustomDialog();
-
+                startActivity(i);
             }
         });
 
@@ -175,44 +168,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             sliderImage.startAutoCycle();
                             sliderImage.setOnIndicatorClickListener(position ->
                                     sliderImage.setCurrentPagePosition(position));
+
                         }).addOnFailureListener(exception -> {
                             // Handle any errors
+
                         });
+
+
                     }
+
+
                 })
                 .addOnFailureListener(e -> {
                     // Uh-oh, an error occurred!
+
                 });
-    }
 
-
-    public void CustomDialog() {
-        dialog=new Dialog(MainActivity.this);
-        dialog.setContentView(R.layout.activity_donor__choose);
-        //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-
-
-        dialog.findViewById(R.id.guest_donor).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),FoodDetailsActivity.class));
-                dialog.cancel();
-            }
-        });
-
-        dialog.findViewById(R.id.auth_donor).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               startActivity(new Intent(getApplicationContext(), DonorLoginActivity.class));
-
-                dialog.cancel();
-            }
-        });
-
-
-
-        dialog.show();
 
     }
 

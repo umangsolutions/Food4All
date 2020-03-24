@@ -22,6 +22,14 @@
             android:textColor="#000"
             android:textSize="21sp"
             android:textStyle="bold" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
+            android:padding="10dp"
+            android:src="@drawable/hap" />
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

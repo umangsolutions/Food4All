@@ -1,8 +1,5 @@
 package com.example.food4all.activities.recipients;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +7,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.food4all.R;
 import com.example.food4all.activities.general.MainActivity;
 import com.example.food4all.modals.RecipientsUpdate;
 import com.example.food4all.modals.Volunteer;
-import com.example.food4all.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

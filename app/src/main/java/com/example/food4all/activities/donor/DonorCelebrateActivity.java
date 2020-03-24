@@ -1,14 +1,15 @@
 package com.example.food4all.activities.donor;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,13 +19,20 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.food4all.R;
 import com.example.food4all.activities.general.MainActivity;
 import com.example.food4all.modals.Happy;
-import com.example.food4all.R;
+import com.example.food4all.utilities.LocationTrack;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 public class DonorCelebrateActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -33,6 +41,10 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
     Button submit;
     String admin_1, admin_2, admin_3, msg;
     DatabaseReference myref;
+    Geocoder geocoder;
+    List<Address> addresses;
+    LocationTrack locationTrack;
+    String location_address,lat,lon,knownName,city,postalCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +58,12 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
         don_add = (EditText) findViewById(R.id.donaddress);
         don_date = (EditText) findViewById(R.id.celebdate);
 
+        locationTrack = new LocationTrack(this);
+
+        lat = Double.toString(locationTrack.getLatitude());
+        lon = Double.toString(locationTrack.getLongitude());
+
+        geocoder = new Geocoder(this, Locale.getDefault());
 
         submit = (Button) findViewById(R.id.submit);
 
@@ -53,6 +71,47 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        don_add.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (don_add.getRight() - don_add.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        try {
+                            if(lat.equals("0.0") || lon.equals("0.0"))
+                                locationTrack.showSettingsAlert();
+                            else {
+                                //Toast.makeText(SthreeRaksha.this, "Latitude " + lat + "\n Longitude " + lon, Toast.LENGTH_SHORT).show();
+                                Log.d("Latitude", lat);
+                                Log.d("Longitude", lon);
+                                addresses = geocoder.getFromLocation(Double.parseDouble(lat),Double.parseDouble(lon),1);
+/*
+                                knownName = addresses.get(0).getFeatureName();
+                                city = addresses.get(0).getLocality();
+                                postalCode = addresses.get(0).getPostalCode();*/
+
+                                location_address = addresses.get(0).getAddressLine(0);
+
+                                //location_address = knownName + ", " +city + ", " +postalCode; // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                                Log.d("address",location_address);
+                                don_add.setText(location_address);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(DonorCelebrateActivity.this, "Location set Successfully !", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
         myref = FirebaseDatabase.getInstance().getReference().child("Happy_Moments");
 
         admin_1 = "9381384234";

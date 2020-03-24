@@ -1,8 +1,5 @@
 package com.example.food4all.activities.volunteer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,10 +14,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.food4all.R;
 import com.example.food4all.activities.general.MainActivity;
 import com.example.food4all.modals.Image;
 import com.example.food4all.modals.Volunteer;
-import com.example.food4all.R;
 import com.example.food4all.utilities.ConstantValues;
 import com.example.food4all.utilities.MyAppPrefsManager;
 import com.google.android.gms.tasks.OnFailureListener;
