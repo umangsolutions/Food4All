@@ -24,7 +24,6 @@
         android:layout_margin="5dp"
         android:drawableStart="@drawable/ic_name"
         android:drawablePadding="10dp"
-        android:text="@string/saikiran"
         android:textColor="@color/black"
         android:textSize="19sp" />
 
@@ -35,7 +34,6 @@
         android:layout_margin="5dp"
         android:drawableStart="@drawable/ic_phone"
         android:drawablePadding="10dp"
-        android:text="@string/_9908721573"
         android:textColor="@color/black"
         android:textSize="19sp" />
 
@@ -46,7 +44,6 @@
         android:layout_margin="5dp"
         android:drawableStart="@drawable/ic_mail"
         android:drawablePadding="10dp"
-        android:text="@string/knvrssaikiran_gmail_com"
         android:textColor="#000"
         android:textSize="19sp" />
 

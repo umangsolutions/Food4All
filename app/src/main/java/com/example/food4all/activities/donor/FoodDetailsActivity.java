@@ -182,6 +182,8 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Address", Toast.LENGTH_LONG).show();
                 } else if (foodno.isEmpty()) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Food can feed Number", Toast.LENGTH_SHORT).show();
+                } else if(foodno.equals("0")) {
+                    Toast.makeText(FoodDetailsActivity.this, "Please enter Number greater than 1", Toast.LENGTH_SHORT).show();
                 } else if (place.equals("Choose Place")) {
                     Toast.makeText(FoodDetailsActivity.this, "Please choose Type of Place", Toast.LENGTH_LONG).show();
                 } else if (tim.equals("Select Cooked Before Time")) {
