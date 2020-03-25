@@ -184,15 +184,13 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Food can feed Number", Toast.LENGTH_SHORT).show();
                 } else if(foodno.equals("0")) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Number greater than 1", Toast.LENGTH_SHORT).show();
-                } else if (place.equals("Choose Place")) {
+                } else if (place.equals("Choose Type of Place")) {
                     Toast.makeText(FoodDetailsActivity.this, "Please choose Type of Place", Toast.LENGTH_LONG).show();
-                } else if (tim.equals("Select Cooked Before Time")) {
+                } else if (tim.equals("Cooked Before")) {
                     Toast.makeText(FoodDetailsActivity.this, "Please select Time of Period", Toast.LENGTH_LONG).show();
                 } else {
                     sendVerificationCode("+91" + phon);
-                    //Toast.makeText(FoodDetailsActivity.this, ""+phon, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(FoodDetailsActivity.this, "One Time Password has been sent to Your Mobile Number " + phon, Toast.LENGTH_SHORT).show();
-                   // startActivity(new Intent(getApplicationContext(),OTP_ValidationActivity.class));
+                    Toast.makeText(FoodDetailsActivity.this, "One Time Password has been sent to Your Mobile Number " + "+91" + phon, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -213,8 +211,6 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         int id = item.getItemId();
         if (id == android.R.id.home) {
 
-            //remove this.finish() use onBackPressed()
-            //this.finish();
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);

@@ -29,6 +29,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -44,6 +46,7 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     Volunteer volunteer;
     boolean connected = false;
+    int count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,87 +95,75 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                 String p = p1.getText().toString().trim();
                 int count =0;
                 SmsManager sms = SmsManager.getDefault();
-                String msg = "Welcome  " + n + ",\nWe feel very Happy to see you Here.\nYou will be notified when there is a Donation\n\n Happy Volunteering !";
-                if (!ph.isEmpty() && !e.isEmpty() && !n.isEmpty()) {
-                    volunteer.setName(n);
-                    volunteer.setEmail(e);
-                    volunteer.setPhone(ph);
-                    volunteer.setCount(count);
-                    reff.push().setValue(volunteer);
-                } else {
-                    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-                    if (n.isEmpty()) {
-                       // Toast.makeText(RegistrationActivity.this, "Please Enter Name", Toast.LENGTH_LONG).show();
-                        name.setError("Please Enter Name ");
-                        return;
-                    } else if (!e.matches(emailPattern) || e.isEmpty()) {
-                        //Toast.makeText(RegistrationActivity.this, "Please Enter Valid Email", Toast.LENGTH_LONG).show();
-                        em.setError("Please enter Valid Email");
-                        return;
-                    } else if (p.isEmpty()) {
-                        Toast.makeText(VolunteerRegistrationActivity.this, "Please Enter Password", Toast.LENGTH_LONG).show();
-                       // p1.setError("Please enter Password");
-                        return;
-                    } else if (p.length() < 8) {
-                        Toast.makeText(VolunteerRegistrationActivity.this, "Password should be more than 8 characters", Toast.LENGTH_LONG).show();
-                       // p1.setError("Password should be more than 8 Characters");
-                        return;
-                    } else if (ph.isEmpty()) {
-                        //Toast.makeText(RegistrationActivity.this, "Please Enter Phone Number", Toast.LENGTH_LONG).show();
-                        phone.setError("Please Enter Phone Number");
-                        return;
-                    } else if (ph.length() < 10) {
-                        phone.setError("Phone Number is Not Valid !");
-                        return;
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+                if (n.isEmpty()) {
+                    // Toast.makeText(RegistrationActivity.this, "Please Enter Name", Toast.LENGTH_LONG).show();
+                    name.setError("Please Enter Name ");
+                    return;
+                } else if (!e.matches(emailPattern) || e.isEmpty()) {
+                    //Toast.makeText(RegistrationActivity.this, "Please Enter Valid Email", Toast.LENGTH_LONG).show();
+                    em.setError("Please enter Valid Email");
+                    return;
+                } else if (p.isEmpty()) {
+                    Toast.makeText(VolunteerRegistrationActivity.this, "Please Enter Password", Toast.LENGTH_LONG).show();
+                    // p1.setError("Please enter Password");
+                    return;
+                } else if (p.length() < 8) {
+                    Toast.makeText(VolunteerRegistrationActivity.this, "Password should be more than 8 characters", Toast.LENGTH_LONG).show();
+                    // p1.setError("Password should be more than 8 Characters");
+                    return;
+                } else if (ph.isEmpty()) {
+                    //Toast.makeText(RegistrationActivity.this, "Please Enter Phone Number", Toast.LENGTH_LONG).show();
+                    phone.setError("Please Enter Phone Number");
+                    return;
+                } else if (ph.length() < 10) {
+                    phone.setError("Phone Number is Not Valid !");
+                    return;
+                }  else {
+                       registerUser(e,p,ph,n);
+                        /*Intent broadcastIntent = new Intent(VolunteerRegistrationActivity.this, VolunteerRegistrationActivity.class);
+                        broadcastIntent.putExtra("toastMessage", "Hi man !");
+                        //startActivity(broadcastIntent);
+                        PendingIntent actionIntent = PendingIntent.getBroadcast(VolunteerRegistrationActivity.this,
+                                0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_arrow_forward_white);
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(
+                                VolunteerRegistrationActivity.this
+                        )
+                                .setSmallIcon(R.drawable.flog)
+                                .setContentTitle("Thank You for Registering !")
+                                .setContentText(msg)
+                                .setAutoCancel(true)
+                                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                                .setStyle(new NotificationCompat.BigTextStyle()
+                                        .bigText(getString(R.string.message))
+                                        .setBigContentTitle("Thank You for Registering !")
+                                        .setSummaryText("Registration"))
+                                .setLargeIcon(largeIcon)
+                                .addAction(R.mipmap.ic_launcher, "Yes", actionIntent);
+
+                        Intent intent1 = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
+                        intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent1.putExtra("message", msg);
+
+                        PendingIntent pendingIntent = PendingIntent.getActivity(VolunteerRegistrationActivity.this,
+                                0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+                        builder.setContentIntent(pendingIntent);
+
+
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(
+                                Context.NOTIFICATION_SERVICE
+                        );
+                        notificationManager.notify(1, builder.build());*/
+
+
+
+                        progressDialog.dismiss();
                     }
                 }
-
-                registerUser();
-                Intent broadcastIntent = new Intent(VolunteerRegistrationActivity.this, VolunteerRegistrationActivity.class);
-                broadcastIntent.putExtra("toastMessage", "Hi man !");
-                //startActivity(broadcastIntent);
-                PendingIntent actionIntent = PendingIntent.getBroadcast(VolunteerRegistrationActivity.this,
-                        0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_arrow_forward_white);
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(
-                        VolunteerRegistrationActivity.this
-                )
-                        .setSmallIcon(R.drawable.flog)
-                        .setContentTitle("Thank You for Registering !")
-                        .setContentText(msg)
-                        .setAutoCancel(true)
-                        .setPriority(NotificationCompat.PRIORITY_HIGH)
-                        .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(getString(R.string.message))
-                                .setBigContentTitle("Thank You for Registering !")
-                                .setSummaryText("Registration"))
-                        .setLargeIcon(largeIcon)
-                        .addAction(R.mipmap.ic_launcher, "Yes", actionIntent);
-
-                Intent intent1 = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
-                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent1.putExtra("message", msg);
-
-                PendingIntent pendingIntent = PendingIntent.getActivity(VolunteerRegistrationActivity.this,
-                        0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-                builder.setContentIntent(pendingIntent);
-
-
-                NotificationManager notificationManager = (NotificationManager) getSystemService(
-                        Context.NOTIFICATION_SERVICE
-                );
-                notificationManager.notify(1, builder.build());
-                if (!ph.isEmpty()) {
-                    sms.sendTextMessage(ph, null, msg, null, null);
-                }
-                Toast.makeText(VolunteerRegistrationActivity.this, "Volunteer Created Successful!", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
-                startActivity(i);
-                finish();
-                progressDialog.dismiss();
-            }
         });
 
         if (getSupportActionBar() != null) {
@@ -202,25 +193,32 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void registerUser() {
-        s1 = em.getText().toString().trim();
-        s2 = p1.getText().toString().trim();
-        String s3 = phone.getText().toString().trim();
-        String s4 = name.getText().toString().trim();
+    private void registerUser(String email, String password,String ph,String n) {
+
         progressDialog.setMessage("Registering, Please Wait...");
         progressDialog.show();
-        if (!s1.isEmpty() && !s2.isEmpty()) {
-            firebaseAuth.createUserWithEmailAndPassword(s1, s2)
+
+            firebaseAuth.createUserWithEmailAndPassword(email,password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                            } else {
-                                Toast.makeText(VolunteerRegistrationActivity.this, "Registration Error!", Toast.LENGTH_LONG).show();
+                            if(task.isSuccessful()){
+                                reff.push().setValue(new Volunteer(n,email,ph,count));
+                                if (!ph.isEmpty()) {
+                                    SmsManager sms = SmsManager.getDefault();
+                                    String msg = "Welcome  " + n + ",\nWe feel very Happy to see you Here.\nYou will be notified when there is a Donation\n\n Happy Volunteering !";
+                                    sms.sendTextMessage(ph, null, msg, null, null);
+                                }
+                                Intent i = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
+                                startActivity(i);
+                                finish();
+                                Toast.makeText(VolunteerRegistrationActivity.this, "Volunteer Created Successfully!", Toast.LENGTH_LONG).show();
+                            }
+                            else {
+                                Toast.makeText(VolunteerRegistrationActivity.this, "User already Exists ! !", Toast.LENGTH_SHORT).show();
                             }
                             progressDialog.dismiss();
                         }
                     });
         }
     }
-}

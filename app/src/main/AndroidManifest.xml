@@ -27,24 +27,20 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".SthreeRaksha" >
+        <activity android:name=".SthreeRaksha"
             android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".OTP_ValidationActivity"
-            android:theme="@style/AppTheme.Light.NoActionBar">
+            android:theme="@style/AppTheme.Light.NoActionBar"
             android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"
-        </activity>
-        <activity android:name=".activities.donor.DonorCelebrateActivity">
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.donor.DonorCelebrateActivity"
             android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"
-        </activity>
-        <activity android:name=".activities.volunteer.VolunteerProfileActivity">
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.volunteer.VolunteerProfileActivity"
             android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.recipients.RecipientActivity"
             android:windowSoftInputMode="stateHidden"

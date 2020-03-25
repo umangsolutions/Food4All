@@ -169,7 +169,7 @@ public class OTP_ValidationActivity extends AppCompatActivity {
                             }
 
                             Toast.makeText(OTP_ValidationActivity.this, "Food Donation details Submitted Successfully !", Toast.LENGTH_SHORT).show();
-                           startActivity(new Intent(OTP_ValidationActivity.this, MainActivity.class));
+                           //startActivity(new Intent(OTP_ValidationActivity.this, MainActivity.class));
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 Toast.makeText(OTP_ValidationActivity.this, "Invalid OTP Entered", Toast.LENGTH_SHORT).show();

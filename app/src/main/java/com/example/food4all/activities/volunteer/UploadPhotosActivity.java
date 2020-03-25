@@ -218,7 +218,9 @@ public class UploadPhotosActivity extends AppCompatActivity {
                                     databaseReference.setValue(image_);
                                     progressDialog.dismiss();
                                     Toast.makeText(UploadPhotosActivity.this, "Image Uploaded Successfully !", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
                                 }
                             })
 
@@ -252,6 +254,8 @@ public class UploadPhotosActivity extends AppCompatActivity {
                                                     + (int) progress + "%");
                                 }
                             });
+        } else {
+            Toast.makeText(this, "Please upload the Image ", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -260,7 +264,7 @@ public class UploadPhotosActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            this.finish();
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }

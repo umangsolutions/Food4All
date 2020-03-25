@@ -200,6 +200,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
                     Toast.makeText(DonorCelebrateActivity.this, "Details Successfully Submitted !", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(DonorCelebrateActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
             }
