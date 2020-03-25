@@ -47,8 +47,6 @@ public class VolunteerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_openvolun);
 
         firebaseAuth = FirebaseAuth.getInstance();
-
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Food Details");

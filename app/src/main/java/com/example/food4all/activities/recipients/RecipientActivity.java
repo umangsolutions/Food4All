@@ -30,7 +30,7 @@ public class RecipientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orphange);
-
+        this.setTitle("Donation Details");
         donname=(EditText)findViewById(R.id.donname);
         volname=(EditText)findViewById(R.id.volname);
         volphone=(EditText)findViewById(R.id.volphone);

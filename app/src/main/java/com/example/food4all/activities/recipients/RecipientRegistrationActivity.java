@@ -47,7 +47,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orphange_registration);
-
+        this.setTitle("Recipient Registration");
 
 
         signin=(TextView)findViewById(R.id.signin);

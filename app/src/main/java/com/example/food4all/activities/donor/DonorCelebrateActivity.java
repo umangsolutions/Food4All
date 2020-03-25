@@ -50,7 +50,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_happy);
-
+        this.setTitle("Celebrate Birtday");
         don_name = (EditText) findViewById(R.id.donname);
         don_email = (EditText) findViewById(R.id.donemail);
         don_phone = (EditText) findViewById(R.id.donphone);

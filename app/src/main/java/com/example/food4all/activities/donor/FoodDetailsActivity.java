@@ -204,6 +204,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                 TimeUnit.SECONDS,   // Unit of timeout
                 this,               // Activity (for callback binding)
                 mCallbacks);
+        Log.d(TAG, "sendVerificationCode: "+phoneNumber);
     }
 
 
@@ -234,12 +235,12 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-
+            Log.d(TAG, "onVerificationCompleted: ");
         }
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-
+            Log.d(TAG, "onVerificationFailed: "+e.toString());
         }
 
         @Override
@@ -247,12 +248,13 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
             super.onCodeSent(s, forceResendingToken);
 
             codesent = s;
+            Log.d(TAG, "onCodeSent: "+s);
             goToNext();
         }
     };
 
     public void goToNext() {
-
+        Intent intent = new Intent(FoodDetailsActivity.this, OTP_ValidationActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("name",name);
         bundle.putString("phone",phon);
@@ -262,7 +264,6 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         bundle.putString("time",tim);
         bundle.putString("date",currdate);
         bundle.putString("code",codesent);
-        Intent intent = new Intent(FoodDetailsActivity.this, OTP_ValidationActivity.class);
         intent.putExtras(bundle);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

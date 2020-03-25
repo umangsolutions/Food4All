@@ -67,7 +67,7 @@ public class UploadPhotosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload__photos);
-
+        this.setTitle("Upload Photos");
         overridePendingTransition(0, 0);
 
         ConstantValues.internetCheck(UploadPhotosActivity.this);

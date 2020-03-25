@@ -32,7 +32,7 @@ public class RecipientLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orphanage_login);
-
+        this.setTitle("Recipient Login");
         login=(TextView)findViewById(R.id.register);
 
         login.setOnClickListener(new View.OnClickListener() {
