@@ -11,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -29,11 +30,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,7 +50,8 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     Volunteer volunteer;
     boolean connected = false;
-    int count=0;
+    int count = 0;
+    String TAG = "TOKENS_DATA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +98,7 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                 String ph = phone.getText().toString();
                 String e = em.getText().toString().trim();
                 String p = p1.getText().toString().trim();
-                int count =0;
+                int count = 0;
                 SmsManager sms = SmsManager.getDefault();
 
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -115,8 +120,8 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                     phone.setError("Please Enter Phone Number");
                 } else if (ph.length() < 10) {
                     phone.setError("Phone Number is Not Valid !");
-                }  else {
-                       registerUser(e,p,ph,n);
+                } else {
+                    registerUser(e, p, ph, n);
                         /*Intent broadcastIntent = new Intent(VolunteerRegistrationActivity.this, VolunteerRegistrationActivity.class);
                         broadcastIntent.putExtra("toastMessage", "Hi man !");
                         //startActivity(broadcastIntent);
@@ -154,16 +159,16 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                         notificationManager.notify(1, builder.build());*/
 
 
-
-                        progressDialog.dismiss();
-                    }
+                    progressDialog.dismiss();
                 }
+            }
         });
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
+
     private boolean isValidEmail(String Emailid) {
         String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -172,6 +177,7 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
         Matcher matcher = pattern.matcher(Emailid);
         return matcher.matches();
     }
+
     private Intent getNotificationIntent() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -182,39 +188,56 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            this.finish();
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void registerUser(String email, String password,String ph,String n) {
+    private void registerUser(String email, String password, String ph, String n) {
 
         progressDialog.setMessage("Registering, Please Wait...");
         progressDialog.show();
+        progressDialog.setCancelable(false);
 
-            firebaseAuth.createUserWithEmailAndPassword(email,password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                reff.push().setValue(new Volunteer(n,email,ph,count));
-                                if (!ph.isEmpty()) {
-                                    SmsManager sms = SmsManager.getDefault();
-                                    String msg = "Welcome  " + n + ",\nWe feel very Happy to see you Here.\nYou will be notified when there is a Donation\n\n Happy Volunteering !";
-                                    sms.sendTextMessage(ph, null, msg, null, null);
-                                }
-                                Intent i = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
-                                startActivity(i);
-                                finish();
-                                progressDialog.dismiss();
-                                Toast.makeText(VolunteerRegistrationActivity.this, "Volunteer Created Successfully!", Toast.LENGTH_LONG).show();
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            if (!ph.isEmpty()) {
+                                SmsManager sms = SmsManager.getDefault();
+                                String msg = "Welcome  " + n + ",\nWe feel very Happy to see you Here.\nYou will be notified when there is a Donation\n\n Happy Volunteering !";
+                                sms.sendTextMessage(ph, null, msg, null, null);
                             }
-                            else {
+                            Log.d(TAG, "onComplete: " + email);
+                            progressDialog.dismiss();
+                            reff.push().setValue(new Volunteer(n,email,ph,count));
+                            Intent i = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                            Toast.makeText(VolunteerRegistrationActivity.this, "Volunteer Created Successfully!", Toast.LENGTH_LONG).show();
+                        } else {
+                            try {
                                 progressDialog.dismiss();
-                                Toast.makeText(VolunteerRegistrationActivity.this, "User already Exists ! !", Toast.LENGTH_SHORT).show();
-                            }
+                                throw Objects.requireNonNull(task.getException());
+                            } catch (FirebaseAuthInvalidCredentialsException malformedEmail) {
+                                progressDialog.dismiss();
+                                Log.d(TAG, "onComplete: malformed_email");
+                                Toast.makeText(VolunteerRegistrationActivity.this, "Invalid Email", Toast.LENGTH_SHORT).show();
 
+                            } catch (FirebaseAuthUserCollisionException existEmail) {
+                                progressDialog.dismiss();
+                                Log.d(TAG, "onComplete: exist_email");
+                                Toast.makeText(VolunteerRegistrationActivity.this, "Email Id Already Exists", Toast.LENGTH_SHORT).show();
+
+                            } catch (Exception e) {
+                                progressDialog.dismiss();
+                                Log.d(TAG, "onComplete: " + e.getMessage());
+                                Toast.makeText(VolunteerRegistrationActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    });
-        }
+
+                    }
+                });
     }
+}

@@ -116,7 +116,7 @@ public class OTP_ValidationActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             reff.push().setValue(new Fooddetails(name, phon, address, place, "", tim, currdate, foodno));
 
-                            openDialog();
+
                             try {
 
                                 RequestQueue queue = Volley.newRequestQueue(OTP_ValidationActivity.this);
@@ -170,6 +170,7 @@ public class OTP_ValidationActivity extends AppCompatActivity {
 
                             Toast.makeText(OTP_ValidationActivity.this, "Food Donation details Submitted Successfully !", Toast.LENGTH_SHORT).show();
                            //startActivity(new Intent(OTP_ValidationActivity.this, MainActivity.class));
+                            openDialog();
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 Toast.makeText(OTP_ValidationActivity.this, "Invalid OTP Entered", Toast.LENGTH_SHORT).show();
