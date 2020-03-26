@@ -52,11 +52,11 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
     Fooddetails fooddetails;
     boolean connected = false;
     FirebaseAuth mAuth;
-    String name,place,address,phon,foodno,tim,currdate,codesent;
-    Geocoder geocoder;
+    String name, place, address, phon, foodno, tim, currdate, codesent;
+    /*Geocoder geocoder;
     List<Address> addresses;
     LocationTrack locationTrack;
-    String location_address,lat,lon,knownName,city,postalCode;
+    String location_address,lat,lon,knownName,city,postalCode;*/
 
     private static String TAG = "TOKENS_DATA";
 
@@ -79,13 +79,13 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
 
         mAuth = FirebaseAuth.getInstance();
 
-        locationTrack = new LocationTrack(this);
+        /*locationTrack = new LocationTrack(this);
 
         lat = Double.toString(locationTrack.getLatitude());
         lon = Double.toString(locationTrack.getLongitude());
 
         geocoder = new Geocoder(this, Locale.getDefault());
-
+*/
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -110,7 +110,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         time.setAdapter(adap);
         time.setOnItemSelectedListener(this);
 
-        edtadd.setOnTouchListener(new View.OnTouchListener() {
+        /*edtadd.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_LEFT = 0;
@@ -128,10 +128,10 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                                 Log.d("Latitude", lat);
                                 Log.d("Longitude", lon);
                                 addresses = geocoder.getFromLocation(Double.parseDouble(lat),Double.parseDouble(lon),1);
-/*
+*//*
                                 knownName = addresses.get(0).getFeatureName();
                                 city = addresses.get(0).getLocality();
-                                postalCode = addresses.get(0).getPostalCode();*/
+                                postalCode = addresses.get(0).getPostalCode();*//*
 
                                 location_address = addresses.get(0).getAddressLine(0);
 
@@ -148,8 +148,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                 }
                 return false;
             }
-        });
-
+        });*/
 
 
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/userABC1");
@@ -164,7 +163,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                 tim = time.getSelectedItem().toString();
                 foodno = edtfoodcanfeed.getText().toString().trim();
 
-               // Toast.makeText(FoodDetailsActivity.this, ""+phon, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(FoodDetailsActivity.this, ""+phon, Toast.LENGTH_SHORT).show();
 
                 Date cd = Calendar.getInstance().getTime();
                 System.out.println("Current time => " + cd);
@@ -182,7 +181,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Address", Toast.LENGTH_LONG).show();
                 } else if (foodno.isEmpty()) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Food can feed Number", Toast.LENGTH_SHORT).show();
-                } else if(foodno.equals("0")) {
+                } else if (foodno.equals("0")) {
                     Toast.makeText(FoodDetailsActivity.this, "Please enter Number greater than 1", Toast.LENGTH_SHORT).show();
                 } else if (place.equals("Choose Type of Place")) {
                     Toast.makeText(FoodDetailsActivity.this, "Please choose Type of Place", Toast.LENGTH_LONG).show();
@@ -195,6 +194,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
             }
         });
     }
+
     public void sendVerificationCode(String phoneNumber) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,        // Phone number to verify
@@ -202,7 +202,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                 TimeUnit.SECONDS,   // Unit of timeout
                 this,               // Activity (for callback binding)
                 mCallbacks);
-        Log.d(TAG, "sendVerificationCode: "+phoneNumber);
+        Log.d(TAG, "sendVerificationCode: " + phoneNumber);
     }
 
 
@@ -215,7 +215,6 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -236,7 +235,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            Log.d(TAG, "onVerificationFailed: "+e.toString());
+            Log.d(TAG, "onVerificationFailed: " + e.toString());
         }
 
         @Override
@@ -244,7 +243,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
             super.onCodeSent(s, forceResendingToken);
 
             codesent = s;
-            Log.d(TAG, "onCodeSent: "+s);
+            Log.d(TAG, "onCodeSent: " + s);
             goToNext();
         }
     };
@@ -252,16 +251,16 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
     public void goToNext() {
         Intent intent = new Intent(FoodDetailsActivity.this, OTP_ValidationActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("name",name);
-        bundle.putString("phone",phon);
-        bundle.putString("address",address);
-        bundle.putString("place",place);
-        bundle.putString("foodno",foodno);
-        bundle.putString("time",tim);
-        bundle.putString("date",currdate);
-        bundle.putString("code",codesent);
+        bundle.putString("name", name);
+        bundle.putString("phone", phon);
+        bundle.putString("address", address);
+        bundle.putString("place", place);
+        bundle.putString("foodno", foodno);
+        bundle.putString("time", tim);
+        bundle.putString("date", currdate);
+        bundle.putString("code", codesent);
         intent.putExtras(bundle);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

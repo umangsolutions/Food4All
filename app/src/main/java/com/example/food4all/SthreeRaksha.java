@@ -47,9 +47,9 @@ import static com.android.volley.VolleyLog.TAG;
 public class SthreeRaksha extends AppCompatActivity {
 
     DatabaseReference ref;
-    LinearLayout emergencylayout,policelayout;
+    LinearLayout emergencylayout, policelayout;
     LocationTrack locationTrack;
-    String lat,lon;
+    String lat, lon;
     String url;
     String police = "09440795852";
 
@@ -65,7 +65,6 @@ public class SthreeRaksha extends AppCompatActivity {
         lon = Double.toString(locationTrack.getLongitude());
 
 
-
         emergencylayout = (LinearLayout) findViewById(R.id.layout_emergency);
         policelayout = (LinearLayout) findViewById(R.id.policelayout);
 
@@ -74,7 +73,8 @@ public class SthreeRaksha extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel",police, null));
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", police, null));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 } catch (SecurityException e) {
                     e.printStackTrace();
@@ -88,15 +88,15 @@ public class SthreeRaksha extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(lat.equals("0.0") || lon.equals("0.0"))
-                locationTrack.showSettingsAlert();
+                if (lat.equals("0.0") || lon.equals("0.0"))
+                    locationTrack.showSettingsAlert();
                 else {
                     //Toast.makeText(SthreeRaksha.this, "Latitude " + lat + "\n Longitude " + lon, Toast.LENGTH_SHORT).show();
                     Log.d("Latitude", lat);
                     Log.d("Longitude", lon);
 
 
-                    url = "https://maps.google.com/?q="+lat +"," + lon + "";
+                    url = "https://maps.google.com/?q=" + lat + "," + lon + "";
 
                     ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -107,7 +107,7 @@ public class SthreeRaksha extends AppCompatActivity {
                                     SmsManager smsManager = SmsManager.getDefault();
                                     String msg = "High Emergency Alert!!!\n";
                                     String fina = msg + "I'm in Danger.Please help me.\nLocation: ";
-                                    String sam = fina+url;
+                                    String sam = fina + url;
                                     smsManager.sendTextMessage(phone, null, sam, null, null);
 
                                     Toast.makeText(SthreeRaksha.this, "Emergency Alert Messages Sent Successfully to all the Volunteers !", Toast.LENGTH_SHORT).show();
@@ -130,14 +130,12 @@ public class SthreeRaksha extends AppCompatActivity {
         });
 
 
-
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
-       @Override
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {

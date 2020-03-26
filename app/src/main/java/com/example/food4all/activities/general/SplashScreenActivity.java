@@ -120,7 +120,7 @@ public class SplashScreenActivity extends Activity {
 
 
     }
-    
+
 //-************************ permission check ***********************************************************************
 
     private void permissioncheck() {
@@ -150,21 +150,23 @@ public class SplashScreenActivity extends Activity {
                 StringBuilder message = new StringBuilder("You need to grant access to " + permissionsNeeded.get(0));
                 for (int i = 1; i < permissionsNeeded.size(); i++)
                     message.append(", ").append(permissionsNeeded.get(i));
-                showMessageOKCancel(message.toString(),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
 
-                                if (Build.VERSION.SDK_INT >= 23) {
-                                    // Marshmallow+
-                                    SplashScreenActivity.this.requestPermissions(permissionsList.toArray(new String[0]),
-                                            REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+                    showMessageOKCancel(message.toString(),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
+                                    if (Build.VERSION.SDK_INT >= 23) {
+                                        // Marshmallow+
+                                        SplashScreenActivity.this.requestPermissions(permissionsList.toArray(new String[0]),
+                                                REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+
+
+                                    }
 
                                 }
+                            });
 
-                            }
-                        });
                 return;
             }
 
@@ -214,7 +216,12 @@ public class SplashScreenActivity extends Activity {
         new AlertDialog.Builder(SplashScreenActivity.this)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
                 .create()
                 .show();
     }
@@ -285,6 +292,7 @@ public class SplashScreenActivity extends Activity {
 
         }
     }
+
     public void LaunchApp() {
         Thread background = new Thread() {
             public void run() {

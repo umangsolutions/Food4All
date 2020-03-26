@@ -23,20 +23,21 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RecipientActivity extends AppCompatActivity {
 
-    EditText donname,volname,volphone,noofpeople;
+    EditText donname, volname, volphone, noofpeople;
     Button submit;
-    DatabaseReference databaseReference,volreference;
+    DatabaseReference databaseReference, volreference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orphange);
         this.setTitle("Donation Details");
-        donname=(EditText)findViewById(R.id.donname);
-        volname=(EditText)findViewById(R.id.volname);
-        volphone=(EditText)findViewById(R.id.volphone);
-        noofpeople=(EditText)findViewById(R.id.noofpeople);
+        donname = (EditText) findViewById(R.id.donname);
+        volname = (EditText) findViewById(R.id.volname);
+        volphone = (EditText) findViewById(R.id.volphone);
+        noofpeople = (EditText) findViewById(R.id.noofpeople);
 
-        submit=(Button)findViewById(R.id.submit);
+        submit = (Button) findViewById(R.id.submit);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Recipients_Updation");
 
@@ -51,15 +52,15 @@ public class RecipientActivity extends AppCompatActivity {
                 String noof_people = noofpeople.getText().toString().trim();
                 String key = databaseReference.push().getKey();
 
-                if(don_name.isEmpty()) {
+                if (don_name.isEmpty()) {
                     donname.setError("Please enter Donor Name");
-                } else if(vol_name.isEmpty()) {
+                } else if (vol_name.isEmpty()) {
                     volname.setError("Please enter Volunteer");
-                } else if(vol_phone.isEmpty()) {
+                } else if (vol_phone.isEmpty()) {
                     volphone.setError("Please enter Phone Number");
                 } else if (vol_phone.length() < 10) {
                     volphone.setError("Phone Number is invalid");
-                } else if(noof_people.isEmpty()) {
+                } else if (noof_people.isEmpty()) {
                     noofpeople.setError("Please enter People Benefitted Number ");
                 } else {
 

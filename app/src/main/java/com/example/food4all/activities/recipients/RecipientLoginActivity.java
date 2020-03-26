@@ -24,16 +24,17 @@ import com.google.firebase.database.ValueEventListener;
 public class RecipientLoginActivity extends AppCompatActivity {
 
     TextView login;
-    EditText usname,pwd;
+    EditText usname, pwd;
     Button submit;
     DatabaseReference databaseReference;
     String dbpass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orphanage_login);
         this.setTitle("Recipient Login");
-        login=(TextView)findViewById(R.id.register);
+        login = (TextView) findViewById(R.id.register);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,25 +45,24 @@ public class RecipientLoginActivity extends AppCompatActivity {
             }
         });
 
-        usname=(EditText)findViewById(R.id.usname);
-        pwd=(EditText)findViewById(R.id.pwd);
-        submit=(Button)findViewById(R.id.button);
+        usname = (EditText) findViewById(R.id.usname);
+        pwd = (EditText) findViewById(R.id.pwd);
+        submit = (Button) findViewById(R.id.button);
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("Organization_Details");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Organization_Details");
 
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String usnam = usname.getText().toString().trim();
-             final String pw = pwd.getText().toString().trim();
+                final String pw = pwd.getText().toString().trim();
 
-                if(usnam.isEmpty()) {
+                if (usnam.isEmpty()) {
                     usname.setError("Please enter Username");
-                } else if(pw.isEmpty()) {
+                } else if (pw.isEmpty()) {
                     pwd.setError("Password should not be Empty");
-                }
-                else {
+                } else {
                     Query query = databaseReference.orderByChild("usname").equalTo(usnam);
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -72,15 +72,14 @@ public class RecipientLoginActivity extends AppCompatActivity {
                                 // dataSnapshot is the "issue" node with all children with id 0
                                 for (DataSnapshot issue : dataSnapshot.getChildren()) {
                                     // do something with the individual "issues"
-                                    dbpass=issue.getValue(Recipient.class).getPassword();
+                                    dbpass = issue.getValue(Recipient.class).getPassword();
                                 }
-                                if(pw.equals(dbpass)) {
+                                if (pw.equals(dbpass)) {
                                     Toast.makeText(RecipientLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(RecipientLoginActivity.this, RecipientActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
-                                }
-                                else {
+                                } else {
                                     Toast.makeText(RecipientLoginActivity.this, "login Failed !", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -102,9 +101,8 @@ public class RecipientLoginActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id= item.getItemId();
-        if (id == android.R.id.home)
-        {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
             this.finish();
         }
         return super.onOptionsItemSelected(item);

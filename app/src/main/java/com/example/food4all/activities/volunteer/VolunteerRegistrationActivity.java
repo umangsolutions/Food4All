@@ -101,26 +101,20 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                 if (n.isEmpty()) {
                     // Toast.makeText(RegistrationActivity.this, "Please Enter Name", Toast.LENGTH_LONG).show();
                     name.setError("Please Enter Name ");
-                    return;
                 } else if (!e.matches(emailPattern) || e.isEmpty()) {
                     //Toast.makeText(RegistrationActivity.this, "Please Enter Valid Email", Toast.LENGTH_LONG).show();
                     em.setError("Please enter Valid Email");
-                    return;
                 } else if (p.isEmpty()) {
                     Toast.makeText(VolunteerRegistrationActivity.this, "Please Enter Password", Toast.LENGTH_LONG).show();
                     // p1.setError("Please enter Password");
-                    return;
                 } else if (p.length() < 8) {
                     Toast.makeText(VolunteerRegistrationActivity.this, "Password should be more than 8 characters", Toast.LENGTH_LONG).show();
                     // p1.setError("Password should be more than 8 Characters");
-                    return;
                 } else if (ph.isEmpty()) {
                     //Toast.makeText(RegistrationActivity.this, "Please Enter Phone Number", Toast.LENGTH_LONG).show();
                     phone.setError("Please Enter Phone Number");
-                    return;
                 } else if (ph.length() < 10) {
                     phone.setError("Phone Number is Not Valid !");
-                    return;
                 }  else {
                        registerUser(e,p,ph,n);
                         /*Intent broadcastIntent = new Intent(VolunteerRegistrationActivity.this, VolunteerRegistrationActivity.class);
@@ -212,12 +206,14 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                                 Intent i = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
                                 startActivity(i);
                                 finish();
+                                progressDialog.dismiss();
                                 Toast.makeText(VolunteerRegistrationActivity.this, "Volunteer Created Successfully!", Toast.LENGTH_LONG).show();
                             }
                             else {
+                                progressDialog.dismiss();
                                 Toast.makeText(VolunteerRegistrationActivity.this, "User already Exists ! !", Toast.LENGTH_SHORT).show();
                             }
-                            progressDialog.dismiss();
+
                         }
                     });
         }

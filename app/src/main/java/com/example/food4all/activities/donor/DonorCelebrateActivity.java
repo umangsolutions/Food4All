@@ -41,10 +41,10 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
     Button submit;
     String admin_1, admin_2, admin_3, msg;
     DatabaseReference myref;
-    Geocoder geocoder;
+    /*Geocoder geocoder;
     List<Address> addresses;
     LocationTrack locationTrack;
-    String location_address,lat,lon,knownName,city,postalCode;
+    String location_address,lat,lon,knownName,city,postalCode;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +58,12 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
         don_add = (EditText) findViewById(R.id.donaddress);
         don_date = (EditText) findViewById(R.id.celebdate);
 
-        locationTrack = new LocationTrack(this);
+        /*locationTrack = new LocationTrack(this);
 
         lat = Double.toString(locationTrack.getLatitude());
         lon = Double.toString(locationTrack.getLongitude());
 
-        geocoder = new Geocoder(this, Locale.getDefault());
+        geocoder = new Geocoder(this, Locale.getDefault());*/
 
         submit = (Button) findViewById(R.id.submit);
 
@@ -72,7 +72,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        don_add.setOnTouchListener(new View.OnTouchListener() {
+        /*don_add.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_LEFT = 0;
@@ -90,10 +90,10 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
                                 Log.d("Latitude", lat);
                                 Log.d("Longitude", lon);
                                 addresses = geocoder.getFromLocation(Double.parseDouble(lat),Double.parseDouble(lon),1);
-/*
+*//*
                                 knownName = addresses.get(0).getFeatureName();
                                 city = addresses.get(0).getLocality();
-                                postalCode = addresses.get(0).getPostalCode();*/
+                                postalCode = addresses.get(0).getPostalCode();*//*
 
                                 location_address = addresses.get(0).getAddressLine(0);
 
@@ -111,7 +111,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
                 return false;
             }
         });
-
+*/
         myref = FirebaseDatabase.getInstance().getReference().child("Happy_Moments");
 
         admin_1 = "9381384234";
