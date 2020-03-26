@@ -15,6 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.food4all.R;
 import com.example.food4all.modals.Report;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,6 +33,7 @@ public class IssuesActivity extends AppCompatActivity {
     Report rep;
     public String s1, s2;
     boolean connected = false;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,24 @@ public class IssuesActivity extends AppCompatActivity {
             connected = true;
         } else
             connected = false;
+
+
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
 
         if (!connected) {
             Toast.makeText(IssuesActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();

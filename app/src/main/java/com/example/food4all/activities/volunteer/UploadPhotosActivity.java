@@ -23,6 +23,12 @@ import com.example.food4all.modals.Image;
 import com.example.food4all.modals.Volunteer;
 import com.example.food4all.utilities.ConstantValues;
 import com.example.food4all.utilities.MyAppPrefsManager;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -62,6 +68,8 @@ public class UploadPhotosActivity extends AppCompatActivity {
     private String volname;
     private String pho;
     MyAppPrefsManager myAppPrefsManager;
+    private AdView mAdView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +97,21 @@ public class UploadPhotosActivity extends AppCompatActivity {
         System.out.println("Current time => " + cd);
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         currdate = df.format(cd);
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
         myRef = FirebaseDatabase.getInstance().getReference("Volunteers");
         myRef.keepSynced(true);

@@ -20,10 +20,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.food4all.OTP_ValidationActivity;
 import com.example.food4all.R;
 import com.example.food4all.modals.Fooddetails;
 import com.example.food4all.utilities.ConstantValues;
+import com.example.food4all.utilities.Dialog;
 import com.example.food4all.utilities.LocationTrack;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,12 +39,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class FoodDetailsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -96,6 +106,8 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         ref = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Volunteers");
 
         reff = FirebaseDatabase.getInstance().getReference().child("Food_Details");
+
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/userABC1");
 
 
         final Spinner spinner = findViewById(R.id.spin);
@@ -232,6 +244,64 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
             Log.d(TAG, "onVerificationCompleted: "+phoneAuthCredential);
 
+            reff.push().setValue(new Fooddetails(name, phon, address, place, "", tim, currdate, foodno));
+
+
+            try {
+
+                RequestQueue queue = Volley.newRequestQueue(FoodDetailsActivity.this);
+
+                String url = "https://fcm.googleapis.com/fcm/send";
+
+                String m = "Mr./Mrs." + name + " is willing to Donate Food from a ";
+                String num = m + place + " which can be fed to " + foodno + " person(s)";
+                String res = num + "\nAddress is " + address;
+                String add = res + "\nFood Cooked Before :" + tim;
+                String fina = add + "\nContact: " + phon;
+
+                TOPIC = "/topics/donateFood";
+                JSONObject data = new JSONObject();
+                data.put("title", "Food Ready to Donate");
+                data.put("message", fina);
+                Log.e(TAG, "" + data);
+
+                JSONObject notification_data = new JSONObject();
+                notification_data.put("data", data);
+                notification_data.put("to", TOPIC);
+
+                Log.e(TAG, "" + notification_data);
+
+
+                JsonObjectRequest request = new JsonObjectRequest(url, notification_data, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }) {
+                    @Override
+                    public Map<String, String> getHeaders() {
+
+                        Map<String, String> params = new HashMap<>();
+                        params.put("Authorization", serverKey);
+                        params.put("Content-Type", contentType);
+                        return params;
+                    }
+                };
+
+                queue.add(request);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Toast.makeText(FoodDetailsActivity.this, "Food Donation details Submitted Successfully !", Toast.LENGTH_SHORT).show();
+            //startActivity(new Intent(OTP_ValidationActivity.this, MainActivity.class));
+            openDialog();
+
         }
 
         @Override
@@ -263,6 +333,11 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         intent.putExtras(bundle);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    public void openDialog() {
+        Dialog d = new Dialog();
+        d.show(getSupportFragmentManager(), "Dialog");
     }
 
 }

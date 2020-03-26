@@ -26,6 +26,12 @@ import com.example.food4all.R;
 import com.example.food4all.activities.general.MainActivity;
 import com.example.food4all.modals.Happy;
 import com.example.food4all.utilities.LocationTrack;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -41,6 +47,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
     Button submit;
     String admin_1, admin_2, admin_3, msg;
     DatabaseReference myref;
+    private AdView mAdView;
     /*Geocoder geocoder;
     List<Address> addresses;
     LocationTrack locationTrack;
@@ -112,6 +119,22 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
             }
         });
 */
+
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         myref = FirebaseDatabase.getInstance().getReference().child("Happy_Moments");
 
         admin_1 = "9381384234";

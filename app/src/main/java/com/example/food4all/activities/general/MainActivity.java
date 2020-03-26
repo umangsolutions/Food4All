@@ -30,6 +30,12 @@ import com.example.food4all.modals.Banners;
 import com.example.food4all.recyclerView.RecyclerViewGallery;
 import com.example.food4all.utilities.ConstantValues;
 import com.example.food4all.utilities.MyAppPrefsManager;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -60,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     List<Banners> modelList = new ArrayList<>();
 
+    private AdView mAdView;
+
 
 
 
@@ -88,6 +96,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         firebaseAuth = FirebaseAuth.getInstance();
         listAllFiles();
+
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
 
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/donateFood")
