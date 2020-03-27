@@ -8,18 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:693289999799:android:741bc736bd46d77d401c32",
+        "mobilesdk_app_id": "1:693289999799:android:ebc17838c0366bbf401c32",
         "android_client_info": {
-          "package_name": "com.example.food4all"
+          "package_name": "com.gmrit.food4all"
         }
       },
       "oauth_client": [
         {
-          "client_id": "693289999799-rop8to5es89qrrjes6hud2o581ugmibe.apps.googleusercontent.com",
+          "client_id": "693289999799-li76mlr22bnon3ldovjgihv03c588hr7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.food4all",
-            "certificate_hash": "100e32874e02f1f5adf85cea84f6b73410abdaf5"
+            "package_name": "com.gmrit.food4all",
+            "certificate_hash": "cc4876e51c7d938252cf0b14dd63e38c6baea0b2"
           }
         },
         {

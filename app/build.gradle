@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.example.food4all"
+        applicationId "com.gmrit.food4all"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1

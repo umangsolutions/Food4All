@@ -15,7 +15,6 @@
 
 
     <ImageView
-        android:id="@+id/iv_gif_container"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="bottom|start"
@@ -25,7 +24,6 @@
 
 
     <FrameLayout
-        android:id="@+id/fl_shadow_container"
         android:background="@drawable/bg_overlay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

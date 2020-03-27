@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.food4all">
+    package="com.gmrit.food4all">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -18,7 +18,7 @@
 
 
     <application
-        android:name=".firebase.FireBaseApp"
+        android:name="com.gmrit.food4all.firebase.FireBaseApp"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -38,53 +38,53 @@
         <!--        android:value="ca-app-pub-7341014042556519~1951002345"/-->
 
 
-        <activity android:name=".SthreeRaksha"
+        <activity android:name="com.gmrit.food4all.SthreeRaksha"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".OTP_ValidationActivity"
+            android:name="com.gmrit.food4all.OTP_ValidationActivity"
             android:theme="@style/AppTheme.Light.NoActionBar"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.donor.DonorCelebrateActivity"
+        <activity android:name="com.gmrit.food4all.activities.donor.DonorCelebrateActivity"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.volunteer.VolunteerProfileActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.recipients.RecipientActivity"
+        <activity android:name="com.gmrit.food4all.activities.volunteer.VolunteerProfileActivity"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.recipients.RecipientLoginActivity"
+            android:name="com.gmrit.food4all.activities.recipients.RecipientActivity"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.recipients.RecipientRegistrationActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait" />
-        <activity android:name=".recyclerView.RecyclerViewGallery"
+            android:name="com.gmrit.food4all.activities.recipients.RecipientLoginActivity"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.volunteer.UploadPhotosActivity"
+            android:name="com.gmrit.food4all.activities.recipients.RecipientRegistrationActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.gmrit.food4all.recyclerView.RecyclerViewGallery"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.administrator.AdminActivity"
+            android:name="com.gmrit.food4all.activities.volunteer.UploadPhotosActivity"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.volunteer.ResetPasswordActivity"
+            android:name="com.gmrit.food4all.activities.administrator.AdminActivity"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.general.IssuesActivity"
+            android:name="com.gmrit.food4all.activities.volunteer.ResetPasswordActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.gmrit.food4all.activities.general.IssuesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activities.general.AboutActivity"
+            android:name="com.gmrit.food4all.activities.general.AboutActivity"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity
@@ -93,7 +93,7 @@
             android:label="@string/title_activity_login2"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.general.SplashScreenActivity"
+            android:name="com.gmrit.food4all.activities.general.SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -102,23 +102,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.general.HungerStatisticsActivity"
+            android:name="com.gmrit.food4all.activities.general.HungerStatisticsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".activities.donor.FoodDetailsActivity"
+            android:name="com.gmrit.food4all.activities.donor.FoodDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activities.volunteer.VolunteerRegistrationActivity"
+            android:name="com.gmrit.food4all.activities.volunteer.VolunteerRegistrationActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activities.volunteer.VolunteerLoginActivity"
+            android:name="com.gmrit.food4all.activities.volunteer.VolunteerLoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activities.volunteer.VolunteerActivity"
+            android:name="com.gmrit.food4all.activities.volunteer.VolunteerActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -126,7 +126,7 @@
             android:label="@string/title_activity_regvolunteer"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.general.MainActivity"
+            android:name="com.gmrit.food4all.activities.general.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             android:theme="@style/AppTheme.NoActionBar">
@@ -158,7 +158,7 @@
             android:value="@string/default_notification_channel_id" />
 
         <service
-            android:name=".firebase.MyFirebaseMessagingService"
+            android:name="com.gmrit.food4all.firebase.MyFirebaseMessagingService"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
