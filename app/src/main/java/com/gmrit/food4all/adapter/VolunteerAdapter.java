@@ -190,9 +190,13 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
                         openDialog(position);
 
 
-                        String message = "Food Robin is on his way to Pickup Food from your Doorstep.Please feel free to contact this Number";
-                        SmsManager smsManager = SmsManager.getDefault();
+
+                       /* SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(donorphone, null, message, null, null);
+*/
+
+
+
 
                     });
                     adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -259,8 +263,14 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-
-                        context.startActivity(new Intent(context, MainActivity.class));
+                        String donor_no = fooddetails.get(position).getPhone();
+                        String message = "Food Robin is on his way to Pickup Food from your Doorstep.Please feel free to contact this Number";
+                        Uri sendSmsTo = Uri.parse("smsto:" + donor_no);
+                        Intent intent = new Intent(
+                                Intent.ACTION_SENDTO, sendSmsTo);
+                        intent.putExtra("sms_body",message);
+                        context.startActivity(intent);
+                        //context.startActivity(new Intent(context, MainActivity.class));
 
 
                     }

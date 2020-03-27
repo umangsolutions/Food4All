@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class SthreeRaksha extends AppCompatActivity {
 
     DatabaseReference ref;
@@ -29,6 +31,7 @@ public class SthreeRaksha extends AppCompatActivity {
     String lat, lon;
     String url;
     String police = "09440795852";
+    private ArrayList<String> phoneno = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class SthreeRaksha extends AppCompatActivity {
 
         lat = Double.toString(locationTrack.getLatitude());
         lon = Double.toString(locationTrack.getLongitude());
+
+        Toast.makeText(SthreeRaksha.this, "Double Click on Emergency button to send Alert Messages", Toast.LENGTH_LONG).show();
 
 
         emergencylayout = (LinearLayout) findViewById(R.id.layout_emergency);
@@ -81,14 +86,8 @@ public class SthreeRaksha extends AppCompatActivity {
                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                 if (dataSnapshot.exists()) {
                                     String phone = dataSnapshot1.getValue(Volunteer.class).toString();
-                                    SmsManager smsManager = SmsManager.getDefault();
-                                    String msg = "High Emergency Alert!!!\n";
-                                    String fina = msg + "I'm in Danger.Please help me.\nLocation: ";
-                                    String sam = fina + url;
-                                    smsManager.sendTextMessage(phone, null, sam, null, null);
-
-                                    Toast.makeText(SthreeRaksha.this, "Emergency Alert Messages Sent Successfully to all the Volunteers !", Toast.LENGTH_SHORT).show();
-
+                                    phoneno.add(phone);
+                                    //SmsManager smsManager = SmsManager.getDefault();
                                 } else {
                                     Toast.makeText(SthreeRaksha.this, "Emergency Alert failed to Send", Toast.LENGTH_SHORT).show();
                                 }
@@ -100,6 +99,33 @@ public class SthreeRaksha extends AppCompatActivity {
                             Toast.makeText(SthreeRaksha.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+
+                    String msg = "High Emergency Alert!!!\n";
+                    String fina = msg + "I'm in Danger.Please help me.\nLocation: ";
+                    String sam = fina + url;
+
+                    String toNumbers = "";
+
+                    for (String s : phoneno) {
+
+                        Log.e("PHONELIST", "" + s);
+                        toNumbers = toNumbers + s + ";";
+                    }
+
+                    phoneno.clear();
+                    if (!toNumbers.isEmpty()) {
+                        toNumbers = toNumbers.substring(0, toNumbers.length() - 1);
+                        Uri sendSmsTo = Uri.parse("smsto:" + toNumbers);
+                        Intent intent = new Intent(
+                                Intent.ACTION_SENDTO, sendSmsTo);
+                        intent.putExtra("sms_body",sam);
+                        startActivity(intent);
+                    }
+
+                    //smsManager.sendTextMessage(phone, null, sam, null, null);
+
+                   // Toast.makeText(SthreeRaksha.this, "Emergency Alert Messages Sent Successfully to all the Volunteers !", Toast.LENGTH_SHORT).show();
+
                 }
 
             }

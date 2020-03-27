@@ -1,11 +1,21 @@
 package com.gmrit.food4all.activities.volunteer;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.media.AudioAttributes;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -18,6 +28,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.gmrit.food4all.R;
 import com.gmrit.food4all.activities.general.MainActivity;
@@ -116,7 +127,8 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                     phone.setError("Phone Number is Not Valid !");
                 } else {
                     registerUser(e, p, ph, n);
-                        /*Intent broadcastIntent = new Intent(VolunteerRegistrationActivity.this, VolunteerRegistrationActivity.class);
+                    String msg = "Welcome  " + n + ",\nWe feel very Happy to see you Here.\nYou will be notified when there is a Donation\n\n Happy Volunteering !";
+                    Intent broadcastIntent = new Intent(VolunteerRegistrationActivity.this, VolunteerRegistrationActivity.class);
                         broadcastIntent.putExtra("toastMessage", "Hi man !");
                         //startActivity(broadcastIntent);
                         PendingIntent actionIntent = PendingIntent.getBroadcast(VolunteerRegistrationActivity.this,
@@ -125,18 +137,20 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                         NotificationCompat.Builder builder = new NotificationCompat.Builder(
                                 VolunteerRegistrationActivity.this
                         )
-                                .setSmallIcon(R.drawable.flog)
+                                .setSmallIcon(R.drawable.log)
                                 .setContentTitle("Thank You for Registering !")
                                 .setContentText(msg)
                                 .setAutoCancel(true)
+                                .setWhen(System.currentTimeMillis())
+                                .setDefaults(Notification.DEFAULT_LIGHTS)
+                                .setVibrate(new long[]{0, 500, 1000})
                                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                                .setStyle(new NotificationCompat.BigTextStyle()
+                                /*.setStyle(new NotificationCompat.BigTextStyle()
                                         .bigText(getString(R.string.message))
                                         .setBigContentTitle("Thank You for Registering !")
-                                        .setSummaryText("Registration"))
-                                .setLargeIcon(largeIcon)
-                                .addAction(R.mipmap.ic_launcher, "Yes", actionIntent);
+                                        .setSummaryText("Registration"))*/
+                                .setLargeIcon(largeIcon);
 
                         Intent intent1 = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
                         intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -150,8 +164,7 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                         NotificationManager notificationManager = (NotificationManager) getSystemService(
                                 Context.NOTIFICATION_SERVICE
                         );
-                        notificationManager.notify(1, builder.build());*/
-
+                        notificationManager.notify(1, builder.build());
 
                     progressDialog.dismiss();
                 }
@@ -199,9 +212,11 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             if (!ph.isEmpty()) {
-                                SmsManager sms = SmsManager.getDefault();
+                                /*SmsManager sms = SmsManager.getDefault();
                                 String msg = "Welcome  " + n + ",\nWe feel very Happy to see you Here.\nYou will be notified when there is a Donation\n\n Happy Volunteering !";
-                                sms.sendTextMessage(ph, null, msg, null, null);
+                                sms.sendTextMessage(ph, null, msg, null, null);*/
+
+
                                 /*String intro="Welcome  \" + n + \",\\nWe feel very Happy to see you Here.\\nYou will be notified when there is a Donation\\n\\n Happy Volunteering !";
                                 String phoneNumber=ph;
                                 Uri sms_uri = Uri.parse("smsto:" +phoneNumber);
