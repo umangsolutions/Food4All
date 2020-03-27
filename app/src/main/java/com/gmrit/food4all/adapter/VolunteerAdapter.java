@@ -156,8 +156,6 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
                                             new Fooddetails(donorname, donorphone, donoradd, place, "Went to Deliver", tim, dondate, noofpeople)
                                     );
                                 }
-
-
                             }
 
                             @Override
