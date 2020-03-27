@@ -107,7 +107,7 @@ public class AdminActivity extends AppCompatActivity {
                                         email = volunteer.getEmail();
                                         phone = volunteer.getPhone();
                                         count = volunteer.getCount();
-                                    }else {
+                                    } else {
                                         Toast.makeText(AdminActivity.this, "No Data Found !", Toast.LENGTH_SHORT).show();
                                     }
 

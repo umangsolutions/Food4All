@@ -141,7 +141,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RecipientRegistrationActivity.this, RecipientLoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
@@ -188,7 +188,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                             progressDialog.dismiss();
                             Toast.makeText(RecipientRegistrationActivity.this, "Registered Successfully !", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(RecipientRegistrationActivity.this, RecipientLoginActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         }
                     });

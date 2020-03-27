@@ -235,7 +235,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-            Log.d(TAG, "onVerificationCompleted: "+phoneAuthCredential);
+            Log.d(TAG, "onVerificationCompleted: " + phoneAuthCredential);
 
             reff.push().setValue(new Fooddetails(name, phon, address, place, "", tim, currdate, foodno));
 

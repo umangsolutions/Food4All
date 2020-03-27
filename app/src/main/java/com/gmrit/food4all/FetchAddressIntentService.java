@@ -44,10 +44,10 @@ public class FetchAddressIntentService extends IntentService {
             if (addresses == null || addresses.isEmpty()) {
                 deliverResultToReceiver(Constants.FAILURE_RESULT, errorMessage);
             } else {
-             Address address=addresses.get(0);
+                Address address = addresses.get(0);
                 ArrayList<String> addressFragments = new ArrayList<>();
-                for(int i=0;i<=address.getMaxAddressLineIndex();i++){
-                   addressFragments.add(address.getAddressLine(i));
+                for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
+                    addressFragments.add(address.getAddressLine(i));
                 }
                 deliverResultToReceiver(
                         Constants.SUCCESS_RESULT,
@@ -67,3 +67,4 @@ public class FetchAddressIntentService extends IntentService {
 
     }
 }
+

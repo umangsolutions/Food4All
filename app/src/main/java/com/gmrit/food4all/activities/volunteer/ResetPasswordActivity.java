@@ -39,19 +39,18 @@ public class ResetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
         this.setTitle("Reset Password");
-        af=(TextView)findViewById(R.id.after);
-        firebaseAuth=FirebaseAuth.getInstance();
+        af = (TextView) findViewById(R.id.after);
+        firebaseAuth = FirebaseAuth.getInstance();
 
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
             //we are connected to a network
             connected = true;
-        }
-        else
+        } else
             connected = false;
 
 
@@ -70,36 +69,34 @@ public class ResetPasswordActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
 
 
-        if(!connected) {
+        if (!connected) {
             Toast.makeText(ResetPasswordActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
         }
 
-        send=(Button)findViewById(R.id.btn_send);
-        reset=(EditText)findViewById(R.id.res_email);
+        send = (Button) findViewById(R.id.btn_send);
+        reset = (EditText) findViewById(R.id.res_email);
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String e = reset.getText().toString().trim();
-                 if(e.equals("")) {
-                     Toast.makeText(ResetPasswordActivity.this,"Please Enter Email",Toast.LENGTH_SHORT).show();
-                 }
-                 else {
-                     firebaseAuth.sendPasswordResetEmail(e).addOnCompleteListener(new OnCompleteListener<Void>() {
-                         @Override
-                         public void onComplete(@NonNull Task<Void> task) {
-                             if(task.isSuccessful()) {
-                                 //Toast.makeText(ResetPassword.this,"Reset Link send to Email",Toast.LENGTH_SHORT).show();
-                                 //startActivity(new Intent(ResetPassword.this,LoginActivity.class));
-                                 af.setText("An Reset Password link is sent to \nYour Registered Email Address");
-                             }
-                             else {
-                                 String error=task.getException().getMessage();
-                                 Toast.makeText(ResetPasswordActivity.this,error,Toast.LENGTH_SHORT).show();
-                             }
-                         }
-                     });
-                 }
+                if (e.equals("")) {
+                    Toast.makeText(ResetPasswordActivity.this, "Please Enter Email", Toast.LENGTH_SHORT).show();
+                } else {
+                    firebaseAuth.sendPasswordResetEmail(e).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                //Toast.makeText(ResetPassword.this,"Reset Link send to Email",Toast.LENGTH_SHORT).show();
+                                //startActivity(new Intent(ResetPassword.this,LoginActivity.class));
+                                af.setText("An Reset Password link is sent to \nYour Registered Email Address");
+                            } else {
+                                String error = task.getException().getMessage();
+                                Toast.makeText(ResetPasswordActivity.this, error, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
             }
         });
 
@@ -107,9 +104,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id= item.getItemId();
-        if (id == android.R.id.home)
-        {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
             this.finish();
         }
         return super.onOptionsItemSelected(item);

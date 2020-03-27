@@ -58,7 +58,6 @@ public class IssuesActivity extends AppCompatActivity {
             connected = false;
 
 
-
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -72,7 +71,6 @@ public class IssuesActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
 
 
         if (!connected) {

@@ -69,8 +69,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AdView mAdView;
 
 
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -83,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer = findViewById(R.id.drawer_layout);
 
         sliderImage = findViewById(R.id.slider_image);
-
 
 
         myAppPrefsManager = new MyAppPrefsManager(this);
@@ -111,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
 
 
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/donateFood")

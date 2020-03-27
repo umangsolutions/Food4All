@@ -151,21 +151,21 @@ public class SplashScreenActivity extends Activity {
                 for (int i = 1; i < permissionsNeeded.size(); i++)
                     message.append(", ").append(permissionsNeeded.get(i));
 
-                    showMessageOKCancel(message.toString(),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                showMessageOKCancel(message.toString(),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                                    if (Build.VERSION.SDK_INT >= 23) {
-                                        // Marshmallow+
-                                        SplashScreenActivity.this.requestPermissions(permissionsList.toArray(new String[0]),
-                                                REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+                                if (Build.VERSION.SDK_INT >= 23) {
+                                    // Marshmallow+
+                                    SplashScreenActivity.this.requestPermissions(permissionsList.toArray(new String[0]),
+                                            REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
 
-
-                                    }
 
                                 }
-                            });
+
+                            }
+                        });
 
                 return;
             }

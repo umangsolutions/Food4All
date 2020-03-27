@@ -241,8 +241,8 @@ public class UploadPhotosActivity extends AppCompatActivity {
                                     databaseReference.setValue(image_);
                                     progressDialog.dismiss();
                                     Toast.makeText(UploadPhotosActivity.this, "Image Uploaded Successfully !", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                 }
                             })

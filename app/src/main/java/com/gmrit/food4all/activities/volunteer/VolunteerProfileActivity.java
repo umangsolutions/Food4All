@@ -69,7 +69,6 @@ public class VolunteerProfileActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
 
 
-
         databaseReference = FirebaseDatabase.getInstance().getReference("Volunteers");
         databaseReference.keepSynced(true);
         Query query = databaseReference.orderByChild("email").equalTo(mail);
