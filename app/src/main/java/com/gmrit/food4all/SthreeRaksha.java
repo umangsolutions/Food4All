@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.gmrit.food4all.modals.Fooddetails;
 import com.gmrit.food4all.modals.Volunteer;
 import com.gmrit.food4all.utilities.LocationTrack;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +33,7 @@ public class SthreeRaksha extends AppCompatActivity {
     String url;
     String police = "09440795852";
     private ArrayList<String> phoneno = new ArrayList<String>();
+    private ArrayList<Fooddetails> fooddetailsArrayList = new ArrayList<Fooddetails>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,17 +72,40 @@ public class SthreeRaksha extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (lat.equals("0.0") || lon.equals("0.0"))
+                if (lat.equals("0.0") || lon.equals("0.0")) {
                     locationTrack.showSettingsAlert();
+                    //Toast.makeText(SthreeRaksha.this, "Hi", Toast.LENGTH_SHORT).show();
+                }
                 else {
                     //Toast.makeText(SthreeRaksha.this, "Latitude " + lat + "\n Longitude " + lon, Toast.LENGTH_SHORT).show();
                     Log.d("Latitude", lat);
                     Log.d("Longitude", lon);
 
-
                     url = "https://maps.google.com/?q=" + lat + "," + lon + "";
 
-                    ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                   ref.addValueEventListener(new ValueEventListener() {
+                       @Override
+                       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                           if(dataSnapshot.exists()) {
+                               for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                   String fooddetails = dataSnapshot1.getValue(Fooddetails.class).getPhone();
+                                   //fooddetailsArrayList.add(fooddetails);
+                                   phoneno.add(fooddetails);
+                               }
+                           }
+                           else {
+                               Toast.makeText(SthreeRaksha.this, "No Data Exists !", Toast.LENGTH_SHORT).show();
+                           }
+                       }
+
+                       @Override
+                       public void onCancelled(@NonNull DatabaseError databaseError) {
+                           Toast.makeText(SthreeRaksha.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                       }
+                   });
+
+
+                    /*ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
@@ -96,9 +121,11 @@ public class SthreeRaksha extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Toast.makeText(SthreeRaksha.this, "Hello" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+
                             Toast.makeText(SthreeRaksha.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    });*/
 
                     String msg = "High Emergency Alert!!!\n";
                     String fina = msg + "I'm in Danger.Please help me.\nLocation: ";

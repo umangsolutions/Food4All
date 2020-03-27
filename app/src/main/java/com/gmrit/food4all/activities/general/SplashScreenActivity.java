@@ -129,8 +129,8 @@ public class SplashScreenActivity extends Activity {
         final List<String> permissionsList = new ArrayList<>();
         if (addPermission(permissionsList, Manifest.permission.READ_EXTERNAL_STORAGE))
             permissionsNeeded.add("READ");
-        if (addPermission(permissionsList, Manifest.permission.SEND_SMS))
-            permissionsNeeded.add("SEND_SMS");
+       /* if (addPermission(permissionsList, Manifest.permission.SEND_SMS))
+            permissionsNeeded.add("SEND_SMS");*/
         if (addPermission(permissionsList, Manifest.permission.WRITE_EXTERNAL_STORAGE))
             permissionsNeeded.add("WRITE");
         if (addPermission(permissionsList, Manifest.permission.CAMERA))
@@ -246,7 +246,7 @@ public class SplashScreenActivity extends Activity {
             Map<String, Integer> perms = new HashMap<>();
             // Initial
             perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
-            perms.put(Manifest.permission.SEND_SMS, PackageManager.PERMISSION_GRANTED);
+            /*perms.put(Manifest.permission.SEND_SMS, PackageManager.PERMISSION_GRANTED);*/
             perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
             perms.put(Manifest.permission.CAMERA, PackageManager.PERMISSION_GRANTED);
             perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
@@ -260,7 +260,6 @@ public class SplashScreenActivity extends Activity {
             // Check for ACCESS_FINE_LOCATION
             if (perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
                     && perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
-                    perms.get(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED &&
                     perms.get(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
                     && perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                     && perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
