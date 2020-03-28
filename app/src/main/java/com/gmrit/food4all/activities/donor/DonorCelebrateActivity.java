@@ -3,6 +3,7 @@ package com.gmrit.food4all.activities.donor;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.MenuItem;
@@ -49,7 +50,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_happy);
-        this.setTitle("Celebrate Birtday");
+        this.setTitle("Celebrate Birthday");
         don_name = (EditText) findViewById(R.id.donname);
         don_email = (EditText) findViewById(R.id.donemail);
         don_phone = (EditText) findViewById(R.id.donphone);
@@ -195,9 +196,9 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
 
                     key = myref.push().getKey();
 
-                    myref = FirebaseDatabase.getInstance().getReference("Happy_Moments").child(key);
+                   // myref = FirebaseDatabase.getInstance().getReference().child("Happy_Moments").child(key);
                     Happy happy_1_modal = new Happy(name, email, phone, money, recip, address, date);
-                    myref.setValue(happy_1_modal);
+                    myref.push().setValue(happy_1_modal);
 
                     msg = "Dear Administrator,\n" + name + " is ready to donate a sum of ";
                     String res = msg + "Rs." + money + " to " + recip;
@@ -207,16 +208,21 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
                     admin_2 = "8639796138";
                     admin_3 = "6303149161";
 
-                    SmsManager smsManager = SmsManager.getDefault();
+                   /* SmsManager smsManager = SmsManager.getDefault();
                     smsManager.sendTextMessage(admin_1, null, re, null, null);
-                    smsManager.sendTextMessage(admin_2, null, re, null, null);
+                    smsManager.sendTextMessage(admin_2, null, re, nu796138ll, null);
                     smsManager.sendTextMessage(admin_3, null, re, null, null);
-
-                    Toast.makeText(DonorCelebrateActivity.this, "Details Successfully Submitted !", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(DonorCelebrateActivity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+*/
+                    Uri sendSmsTo = Uri.parse("smsto:"+admin_1+";"+admin_2+";"+admin_3);
+                    Intent intent = new Intent(
+                            Intent.ACTION_SENDTO, sendSmsTo);
+                    intent.putExtra("sms_body",re);
                     startActivity(intent);
+                   // Toast.makeText(DonorCelebrateActivity.this, "Details Successfully Submitted !", Toast.LENGTH_SHORT).show();
+
+                    /*Intent intent1 = new Intent(DonorCelebrateActivity.this, MainActivity.class);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent1);*/
                 }
             }
         });
