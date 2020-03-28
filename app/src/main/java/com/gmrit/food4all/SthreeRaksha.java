@@ -56,17 +56,12 @@ public class SthreeRaksha extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sthree_raksha);
         this.setTitle("Sthree Raksha");
-        /*resultReceiver = new AddressResultReceiver(new Handler());*/
 
-        /*locationTrack = new LocationTrack(this);
 
-        lat = Double.toString(locationTrack.getLatitude());
-        lon = Double.toString(locationTrack.getLongitude());
-*/
         Toast.makeText(SthreeRaksha.this, "Double Click on Emergency button to send Alert Messages", Toast.LENGTH_LONG).show();
 
 
-        emergencylayout = (LinearLayout) findViewById(R.id.layout_emergency);
+        //emergencylayout = (LinearLayout) findViewById(R.id.layout_emergency);
         policelayout = (LinearLayout) findViewById(R.id.policelayout);
 
 
@@ -89,64 +84,7 @@ public class SthreeRaksha extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                /*if (lat.equals("0.0") || lon.equals("0.0"))
-                    locationTrack.showSettingsAlert();
-                else {
-                    //Toast.makeText(SthreeRaksha.this, "Latitude " + lat + "\n Longitude " + lon, Toast.LENGTH_SHORT).show();
-                    Log.d("Latitude", lat);
-                    Log.d("Longitude", lon);
-
-
-                    url = "https://maps.google.com/?q=" + lat + "," + lon + "";
-
-                    ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                if (dataSnapshot.exists()) {
-                                    String phone = dataSnapshot1.getValue(Volunteer.class).toString();
-                                    phoneno.add(phone);
-                                    //SmsManager smsManager = SmsManager.getDefault();
-                                } else {
-                                    Toast.makeText(SthreeRaksha.this, "Emergency Alert failed to Send", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Toast.makeText(SthreeRaksha.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                    String msg = "High Emergency Alert!!!\n";
-                    String fina = msg + "I'm in Danger.Please help me.\nLocation: ";
-                    String sam = fina + url;
-
-                    String toNumbers = "";
-
-                    for (String s : phoneno) {
-
-                        Log.e("PHONELIST", "" + s);
-                        toNumbers = toNumbers + s + ";";
-                    }
-
-                    phoneno.clear();
-                    if (!toNumbers.isEmpty()) {
-                        toNumbers = toNumbers.substring(0, toNumbers.length() - 1);
-                        Uri sendSmsTo = Uri.parse("smsto:" + toNumbers);
-                        Intent intent = new Intent(
-                                Intent.ACTION_SENDTO, sendSmsTo);
-                        intent.putExtra("sms_body",sam);
-                        startActivity(intent);
-                    }
-
-                    //smsManager.sendTextMessage(phone, null, sam, null, null);
-
-                   // Toast.makeText(SthreeRaksha.this, "Emergency Alert Messages Sent Successfully to all the Volunteers !", Toast.LENGTH_SHORT).show();
-
-                }*/
-                if (ContextCompat.checkSelfPermission(
+               /* if (ContextCompat.checkSelfPermission(
                         getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(
@@ -155,8 +93,7 @@ public class SthreeRaksha extends AppCompatActivity {
                     );
                 } else {
                     getCurrentLocation();
-                }
-
+                } */
 
             }
 
@@ -176,8 +113,9 @@ public class SthreeRaksha extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+}
 
-    @Override
+   /* @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE_LOCATION_PERMISSION && grantResults.length > 0) {
@@ -210,10 +148,10 @@ public class SthreeRaksha extends AppCompatActivity {
                             double longitude =
                                     locationResult.getLocations().get(latestLocationIndex).getLongitude();
                             Log.d(TAG, "Latitude:" + latitude + " Longitude:" + longitude);
-                            /*Location location = new Location("providerNA");
+                            *//*Location location = new Location("providerNA");
                             location.setLatitude(latitude);
                             location.setLongitude(longitude);
-                            fetchAddressFromLatLong(location);*/
+                            fetchAddressFromLatLong(location);*//*
                             url = "https://maps.google.com/?q=" + latitude + "," + longitude + "";
                             Log.d(TAG, "" + url);
                             ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -240,7 +178,8 @@ public class SthreeRaksha extends AppCompatActivity {
                             String msg = "High Emergency Alert!!!\n";
                             String fina = msg + "I'm in Danger.Please help me.\nLocation: ";
                             String sam = fina + url;
-                            Log.d(TAG, "" + phoneno);
+                            for(int i=0;i<phoneno.size();i++)
+                            Log.d(TAG, "" + phoneno.get(i));
                             Log.d(TAG, "" + sam);
 
                             String toNumbers = "";
@@ -260,11 +199,11 @@ public class SthreeRaksha extends AppCompatActivity {
                                 intent.putExtra("sms_body", sam);
                                 startActivity(intent);
                             }
-                            /*Uri sendSmsTo = Uri.parse("smsto:8639796138");
+                            *//*Uri sendSmsTo = Uri.parse("smsto:8639796138");
                             Intent intent = new Intent(
                                     Intent.ACTION_SENDTO, sendSmsTo);
                             intent.putExtra("sms_body", sam);
-                            startActivity(intent);*/
+                            startActivity(intent);*//*
 
                             //smsManager.sendTextMessage(phone, null, sam, null, null);
 
@@ -277,29 +216,7 @@ public class SthreeRaksha extends AppCompatActivity {
                 }, Looper.getMainLooper());
     }
 
-   /* private void fetchAddressFromLatLong(Location location) {
-        Intent intent = new Intent(this, FetchAddressIntentService.class);
-        intent.putExtra(Constants.RECEIVER, resultReceiver);
-        intent.putExtra(Constants.LOCATION_DATA_EXTRA, location);
-        startService(intent);
-    }
-
-    private class AddressResultReceiver extends ResultReceiver {
-
-        AddressResultReceiver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-            super.onReceiveResult(resultCode, resultData);
-            if (resultCode == Constants.SUCCESS_RESULT) {
-                Toast.makeText(SthreeRaksha.this, "" + resultData.getString(Constants.RESULT_DATA_KEY), Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(SthreeRaksha.this, "" + resultData.getString(Constants.RESULT_DATA_KEY), Toast.LENGTH_SHORT).show();
-            }
-        }
-    }*/
 }
 
 
+*/
