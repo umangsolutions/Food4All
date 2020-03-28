@@ -58,7 +58,7 @@ public class SthreeRaksha extends AppCompatActivity {
         this.setTitle("Sthree Raksha");
 
 
-        Toast.makeText(SthreeRaksha.this, "Double Click on Emergency button to send Alert Messages", Toast.LENGTH_LONG).show();
+        //Toast.makeText(SthreeRaksha.this, "Double Click on Emergency button to send Alert Messages", Toast.LENGTH_LONG).show();
 
 
         //emergencylayout = (LinearLayout) findViewById(R.id.layout_emergency);
@@ -80,11 +80,11 @@ public class SthreeRaksha extends AppCompatActivity {
 
         ref = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Volunteers");
 
-        emergencylayout.setOnClickListener(new View.OnClickListener() {
+      /*  emergencylayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-               /* if (ContextCompat.checkSelfPermission(
+               *//* if (ContextCompat.checkSelfPermission(
                         getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(
@@ -93,12 +93,12 @@ public class SthreeRaksha extends AppCompatActivity {
                     );
                 } else {
                     getCurrentLocation();
-                } */
+                } *//*
 
             }
 
         });
-
+*/
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

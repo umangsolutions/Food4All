@@ -74,19 +74,26 @@
                 android:textSize="19sp" />
         </LinearLayout>
 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
         <LinearLayout
             android:id="@+id/policelayout"
             android:layout_width="match_parent"
             android:layout_height="190dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
+            android:gravity="center"
             android:layout_weight="1"
             android:background="@drawable/button_1"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:contentDescription="@string/app_name"
@@ -101,6 +108,8 @@
                 android:textStyle="bold"
                 android:text="@string/contact_police"
                 android:textColor="@android:color/black"
-                android:textSize="19sp" />
+                android:textSize="23sp" />
         </LinearLayout>
+    </LinearLayout>
+
     </LinearLayout>
