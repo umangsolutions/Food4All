@@ -24,11 +24,15 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.gmrit.food4all.OTP_ValidationActivity;
 import com.gmrit.food4all.R;
+import com.gmrit.food4all.activities.volunteer.VolunteerRegistrationActivity;
 import com.gmrit.food4all.modals.Fooddetails;
 import com.gmrit.food4all.utilities.ConstantValues;
 import com.gmrit.food4all.utilities.Dialog;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
@@ -300,12 +304,26 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
             Log.d(TAG, "onVerificationFailed: " + e.toString());
+            if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                // Invalid request
+                // [START_EXCLUDE]
+                Toast.makeText(FoodDetailsActivity.this, "Invalid Phone Number", Toast.LENGTH_SHORT).show();
+                // [END_EXCLUDE]
+            } else if (e instanceof FirebaseTooManyRequestsException) {
+                // The SMS quota for the project has been exceeded
+                // [START_EXCLUDE]
+                /*Snackbar.make(findViewById(android.R.id.content), "Quota exceeded.",
+                        Snackbar.LENGTH_SHORT).show();*/
+                Toast.makeText(FoodDetailsActivity.this, "SMS Quota Exceeded", Toast.LENGTH_SHORT).show();
+                // [END_EXCLUDE]
+            } else {
+                Toast.makeText(FoodDetailsActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
-
             codesent = s;
             Log.d(TAG, "onCodeSent: " + s);
             goToNext();

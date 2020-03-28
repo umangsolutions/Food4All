@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -87,6 +88,8 @@ public class VolunteerProfileActivity extends AppCompatActivity {
                     phone.setText(ph);
                     email.setText(em);
                     inc.setText("Total No. of Deliveries : " + cou);
+                } else {
+                    Toast.makeText(VolunteerProfileActivity.this, "Fetching Details....This may take some time!", Toast.LENGTH_SHORT).show();
                 }
             }
 

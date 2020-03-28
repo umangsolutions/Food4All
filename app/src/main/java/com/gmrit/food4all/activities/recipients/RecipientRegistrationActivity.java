@@ -1,9 +1,12 @@
 package com.gmrit.food4all.activities.recipients;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -44,10 +47,11 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
     EditText name, usname, pwd, phone, address;
     Button register;
     DatabaseReference databaseReference;
-    Geocoder geocoder;
-    List<Address> addresses;
-    LocationTrack locationTrack;
-    String location_address, lat, lon, knownName, city, postalCode;
+    Boolean connected;
+    /* Geocoder geocoder;
+     List<Address> addresses;
+     LocationTrack locationTrack;
+     String location_address, lat, lon, knownName, city, postalCode;*/
     private AdView mAdView;
 
     @Override
@@ -65,13 +69,13 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
         address = (EditText) findViewById(R.id.address);
         register = (Button) findViewById(R.id.register);
 
-        locationTrack = new LocationTrack(this);
+        /*locationTrack = new LocationTrack(this);
 
         lat = Double.toString(locationTrack.getLatitude());
         lon = Double.toString(locationTrack.getLongitude());
 
         geocoder = new Geocoder(this, Locale.getDefault());
-
+*/
         final Spinner spinner = findViewById(R.id.spin);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.organization_type, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -93,11 +97,22 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        } else {
+            connected = false;
+        }
+        if (!connected) {
+            Toast.makeText(RecipientRegistrationActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+        }
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        address.setOnTouchListener(new View.OnTouchListener() {
+        /*address.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_LEFT = 0;
@@ -115,10 +130,10 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                                 Log.d("Latitude", lat);
                                 Log.d("Longitude", lon);
                                 addresses = geocoder.getFromLocation(Double.parseDouble(lat), Double.parseDouble(lon), 1);
-/*
+*//*
                                 knownName = addresses.get(0).getFeatureName();
                                 city = addresses.get(0).getLocality();
-                                postalCode = addresses.get(0).getPostalCode();*/
+                                postalCode = addresses.get(0).getPostalCode();*//*
 
                                 location_address = addresses.get(0).getAddressLine(0);
 
@@ -135,7 +150,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                 }
                 return false;
             }
-        });
+        });*/
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override

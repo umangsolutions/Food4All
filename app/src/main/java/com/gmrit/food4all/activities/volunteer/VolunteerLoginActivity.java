@@ -128,9 +128,8 @@ public class VolunteerLoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()) {
 
-
                                 progressDialog.dismiss();
-                                Toast.makeText(VolunteerLoginActivity.this, "Please Enter Valid Email/Password", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(VolunteerLoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
 
                             } else {
                                 myAppPrefsManager.setUserLoggedIn(true);

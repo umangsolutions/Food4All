@@ -1,6 +1,9 @@
 package com.gmrit.food4all.activities.recipients;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gmrit.food4all.R;
 import com.gmrit.food4all.activities.general.MainActivity;
+import com.gmrit.food4all.activities.volunteer.UploadPhotosActivity;
+import com.gmrit.food4all.activities.volunteer.VolunteerActivity;
+import com.gmrit.food4all.modals.Recipient;
 import com.gmrit.food4all.modals.RecipientsUpdate;
 import com.gmrit.food4all.modals.Volunteer;
 import com.google.android.gms.ads.AdRequest;
@@ -32,6 +38,7 @@ public class RecipientActivity extends AppCompatActivity {
     EditText donname, volname, volphone, noofpeople;
     Button submit;
     DatabaseReference databaseReference, volreference;
+    Boolean connected;
 
     private AdView mAdView;
 
@@ -60,6 +67,16 @@ public class RecipientActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        } else {
+            connected = false;}
+        if (!connected) {
+            Toast.makeText(RecipientActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+        }
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Recipients_Updation");
@@ -102,7 +119,7 @@ public class RecipientActivity extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            Toast.makeText(RecipientActivity.this, "Failed to submit Details.", Toast.LENGTH_LONG).show();
                         }
                     });
 

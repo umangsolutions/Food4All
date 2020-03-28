@@ -1,8 +1,11 @@
 package com.gmrit.food4all.activities.volunteer;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -66,6 +69,7 @@ public class UploadPhotosActivity extends AppCompatActivity {
     private String email, currdate;
     private String numberpeople, area;
     private String volname;
+    Boolean connected=false;
     private String pho;
     MyAppPrefsManager myAppPrefsManager;
     private AdView mAdView;
@@ -89,6 +93,16 @@ public class UploadPhotosActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        } else {
+            connected = false;}
+        if (!connected) {
+            Toast.makeText(UploadPhotosActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
         }
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -132,7 +146,7 @@ public class UploadPhotosActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(UploadPhotosActivity.this, "Failed to Upload.", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -253,11 +267,9 @@ public class UploadPhotosActivity extends AppCompatActivity {
 
                             // Error, Image not uploaded
                             progressDialog.dismiss();
-                            Toast
-                                    .makeText(UploadPhotosActivity.this,
+                            Toast.makeText(UploadPhotosActivity.this,
                                             "Failed " + e.getMessage(),
-                                            Toast.LENGTH_SHORT)
-                                    .show();
+                                            Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(

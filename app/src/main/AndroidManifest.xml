@@ -97,7 +97,8 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.gmrit.food4all.activities.general.SplashScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

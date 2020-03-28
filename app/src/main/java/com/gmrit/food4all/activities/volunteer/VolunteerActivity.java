@@ -107,7 +107,7 @@ public class VolunteerActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(VolunteerActivity.this, "Something is wrong !", Toast.LENGTH_LONG).show();
+                Toast.makeText(VolunteerActivity.this, "Failed to Load.", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -140,6 +140,7 @@ public class VolunteerActivity extends AppCompatActivity {
             Intent intent = new Intent(VolunteerActivity.this, VolunteerLoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            Toast.makeText(this, "Sign Out Successful", Toast.LENGTH_SHORT).show();
             myAppPrefsManager.setUserLoggedIn(false);
             myAppPrefsManager.setUserName("");
             finish();

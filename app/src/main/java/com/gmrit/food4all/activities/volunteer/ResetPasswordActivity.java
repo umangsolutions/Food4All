@@ -50,8 +50,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
             //we are connected to a network
             connected = true;
-        } else
-            connected = false;
+        } else {
+            connected = false;}
 
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
