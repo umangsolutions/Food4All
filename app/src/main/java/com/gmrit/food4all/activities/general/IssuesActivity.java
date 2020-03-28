@@ -49,13 +49,7 @@ public class IssuesActivity extends AppCompatActivity {
         s1 = email.getText().toString().trim();
         s2 = report.getText().toString().trim();
 
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-            //we are connected to a network
-            connected = true;
-        } else
-            connected = false;
+
 
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -72,10 +66,10 @@ public class IssuesActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-
+/*
         if (!connected) {
             Toast.makeText(IssuesActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
-        }
+        }*/
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,10 +83,21 @@ public class IssuesActivity extends AppCompatActivity {
                 } else if (s2.isEmpty()) {
                     Toast.makeText(IssuesActivity.this, "Please enter the Problem", Toast.LENGTH_LONG).show();
                 } else {
-                    rep.setEmail(email.getText().toString().trim());
-                    rep.setReport(report.getText().toString().trim());
-                    ref.push().setValue(rep);
-                    Toast.makeText(IssuesActivity.this, "We will Contact you Shortly!", Toast.LENGTH_SHORT).show();
+
+
+                    ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                            connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                        //we are connected to a network
+                        rep.setEmail(email.getText().toString().trim());
+                        rep.setReport(report.getText().toString().trim());
+                        ref.push().setValue(rep);
+                        Toast.makeText(IssuesActivity.this, "We will Contact you Shortly!", Toast.LENGTH_SHORT).show();
+                        connected = true;
+                    } else {
+                        connected = false;
+                        Toast.makeText(IssuesActivity.this, "Network Unavailable", Toast.LENGTH_LONG).show();
+                    }
                 }
 
             }

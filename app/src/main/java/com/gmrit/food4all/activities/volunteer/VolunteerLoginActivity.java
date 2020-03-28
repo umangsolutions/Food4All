@@ -48,6 +48,7 @@ public class VolunteerLoginActivity extends AppCompatActivity {
         this.setTitle("Volunteer Login");
         myAppPrefsManager = new MyAppPrefsManager(VolunteerLoginActivity.this);
         ConstantValues.internetCheck(VolunteerLoginActivity.this);
+
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         //we are connected to a network
         assert connectivityManager != null;

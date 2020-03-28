@@ -2,7 +2,10 @@ package com.gmrit.food4all.activities.donor;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -20,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gmrit.food4all.R;
+import com.gmrit.food4all.activities.general.IssuesActivity;
 import com.gmrit.food4all.activities.general.MainActivity;
 import com.gmrit.food4all.modals.Happy;
 import com.google.android.gms.ads.AdRequest;
@@ -41,6 +45,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
     String admin_1, admin_2, admin_3, msg;
     DatabaseReference myref;
     private AdView mAdView;
+    boolean connected=false;
     /*Geocoder geocoder;
     List<Address> addresses;
     LocationTrack locationTrack;
@@ -194,35 +199,43 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
                     don_money.setError("Please enter Money");
                 } else {
 
-                    key = myref.push().getKey();
+                    ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                            connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                        //we are connected to a network
+                        Happy happy_1_modal = new Happy(name, email, phone, money, recip, address, date);
+                        myref.push().setValue(happy_1_modal);
 
-                   // myref = FirebaseDatabase.getInstance().getReference().child("Happy_Moments").child(key);
-                    Happy happy_1_modal = new Happy(name, email, phone, money, recip, address, date);
-                    myref.push().setValue(happy_1_modal);
+                        msg = "Dear Administrator,\n" + name + " is ready to donate a sum of ";
+                        String res = msg + "Rs." + money + " to " + recip;
+                        String re = res + ", Please collect Money at " + address;
 
-                    msg = "Dear Administrator,\n" + name + " is ready to donate a sum of ";
-                    String res = msg + "Rs." + money + " to " + recip;
-                    String re = res + ", Please collect Money at " + address;
-
-                    admin_1 = "9381384234";
-                    admin_2 = "8639796138";
-                    admin_3 = "6303149161";
+                        admin_1 = "9381384234";
+                        admin_2 = "8639796138";
+                        admin_3 = "6303149161";
 
                    /* SmsManager smsManager = SmsManager.getDefault();
                     smsManager.sendTextMessage(admin_1, null, re, null, null);
                     smsManager.sendTextMessage(admin_2, null, re, nu796138ll, null);
                     smsManager.sendTextMessage(admin_3, null, re, null, null);
 */
-                    Uri sendSmsTo = Uri.parse("smsto:"+admin_1+";"+admin_2+";"+admin_3);
-                    Intent intent = new Intent(
-                            Intent.ACTION_SENDTO, sendSmsTo);
-                    intent.putExtra("sms_body",re);
-                    startActivity(intent);
-                   // Toast.makeText(DonorCelebrateActivity.this, "Details Successfully Submitted !", Toast.LENGTH_SHORT).show();
+                        Uri sendSmsTo = Uri.parse("smsto:"+admin_1+";"+admin_2+";"+admin_3);
+                        Intent intent = new Intent(
+                                Intent.ACTION_SENDTO, sendSmsTo);
+                        intent.putExtra("sms_body",re);
+                        startActivity(intent);
+                        // Toast.makeText(DonorCelebrateActivity.this, "Details Successfully Submitted !", Toast.LENGTH_SHORT).show();
 
                     /*Intent intent1 = new Intent(DonorCelebrateActivity.this, MainActivity.class);
                     intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent1);*/
+                        connected = true;
+                    } else {
+                        connected = false;
+                        Toast.makeText(DonorCelebrateActivity.this, "Network Unavailable", Toast.LENGTH_LONG).show();
+                    }
+
+                    // myref = FirebaseDatabase.getInstance().getReference().child("Happy_Moments").child(key);
                 }
             }
         });
