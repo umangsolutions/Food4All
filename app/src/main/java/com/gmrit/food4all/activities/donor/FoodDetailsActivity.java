@@ -1,7 +1,10 @@
 package com.gmrit.food4all.activities.donor;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -197,8 +200,17 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                 } else if (tim.equals("Cooked Before")) {
                     Toast.makeText(FoodDetailsActivity.this, "Please select Time of Period", Toast.LENGTH_LONG).show();
                 } else {
-                    sendVerificationCode("+91" + phon);
-                    Toast.makeText(FoodDetailsActivity.this, "One Time Password has been sent to Your Mobile Number " + "+91" + phon, Toast.LENGTH_SHORT).show();
+
+                    ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                            connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                        sendVerificationCode("+91" + phon);
+                        Toast.makeText(FoodDetailsActivity.this, "One Time Password has been sent to Your Mobile Number " + "+91" + phon, Toast.LENGTH_SHORT).show();
+                        connected=true;
+                    } else {
+                        Toast.makeText(FoodDetailsActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
+                        connected=false;
+                    }
                 }
             }
         });

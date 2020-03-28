@@ -122,6 +122,8 @@ public class VolunteerLoginActivity extends AppCompatActivity {
             //t2.setError("Password should be more than 8 Characters !");
         } else {
             progressDialog.setMessage("Logging in...");
+            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
             firebaseAuth.signInWithEmailAndPassword(s1, s2)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

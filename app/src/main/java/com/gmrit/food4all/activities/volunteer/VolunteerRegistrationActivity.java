@@ -205,6 +205,7 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
         progressDialog.setMessage("Registering, Please Wait...");
         progressDialog.show();
         progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

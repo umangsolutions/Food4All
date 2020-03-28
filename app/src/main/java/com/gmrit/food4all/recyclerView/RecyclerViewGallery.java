@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.gmrit.food4all.modals.Image;
 import com.gmrit.food4all.adapter.GalleryAdapter;
@@ -33,9 +34,13 @@ public class RecyclerViewGallery extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view__gallery);
 
+
+
         final ProgressDialog progressDialog
                 = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
 
@@ -45,6 +50,7 @@ public class RecyclerViewGallery extends AppCompatActivity {
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Gallery");
         }
 
         list = new ArrayList<Image>();
@@ -54,13 +60,19 @@ public class RecyclerViewGallery extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    Image d = dataSnapshot1.getValue(Image.class);
-                    list.add(d);
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        Image d = dataSnapshot1.getValue(Image.class);
+                        list.add(d);
+                    }
+                    progressDialog.dismiss();
+                    myAdapter = new GalleryAdapter(RecyclerViewGallery.this, list);
+                    recyclerView.setAdapter(myAdapter);
                 }
-                progressDialog.dismiss();
-                myAdapter = new GalleryAdapter(RecyclerViewGallery.this, list);
-                recyclerView.setAdapter(myAdapter);
+                else {
+                    progressDialog.dismiss();
+                    Toast.makeText(RecyclerViewGallery.this, "No Photos to Show", Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
@@ -75,7 +87,7 @@ public class RecyclerViewGallery extends AppCompatActivity {
         int id= item.getItemId();
         if (id == android.R.id.home)
         {
-            this.finish();
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }

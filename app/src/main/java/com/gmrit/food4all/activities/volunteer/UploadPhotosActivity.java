@@ -99,11 +99,6 @@ public class UploadPhotosActivity extends AppCompatActivity {
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
             //we are connected to a network
             connected = true;
-        } else {
-            connected = false;}
-        if (!connected) {
-            Toast.makeText(UploadPhotosActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
-        }
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
@@ -163,6 +158,11 @@ public class UploadPhotosActivity extends AppCompatActivity {
                 uploadImage();
             }
         });
+
+        }
+        else {
+            connected = false;
+        }
     }
 
     // Select Image method
@@ -230,6 +230,8 @@ public class UploadPhotosActivity extends AppCompatActivity {
             final ProgressDialog progressDialog
                     = new ProgressDialog(this);
             progressDialog.setTitle("Uploading Data...");
+            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
             // Defining the child of storageReference
