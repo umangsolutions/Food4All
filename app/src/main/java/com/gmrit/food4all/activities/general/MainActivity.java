@@ -18,6 +18,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.gmrit.food4all.DonationCount;
+import com.gmrit.food4all.NearbyNGOActivity;
 import com.gmrit.food4all.R;
 import com.gmrit.food4all.SthreeRaksha;
 import com.gmrit.food4all.activities.donor.DonorCelebrateActivity;
@@ -246,7 +248,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent2);
                 break;
-
+            case R.id.nav_doncount:
+                Intent intent3 = new Intent(MainActivity.this, DonationCount.class);
+                intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent3);
+                break;
+            case R.id.nav_nearby:
+                Intent intent4 = new Intent(MainActivity.this, NearbyNGOActivity.class);
+                intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent4);
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

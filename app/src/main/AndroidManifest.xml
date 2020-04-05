@@ -4,8 +4,10 @@
     package="com.gmrit.food4all">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--<uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />-->
+    <!--
+<uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -15,9 +17,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-
     <application
-        android:name="com.gmrit.food4all.firebase.FireBaseApp"
+        android:name=".firebase.FireBaseApp"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,66 +29,62 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-
-        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        <activity android:name=".DonationCount"></activity>
+        <activity android:name=".NearbyNGOActivity" /> <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7341014042556519~1951002345" />
-
-        <!--        android:value="ca-app-pub-7341014042556519~1951002345"/-->
-
-
+            android:value="ca-app-pub-7341014042556519~1951002345" /> <!-- android:value="ca-app-pub-7341014042556519~1951002345"/ -->
         <activity
-            android:name="com.gmrit.food4all.SthreeRaksha"
+            android:name=".SthreeRaksha"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.OTP_ValidationActivity"
+            android:name=".OTP_ValidationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Light.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.donor.DonorCelebrateActivity"
+            android:name=".activities.donor.DonorCelebrateActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.volunteer.VolunteerProfileActivity"
+            android:name=".activities.volunteer.VolunteerProfileActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.recipients.RecipientActivity"
+            android:name=".activities.recipients.RecipientActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.recipients.RecipientLoginActivity"
+            android:name=".activities.recipients.RecipientLoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.recipients.RecipientRegistrationActivity"
+            android:name=".activities.recipients.RecipientRegistrationActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.recyclerView.RecyclerViewGallery"
+            android:name=".recyclerView.RecyclerViewGallery"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.volunteer.UploadPhotosActivity"
+            android:name=".activities.volunteer.UploadPhotosActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.administrator.AdminActivity"
+            android:name=".activities.administrator.AdminActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.volunteer.ResetPasswordActivity"
+            android:name=".activities.volunteer.ResetPasswordActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.general.IssuesActivity"
+            android:name=".activities.general.IssuesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.general.AboutActivity"
+            android:name=".activities.general.AboutActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -96,7 +93,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.general.SplashScreenActivity"
+            android:name=".activities.general.SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -106,23 +103,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.gmrit.food4all.activities.general.HungerStatisticsActivity"
+            android:name=".activities.general.HungerStatisticsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.gmrit.food4all.activities.donor.FoodDetailsActivity"
+            android:name=".activities.donor.FoodDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.volunteer.VolunteerRegistrationActivity"
+            android:name=".activities.volunteer.VolunteerRegistrationActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.volunteer.VolunteerLoginActivity"
+            android:name=".activities.volunteer.VolunteerLoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gmrit.food4all.activities.volunteer.VolunteerActivity"
+            android:name=".activities.volunteer.VolunteerActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -130,7 +127,7 @@
             android:label="@string/title_activity_regvolunteer"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gmrit.food4all.activities.general.MainActivity"
+            android:name=".activities.general.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden">
@@ -162,7 +159,7 @@
             android:value="@string/default_notification_channel_id" />
 
         <service
-            android:name="com.gmrit.food4all.firebase.MyFirebaseMessagingService"
+            android:name=".firebase.MyFirebaseMessagingService"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -170,6 +167,11 @@
             </intent-filter>
         </service>
         <service android:name=".FetchAddressIntentService" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCbV1kxdn_Bs0SupOFAvySabkOnzXaewFw"/>
+
     </application>
 
 </manifest>

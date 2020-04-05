@@ -31,7 +31,7 @@
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/app_name"
             android:padding="10dp"
-            android:src="@drawable/re" />
+            android:src="@drawable/rer" />
 
 
         <com.google.android.material.textfield.TextInputLayout

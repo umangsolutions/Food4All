@@ -19,6 +19,17 @@
             android:title="@string/hunger_statistics" />
 
         <item
+            android:id="@+id/nav_doncount"
+            android:icon="@drawable/ic_timeline_black_24dp"
+            android:title="@string/view_your_donations" />
+
+
+        <item
+            android:id="@+id/nav_nearby"
+            android:icon="@drawable/ic_near_me_black_24dp"
+            android:title="@string/nearby_ngo" />
+
+        <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_photo_black_24dp"
             android:title="@string/gallery" />
