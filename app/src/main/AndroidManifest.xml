@@ -20,6 +20,7 @@
     <application
         android:name=".firebase.FireBaseApp"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:largeHeap="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"

@@ -90,6 +90,7 @@ public class NearbyNGOActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("View nearby NGOs");
         }
     }
     @Override
