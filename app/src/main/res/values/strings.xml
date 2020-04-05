@@ -128,14 +128,9 @@
     <string name="please_enter_verification_code_sent_to_n_91xxxxxxx">Please enter Verification code sent to \n+91xxxxxxx</string>
     <string name="validate_otp">Validate OTP</string>
     <string name="sthree_raksha">Sthree Raksha</string>
-    <string name="emergency">Emergency Alert</string>
     <string name="contact_police">Contact Police</string>
     <string name="stand_up_for_women_s_safety">Stand up for Women\'s Safety</string>
 
-
-    <string name="no_geocoder_available" translatable="false">No geocoder available</string>
-
-    <string name="fetch_address" translatable="false">Fetch address</string>
 
     <string name="address_found" translatable="false">Address found</string>
 
@@ -145,10 +140,6 @@
     <string name="invalid_lat_long_used" translatable="false">Invalid latitude or longitude used</string>
 
 
-    <string name="permission_rationale" translatable="false">Location permission is needed for core functionality</string>
-    <string name="permission_denied_explanation" translatable="false">Permission was denied, but is needed for core
-        functionality.</string>
-    <string name="settings" translatable="false">Settings</string>
     <string name="view_your_donations">View your Donations</string>
     <string name="nearby_ngo">Nearby NGO</string>
     <string name="search_nearby_ngo_s">Search Nearby NGO\'s</string>

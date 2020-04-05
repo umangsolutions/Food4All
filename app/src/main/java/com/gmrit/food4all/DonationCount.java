@@ -3,7 +3,10 @@ package com.gmrit.food4all;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +15,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gmrit.food4all.activities.volunteer.VolunteerActivity;
+import com.gmrit.food4all.activities.volunteer.VolunteerLoginActivity;
+import com.gmrit.food4all.utilities.ConstantValues;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
@@ -27,6 +33,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.Objects;
+
 public class DonationCount extends AppCompatActivity {
 
     private DatabaseReference myref;
@@ -34,11 +42,22 @@ public class DonationCount extends AppCompatActivity {
     private EditText edtphone;
     private Button btnsubmit;
     private String phone;
+    boolean connected = false;
     private TextView doncount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_count);
+        ConstantValues.internetCheck(DonationCount.this);
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        //we are connected to a network
+        assert connectivityManager != null;
+        connected = Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)).getState() == NetworkInfo.State.CONNECTED ||
+                Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)).getState() == NetworkInfo.State.CONNECTED;
+        if (!connected) {
+            Toast.makeText(DonationCount.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
+        }
 
         edtphone = (EditText) findViewById(R.id.phone);
         btnsubmit = (Button) findViewById(R.id.submit);
@@ -71,28 +90,35 @@ public class DonationCount extends AppCompatActivity {
                 } else if(phone.length()!=10) {
                     edtphone.setError("Invalid Phone Number");
                 } else {
-                    Query query = myref.orderByChild("phone").equalTo(phone);
-                    query.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                //int  = Integer.toString(dataSnapshot.getChildrenCount())
-                                String don_count = Long.toString(dataSnapshot.getChildrenCount());
-                                doncount.setVisibility(View.VISIBLE);
-                                doncount.setText("Total No. of Donations : " + don_count);
-                                //Toast.makeText(DonationCount.this, "Donations Count : " + don_count, Toast.LENGTH_SHORT).show();
+                    assert connectivityManager != null;
+                    connected = Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)).getState() == NetworkInfo.State.CONNECTED ||
+                            Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)).getState() == NetworkInfo.State.CONNECTED;
+                    if (!connected) {
+                        Toast.makeText(DonationCount.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Query query = myref.orderByChild("phone").equalTo(phone);
+                        query.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    //int  = Integer.toString(dataSnapshot.getChildrenCount())
+                                    String don_count = Long.toString(dataSnapshot.getChildrenCount());
+                                    doncount.setVisibility(View.VISIBLE);
+                                    doncount.setText("Total No. of Donations : " + don_count);
+                                    //Toast.makeText(DonationCount.this, "Donations Count : " + don_count, Toast.LENGTH_SHORT).show();
 
-                            } else {
-                                Toast.makeText(DonationCount.this, "No Donations Found", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(DonationCount.this, "No Donations Found", Toast.LENGTH_LONG).show();
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Toast.makeText(DonationCount.this, "Failed to Load.", Toast.LENGTH_LONG).show();
+                            }
+                        });
 
-                        }
-                    });
-
+                    }
                 }
 
             }
