@@ -1,6 +1,7 @@
 package com.gmrit.food4all.activities.general;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -99,8 +100,10 @@ public class IssuesActivity extends AppCompatActivity {
                         rep.setReport(report.getText().toString().trim());
                         ref.push().setValue(rep);
                         Toast.makeText(IssuesActivity.this, "Thank you, We will Contact you Shortly!", Toast.LENGTH_SHORT).show();
-                        
                         connected = true;
+                        Intent intent = new Intent(IssuesActivity.this,MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                     } else {
                         connected = false;
                         Toast.makeText(IssuesActivity.this, "Internet Unavailable", Toast.LENGTH_LONG).show();

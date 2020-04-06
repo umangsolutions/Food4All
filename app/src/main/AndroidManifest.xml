@@ -31,22 +31,22 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
         <activity
-            android:name=".DonationCount"
+            android:name=".activities.general.DonationCount"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
         <activity
-            android:name=".NearbyNGOActivity"
+            android:name=".activities.general.NearbyNGOActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/> <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7341014042556519~1951002345" /> <!-- android:value="ca-app-pub-7341014042556519~1951002345"/ -->
         <activity
-            android:name=".SthreeRaksha"
+            android:name=".activities.general.SthreeRaksha"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name=".OTP_ValidationActivity"
+            android:name=".activities.donor.OTP_ValidationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Light.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
@@ -168,11 +168,10 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
-        <service android:name=".FetchAddressIntentService" />
 
-        <meta-data
+        <!--<meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCbV1kxdn_Bs0SupOFAvySabkOnzXaewFw"/>
+            android:value="AIzaSyCbV1kxdn_Bs0SupOFAvySabkOnzXaewFw"/>-->
 
     </application>
 

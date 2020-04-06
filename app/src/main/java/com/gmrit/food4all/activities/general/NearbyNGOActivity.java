@@ -1,4 +1,4 @@
-package com.gmrit.food4all;
+package com.gmrit.food4all.activities.general;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gmrit.food4all.R;
 import com.gmrit.food4all.utilities.ConstantValues;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;

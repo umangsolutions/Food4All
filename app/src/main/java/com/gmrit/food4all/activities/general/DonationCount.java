@@ -1,10 +1,9 @@
-package com.gmrit.food4all;
+package com.gmrit.food4all.activities.general;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -15,8 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gmrit.food4all.activities.volunteer.VolunteerActivity;
-import com.gmrit.food4all.activities.volunteer.VolunteerLoginActivity;
+import com.gmrit.food4all.R;
 import com.gmrit.food4all.utilities.ConstantValues;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -30,8 +28,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 import java.util.Objects;
 

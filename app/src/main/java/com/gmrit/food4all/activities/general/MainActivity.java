@@ -18,10 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.gmrit.food4all.DonationCount;
-import com.gmrit.food4all.NearbyNGOActivity;
 import com.gmrit.food4all.R;
-import com.gmrit.food4all.SthreeRaksha;
 import com.gmrit.food4all.activities.donor.DonorCelebrateActivity;
 import com.gmrit.food4all.activities.donor.FoodDetailsActivity;
 import com.gmrit.food4all.activities.recipients.RecipientLoginActivity;

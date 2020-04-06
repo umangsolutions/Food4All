@@ -1,4 +1,4 @@
-package com.gmrit.food4all;
+package com.gmrit.food4all.activities.donor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.gmrit.food4all.activities.recipients.RecipientRegistrationActivity;
+import com.gmrit.food4all.R;
 import com.gmrit.food4all.modals.Fooddetails;
 import com.gmrit.food4all.utilities.ConstantValues;
 import com.gmrit.food4all.utilities.Dialog;

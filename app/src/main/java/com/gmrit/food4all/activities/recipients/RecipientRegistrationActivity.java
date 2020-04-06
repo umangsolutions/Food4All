@@ -3,14 +3,10 @@ package com.gmrit.food4all.activities.recipients;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,7 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gmrit.food4all.R;
 import com.gmrit.food4all.modals.Recipient;
-import com.gmrit.food4all.utilities.LocationTrack;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
@@ -36,10 +31,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 public class RecipientRegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
