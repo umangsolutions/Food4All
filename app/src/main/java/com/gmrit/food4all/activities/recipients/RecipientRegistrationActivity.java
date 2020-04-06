@@ -104,8 +104,6 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
             connected = true;
         } else {
             connected = false;
-        }
-        if (!connected) {
             Toast.makeText(RecipientRegistrationActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
         }
 
@@ -191,22 +189,26 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                 } else if (add.length() < 10) {
                     address.setError("Address should be minimum of 10 Characters !");
                 } else {
-                    final ProgressDialog progressDialog = new ProgressDialog(RecipientRegistrationActivity.this);
-                    progressDialog.setMessage("Registering...");
-                    progressDialog.show();
+                    if (connected == true) {
+                        final ProgressDialog progressDialog = new ProgressDialog(RecipientRegistrationActivity.this);
+                        progressDialog.setMessage("Registering...");
+                        progressDialog.show();
 
-                    databaseReference = FirebaseDatabase.getInstance().getReference().child("Organization_Details").child(id);
-                    Recipient orphanage_modal = new Recipient(nam, orgtype, usnam, pw, ph, add);
-                    databaseReference.setValue(orphanage_modal).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            progressDialog.dismiss();
-                            Toast.makeText(RecipientRegistrationActivity.this, "Registered Successfully !", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(RecipientRegistrationActivity.this, RecipientLoginActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                        }
-                    });
+                        databaseReference = FirebaseDatabase.getInstance().getReference().child("Organization_Details").child(id);
+                        Recipient orphanage_modal = new Recipient(nam, orgtype, usnam, pw, ph, add);
+                        databaseReference.setValue(orphanage_modal).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                progressDialog.dismiss();
+                                Toast.makeText(RecipientRegistrationActivity.this, "Registered Successfully !", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RecipientRegistrationActivity.this, RecipientLoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            }
+                        });
+                    } else {
+                        Toast.makeText(RecipientRegistrationActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

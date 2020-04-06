@@ -81,13 +81,10 @@ public class RecipientLoginActivity extends AppCompatActivity {
             //we are connected to a network
             connected = true;
         } else {
-            connected = false;}
-        if (!connected) {
+            connected = false;
             Toast.makeText(RecipientLoginActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
         }
-
         databaseReference = FirebaseDatabase.getInstance().getReference("Organization_Details");
-
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,33 +97,41 @@ public class RecipientLoginActivity extends AppCompatActivity {
                 } else if (pw.isEmpty()) {
                     pwd.setError("Password should not be Empty");
                 } else {
-                    Query query = databaseReference.orderByChild("usname").equalTo(usnam);
-                    query.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                            connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                        //we are connected to a network
+                        Query query = databaseReference.orderByChild("usname").equalTo(usnam);
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            if (dataSnapshot.exists()) {
-                                // dataSnapshot is the "issue" node with all children with id 0
-                                for (DataSnapshot issue : dataSnapshot.getChildren()) {
-                                    // do something with the individual "issues"
-                                    dbpass = issue.getValue(Recipient.class).getPassword();
-                                }
-                                if (pw.equals(dbpass)) {
-                                    Toast.makeText(RecipientLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RecipientLoginActivity.this, RecipientActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(RecipientLoginActivity.this, "login Failed !", Toast.LENGTH_SHORT).show();
+                                if (dataSnapshot.exists()) {
+                                    // dataSnapshot is the "issue" node with all children with id 0
+                                    for (DataSnapshot issue : dataSnapshot.getChildren()) {
+                                        // do something with the individual "issues"
+                                        dbpass = issue.getValue(Recipient.class).getPassword();
+                                    }
+                                    if (pw.equals(dbpass)) {
+                                        Toast.makeText(RecipientLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(RecipientLoginActivity.this, RecipientActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(RecipientLoginActivity.this, "login Failed !", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Toast.makeText(RecipientLoginActivity.this, "Authentication Failed", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Toast.makeText(RecipientLoginActivity.this, "Authentication Failed", Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+                    } else {
+                        Toast.makeText(RecipientLoginActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

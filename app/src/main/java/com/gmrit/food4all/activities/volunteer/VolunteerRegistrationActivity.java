@@ -79,13 +79,10 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
             //we are connected to a network
             connected = true;
-        } else
+        } else{
             connected = false;
-
-        if (!connected) {
             Toast.makeText(VolunteerRegistrationActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
         }
-
 
         //Buttons activity
         singin.setOnClickListener(new View.OnClickListener() {
@@ -126,47 +123,53 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                 } else if (ph.length() < 10) {
                     phone.setError("Phone Number is Not Valid !");
                 } else {
-                    registerUser(e, p, ph, n);
-                    String msg = "Welcome  " + n + ",\nWe feel very Happy to see you Here.\nYou will be notified when there is a Donation\n\n Happy Volunteering !";
-                    Intent broadcastIntent = new Intent(VolunteerRegistrationActivity.this, VolunteerRegistrationActivity.class);
-                    broadcastIntent.putExtra("toastMessage", "Hi man !");
-                    //startActivity(broadcastIntent);
-                    PendingIntent actionIntent = PendingIntent.getBroadcast(VolunteerRegistrationActivity.this,
-                            0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                    Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_arrow_forward_white);
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(
-                            VolunteerRegistrationActivity.this
-                    )
-                            .setSmallIcon(R.drawable.log)
-                            .setContentTitle("Thank You for Registering !")
-                            .setContentText(msg)
-                            .setAutoCancel(true)
-                            .setWhen(System.currentTimeMillis())
-                            .setDefaults(Notification.DEFAULT_LIGHTS)
-                            .setVibrate(new long[]{0, 500, 1000})
-                            .setPriority(NotificationCompat.PRIORITY_HIGH)
-                            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                            /*.setStyle(new NotificationCompat.BigTextStyle()
-                                    .bigText(getString(R.string.message))
-                                    .setBigContentTitle("Thank You for Registering !")
-                                    .setSummaryText("Registration"))*/
-                            .setLargeIcon(largeIcon);
+                    if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                            connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED){
+                        registerUser(e, p, ph, n);
+                        String msg = "Welcome  " + n + ",\nWe feel very Happy to see you Here.\nYou will be notified when there is a Donation\n\n Happy Volunteering !";
+                        Intent broadcastIntent = new Intent(VolunteerRegistrationActivity.this, VolunteerRegistrationActivity.class);
+                        broadcastIntent.putExtra("toastMessage", "Hi man !");
+                        //startActivity(broadcastIntent);
+                        PendingIntent actionIntent = PendingIntent.getBroadcast(VolunteerRegistrationActivity.this,
+                                0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_arrow_forward_white);
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(
+                                VolunteerRegistrationActivity.this
+                        )
+                                .setSmallIcon(R.drawable.log)
+                                .setContentTitle("Thank You for Registering !")
+                                .setContentText(msg)
+                                .setAutoCancel(true)
+                                .setWhen(System.currentTimeMillis())
+                                .setDefaults(Notification.DEFAULT_LIGHTS)
+                                .setVibrate(new long[]{0, 500, 1000})
+                                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                                /*.setStyle(new NotificationCompat.BigTextStyle()
+                                        .bigText(getString(R.string.message))
+                                        .setBigContentTitle("Thank You for Registering !")
+                                        .setSummaryText("Registration"))*/
+                                .setLargeIcon(largeIcon);
 
-                    Intent intent1 = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
-                    intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent1.putExtra("message", msg);
+                        Intent intent1 = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
+                        intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent1.putExtra("message", msg);
 
-                    PendingIntent pendingIntent = PendingIntent.getActivity(VolunteerRegistrationActivity.this,
-                            0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-                    builder.setContentIntent(pendingIntent);
+                        PendingIntent pendingIntent = PendingIntent.getActivity(VolunteerRegistrationActivity.this,
+                                0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+                        builder.setContentIntent(pendingIntent);
 
 
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(
-                            Context.NOTIFICATION_SERVICE
-                    );
-                    notificationManager.notify(1, builder.build());
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(
+                                Context.NOTIFICATION_SERVICE
+                        );
+                        notificationManager.notify(1, builder.build());
 
-                    progressDialog.dismiss();
+                        progressDialog.dismiss();
+                    }else{
+                        Toast.makeText(VolunteerRegistrationActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });

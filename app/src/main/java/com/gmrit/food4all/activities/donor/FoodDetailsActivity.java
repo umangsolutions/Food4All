@@ -208,7 +208,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                         Toast.makeText(FoodDetailsActivity.this, "One Time Password has been sent to Your Mobile Number " + "+91" + phon, Toast.LENGTH_SHORT).show();
                         connected=true;
                     } else {
-                        Toast.makeText(FoodDetailsActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FoodDetailsActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
                         connected=false;
                     }
                 }
@@ -252,65 +252,67 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
             Log.d(TAG, "onVerificationCompleted: " + phoneAuthCredential);
+            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                    connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED){
+                reff.push().setValue(new Fooddetails(name, phon, address, place, "", tim, currdate, foodno));
+                try {
 
-            reff.push().setValue(new Fooddetails(name, phon, address, place, "", tim, currdate, foodno));
+                    RequestQueue queue = Volley.newRequestQueue(FoodDetailsActivity.this);
+
+                    String url = "https://fcm.googleapis.com/fcm/send";
+
+                    String m = "Mr./Mrs." + name + " is willing to Donate Food from a ";
+                    String num = m + place + " which can be fed to " + foodno + " person(s)";
+                    String res = num + "\nAddress is " + address;
+                    String add = res + "\nFood Cooked Before :" + tim;
+                    String fina = add + "\nContact: " + phon;
+
+                    TOPIC = "/topics/donateFood";
+                    JSONObject data = new JSONObject();
+                    data.put("title", "Food Ready to Donate");
+                    data.put("message", fina);
+                    Log.e(TAG, "" + data);
+
+                    JSONObject notification_data = new JSONObject();
+                    notification_data.put("data", data);
+                    notification_data.put("to", TOPIC);
+
+                    Log.e(TAG, "" + notification_data);
 
 
-            try {
+                    JsonObjectRequest request = new JsonObjectRequest(url, notification_data, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
 
-                RequestQueue queue = Volley.newRequestQueue(FoodDetailsActivity.this);
+                        }
+                    }) {
+                        @Override
+                        public Map<String, String> getHeaders() {
 
-                String url = "https://fcm.googleapis.com/fcm/send";
+                            Map<String, String> params = new HashMap<>();
+                            params.put("Authorization", serverKey);
+                            params.put("Content-Type", contentType);
+                            return params;
+                        }
+                    };
 
-                String m = "Mr./Mrs." + name + " is willing to Donate Food from a ";
-                String num = m + place + " which can be fed to " + foodno + " person(s)";
-                String res = num + "\nAddress is " + address;
-                String add = res + "\nFood Cooked Before :" + tim;
-                String fina = add + "\nContact: " + phon;
+                    queue.add(request);
 
-                TOPIC = "/topics/donateFood";
-                JSONObject data = new JSONObject();
-                data.put("title", "Food Ready to Donate");
-                data.put("message", fina);
-                Log.e(TAG, "" + data);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                JSONObject notification_data = new JSONObject();
-                notification_data.put("data", data);
-                notification_data.put("to", TOPIC);
-
-                Log.e(TAG, "" + notification_data);
-
-
-                JsonObjectRequest request = new JsonObjectRequest(url, notification_data, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }) {
-                    @Override
-                    public Map<String, String> getHeaders() {
-
-                        Map<String, String> params = new HashMap<>();
-                        params.put("Authorization", serverKey);
-                        params.put("Content-Type", contentType);
-                        return params;
-                    }
-                };
-
-                queue.add(request);
-
-            } catch (Exception e) {
-                e.printStackTrace();
+                Toast.makeText(FoodDetailsActivity.this, "Food Donation details Submitted Successfully !", Toast.LENGTH_SHORT).show();
+                //startActivity(new Intent(OTP_ValidationActivity.this, MainActivity.class));
+                openDialog();
+            }else{
+                Toast.makeText(FoodDetailsActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
             }
-
-            Toast.makeText(FoodDetailsActivity.this, "Food Donation details Submitted Successfully !", Toast.LENGTH_SHORT).show();
-            //startActivity(new Intent(OTP_ValidationActivity.this, MainActivity.class));
-            openDialog();
-
         }
 
         @Override

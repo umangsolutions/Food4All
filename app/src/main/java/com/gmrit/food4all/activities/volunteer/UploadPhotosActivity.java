@@ -69,7 +69,7 @@ public class UploadPhotosActivity extends AppCompatActivity {
     private String email, currdate;
     private String numberpeople, area;
     private String volname;
-    Boolean connected=false;
+    Boolean connected = false;
     private String pho;
     MyAppPrefsManager myAppPrefsManager;
     private AdView mAdView;
@@ -99,69 +99,75 @@ public class UploadPhotosActivity extends AppCompatActivity {
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
             //we are connected to a network
             connected = true;
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
+            storage = FirebaseStorage.getInstance();
+            storageReference = storage.getReference();
 
-        Date cd = Calendar.getInstance().getTime();
-        System.out.println("Current time => " + cd);
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        currdate = df.format(cd);
+            Date cd = Calendar.getInstance().getTime();
+            System.out.println("Current time => " + cd);
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            currdate = df.format(cd);
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
+            MobileAds.initialize(this, new OnInitializationCompleteListener() {
+                @Override
+                public void onInitializationComplete(InitializationStatus initializationStatus) {
+                }
+            });
 
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
+            AdView adView = new AdView(this);
+            adView.setAdSize(AdSize.BANNER);
+            adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
 
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+            mAdView = findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
 
 
-        myRef = FirebaseDatabase.getInstance().getReference("Volunteers");
-        myRef.keepSynced(true);
+            myRef = FirebaseDatabase.getInstance().getReference("Volunteers");
+            myRef.keepSynced(true);
 
-        Query query = myRef.orderByChild("email").equalTo(email);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            Query query = myRef.orderByChild("email").equalTo(email);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.exists()) {
-                    // dataSnapshot is the "issue" node with all children with id 0
-                    for (DataSnapshot issue : dataSnapshot.getChildren()) {
-                        // do something with the individual "issues"
-                        volname = issue.getValue(Volunteer.class).getName();
+                    if (dataSnapshot.exists()) {
+                        // dataSnapshot is the "issue" node with all children with id 0
+                        for (DataSnapshot issue : dataSnapshot.getChildren()) {
+                            // do something with the individual "issues"
+                            volname = issue.getValue(Volunteer.class).getName();
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(UploadPhotosActivity.this, "Failed to Upload.", Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(UploadPhotosActivity.this, "Failed to Upload.", Toast.LENGTH_LONG).show();
+                }
+            });
 
-        photo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SelectImage();
-            }
-        });
+            photo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SelectImage();
+                }
+            });
 
-        upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadImage();
-            }
-        });
+            upload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                            connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                        uploadImage();
+                    } else {
+                        Toast.makeText(UploadPhotosActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+                    }
 
-        }
-        else {
+                }
+            });
+        } else {
             connected = false;
+            Toast.makeText(this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -270,8 +276,8 @@ public class UploadPhotosActivity extends AppCompatActivity {
                             // Error, Image not uploaded
                             progressDialog.dismiss();
                             Toast.makeText(UploadPhotosActivity.this,
-                                            "Failed " + e.getMessage(),
-                                            Toast.LENGTH_SHORT).show();
+                                    "Failed " + e.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(
@@ -292,7 +298,7 @@ public class UploadPhotosActivity extends AppCompatActivity {
                                 }
                             });
         } else {
-            Toast.makeText(this, "Please upload the Image ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please select an Image ", Toast.LENGTH_SHORT).show();
         }
     }
 

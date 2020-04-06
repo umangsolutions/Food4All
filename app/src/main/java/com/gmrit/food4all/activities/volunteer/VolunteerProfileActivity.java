@@ -1,6 +1,9 @@
 package com.gmrit.food4all.activities.volunteer;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -36,6 +39,7 @@ public class VolunteerProfileActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     MyAppPrefsManager myAppPrefsManager;
     private AdView mAdView;
+    boolean connected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,32 +76,39 @@ public class VolunteerProfileActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Volunteers");
         databaseReference.keepSynced(true);
-        Query query = databaseReference.orderByChild("email").equalTo(mail);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                        nam = Objects.requireNonNull(dataSnapshot1.getValue(Volunteer.class)).getName();
-                        ph = Objects.requireNonNull(dataSnapshot1.getValue(Volunteer.class)).getPhone();
-                        em = Objects.requireNonNull(dataSnapshot1.getValue(Volunteer.class)).getEmail();
-                        cou = Objects.requireNonNull(dataSnapshot1.getValue(Volunteer.class)).getCount();
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //connected to network
+            Query query = databaseReference.orderByChild("email").equalTo(mail);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                            nam = Objects.requireNonNull(dataSnapshot1.getValue(Volunteer.class)).getName();
+                            ph = Objects.requireNonNull(dataSnapshot1.getValue(Volunteer.class)).getPhone();
+                            em = Objects.requireNonNull(dataSnapshot1.getValue(Volunteer.class)).getEmail();
+                            cou = Objects.requireNonNull(dataSnapshot1.getValue(Volunteer.class)).getCount();
+                        }
+                        name.setText(nam);
+                        phone.setText(ph);
+                        email.setText(em);
+                        inc.setText("Total No. of Deliveries : " + cou);
+                    } else {
+                        Toast.makeText(VolunteerProfileActivity.this, "Fetching Details....This may take some time!", Toast.LENGTH_SHORT).show();
                     }
-                    name.setText(nam);
-                    phone.setText(ph);
-                    email.setText(em);
-                    inc.setText("Total No. of Deliveries : " + cou);
-                } else {
-                    Toast.makeText(VolunteerProfileActivity.this, "Fetching Details....This may take some time!", Toast.LENGTH_SHORT).show();
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(VolunteerProfileActivity.this, "Failed to load", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

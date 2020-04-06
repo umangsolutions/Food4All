@@ -10,7 +10,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="190dp"
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:contentDescription="@string/app_name"

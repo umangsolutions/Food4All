@@ -3,6 +3,9 @@ package com.gmrit.food4all;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.gmrit.food4all.activities.recipients.RecipientRegistrationActivity;
 import com.gmrit.food4all.modals.Fooddetails;
 import com.gmrit.food4all.utilities.ConstantValues;
 import com.gmrit.food4all.utilities.Dialog;
@@ -42,7 +46,8 @@ public class OTP_ValidationActivity extends AppCompatActivity {
     Button btnvalidate;
     FirebaseAuth mAuth;
     DatabaseReference reff;
-    String name,place,address,phon,foodno,tim,currdate,recvdotp;
+    String name, place, address, phon, foodno, tim, currdate, recvdotp;
+    boolean connected = false;
 
     private static String TAG = "TOKENS_DATA";
 
@@ -50,14 +55,15 @@ public class OTP_ValidationActivity extends AppCompatActivity {
     final private String serverKey = "key=" + ConstantValues.AUTH_KEY_FCM;
     final private String contentType = "application/json";
     String TOPIC;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_o_t_p__validation);
         this.setTitle("OTP Verification");
-        edtotp = (EditText)findViewById(R.id.otp);
-        txttitle = (TextView)findViewById(R.id.title);
-        btnvalidate = (Button)findViewById(R.id.validate);
+        edtotp = (EditText) findViewById(R.id.otp);
+        txttitle = (TextView) findViewById(R.id.title);
+        btnvalidate = (Button) findViewById(R.id.validate);
 
         mAuth = FirebaseAuth.getInstance();
         reff = FirebaseDatabase.getInstance().getReference().child("Food_Details");
@@ -73,14 +79,14 @@ public class OTP_ValidationActivity extends AppCompatActivity {
         tim = bundle.getString(getString(R.string.bun_time));
         currdate = bundle.getString(getString(R.string.currentdate));
 
-        Log.d(TAG, "onCreate: "+"\n"+"OTP : "+recvdotp
-                +"\n"+"name : "+name
-                +"\n"+"place : "+place
-                +"\n"+"address : "+address
-                +"\n"+"phone : "+phon
-                +"\n"+"food : "+foodno
-                +"\n"+"time : "+tim
-                +"\n"+"date : "+currdate);
+        Log.d(TAG, "onCreate: " + "\n" + "OTP : " + recvdotp
+                + "\n" + "name : " + name
+                + "\n" + "place : " + place
+                + "\n" + "address : " + address
+                + "\n" + "phone : " + phon
+                + "\n" + "food : " + foodno
+                + "\n" + "time : " + tim
+                + "\n" + "date : " + currdate);
 
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/userABC1");
 
@@ -89,19 +95,36 @@ public class OTP_ValidationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String entered_otp = edtotp.getText().toString().trim();
 
-                if(entered_otp.isEmpty()) {
+                if (entered_otp.isEmpty()) {
                     edtotp.setError("Please enter OTP");
                     edtotp.requestFocus();
                 } else {
-                      verifySignInCode(entered_otp);
+                    ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                            connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                        //we are connected to a network
+                        connected = true;
+                        verifySignInCode(entered_otp);
+                    } else {
+                        connected = false;
+                        Toast.makeText(OTP_ValidationActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
     }
 
     public void verifySignInCode(String enteredotp) {
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(recvdotp,enteredotp);
-        signInWithPhoneAuthCredential(credential);
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(recvdotp, enteredotp);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            signInWithPhoneAuthCredential(credential);
+            connected = true;
+        } else {
+            Toast.makeText(this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
@@ -165,7 +188,7 @@ public class OTP_ValidationActivity extends AppCompatActivity {
                             }
 
                             Toast.makeText(OTP_ValidationActivity.this, "Food Donation details Submitted Successfully !", Toast.LENGTH_SHORT).show();
-                           //startActivity(new Intent(OTP_ValidationActivity.this, MainActivity.class));
+                            //startActivity(new Intent(OTP_ValidationActivity.this, MainActivity.class));
                             openDialog();
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {

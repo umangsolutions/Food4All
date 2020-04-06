@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gmrit.food4all.R;
+import com.gmrit.food4all.activities.recipients.RecipientRegistrationActivity;
 import com.gmrit.food4all.modals.Report;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -49,8 +50,15 @@ public class IssuesActivity extends AppCompatActivity {
         s1 = email.getText().toString().trim();
         s2 = report.getText().toString().trim();
 
-
-
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        } else {
+            connected = false;
+            Toast.makeText(IssuesActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+        }
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -73,9 +81,6 @@ public class IssuesActivity extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!connected) {
-                    Toast.makeText(IssuesActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
-                }
                 s1 = email.getText().toString().trim();
                 s2 = report.getText().toString().trim();
                 if (s1.isEmpty()) {
@@ -84,7 +89,6 @@ public class IssuesActivity extends AppCompatActivity {
                     Toast.makeText(IssuesActivity.this, "Please enter the Problem", Toast.LENGTH_LONG).show();
                 } else {
 
-
                     ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                     if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                             connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
@@ -92,11 +96,11 @@ public class IssuesActivity extends AppCompatActivity {
                         rep.setEmail(email.getText().toString().trim());
                         rep.setReport(report.getText().toString().trim());
                         ref.push().setValue(rep);
-                        Toast.makeText(IssuesActivity.this, "We will Contact you Shortly!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(IssuesActivity.this, "Thank you, We will Contact you Shortly!", Toast.LENGTH_SHORT).show();
                         connected = true;
                     } else {
                         connected = false;
-                        Toast.makeText(IssuesActivity.this, "Network Unavailable", Toast.LENGTH_LONG).show();
+                        Toast.makeText(IssuesActivity.this, "Internet Unavailable", Toast.LENGTH_LONG).show();
                     }
                 }
 

@@ -232,7 +232,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
                         connected = true;
                     } else {
                         connected = false;
-                        Toast.makeText(DonorCelebrateActivity.this, "Network Unavailable", Toast.LENGTH_LONG).show();
+                        Toast.makeText(DonorCelebrateActivity.this, "Internet Unavailable", Toast.LENGTH_LONG).show();
                     }
 
                     // myref = FirebaseDatabase.getInstance().getReference().child("Happy_Moments").child(key);

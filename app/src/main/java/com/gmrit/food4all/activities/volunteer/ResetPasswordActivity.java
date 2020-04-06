@@ -51,7 +51,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
             //we are connected to a network
             connected = true;
         } else {
-            connected = false;}
+            connected = false;
+        }
 
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -83,19 +84,26 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 if (e.equals("")) {
                     Toast.makeText(ResetPasswordActivity.this, "Please Enter Email", Toast.LENGTH_SHORT).show();
                 } else {
-                    firebaseAuth.sendPasswordResetEmail(e).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                //Toast.makeText(ResetPassword.this,"Reset Link send to Email",Toast.LENGTH_SHORT).show();
-                                //startActivity(new Intent(ResetPassword.this,LoginActivity.class));
-                                af.setText("An Reset Password link is sent to \nYour Registered Email Address");
-                            } else {
-                                String error = task.getException().getMessage();
-                                Toast.makeText(ResetPasswordActivity.this, error, Toast.LENGTH_SHORT).show();
+                    ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                            connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                        //we are connected to a network
+                        firebaseAuth.sendPasswordResetEmail(e).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    //Toast.makeText(ResetPassword.this,"Reset Link send to Email",Toast.LENGTH_SHORT).show();
+                                    //startActivity(new Intent(ResetPassword.this,LoginActivity.class));
+                                    af.setText("An Reset Password link is sent to \nYour Registered Email Address");
+                                } else {
+                                    String error = task.getException().getMessage();
+                                    Toast.makeText(ResetPasswordActivity.this, error, Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
+                        });
+                    } else {
+                        Toast.makeText(ResetPasswordActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

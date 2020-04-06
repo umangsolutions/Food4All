@@ -73,11 +73,9 @@ public class RecipientActivity extends AppCompatActivity {
             //we are connected to a network
             connected = true;
         } else {
-            connected = false;}
-        if (!connected) {
+            connected = false;
             Toast.makeText(RecipientActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
         }
-
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Recipients_Updation");
 
@@ -103,37 +101,37 @@ public class RecipientActivity extends AppCompatActivity {
                 } else if (noof_people.isEmpty()) {
                     noofpeople.setError("Please enter People Benefitted Number ");
                 } else {
-
-                    Query query = volreference.orderByChild("phone").equalTo(vol_phone);
-                    query.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                    int count_var = dataSnapshot1.getValue(Volunteer.class).getCount();
-                                    int res = count_var + 1;
-                                    dataSnapshot1.getRef().child("count").setValue(res);
+                    ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                            connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                        Query query = volreference.orderByChild("phone").equalTo(vol_phone);
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                        int count_var = dataSnapshot1.getValue(Volunteer.class).getCount();
+                                        int res = count_var + 1;
+                                        dataSnapshot1.getRef().child("count").setValue(res);
+                                    }
                                 }
                             }
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Toast.makeText(RecipientActivity.this, "Failed to submit Details.", Toast.LENGTH_LONG).show();
-                        }
-                    });
-
-
-                    databaseReference = FirebaseDatabase.getInstance().getReference().child("Recipients_Updation").child(key);
-                    RecipientsUpdate recipients_Update_update = new RecipientsUpdate(don_name, vol_name, vol_phone, noof_people);
-                    databaseReference.setValue(recipients_Update_update);
-
-
-                    Toast.makeText(RecipientActivity.this, "Details Successfully Submitted !", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RecipientActivity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Toast.makeText(RecipientActivity.this, "Failed to submit Details.", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        databaseReference = FirebaseDatabase.getInstance().getReference().child("Recipients_Updation").child(key);
+                        RecipientsUpdate recipients_Update_update = new RecipientsUpdate(don_name, vol_name, vol_phone, noof_people);
+                        databaseReference.setValue(recipients_Update_update);
+                        Toast.makeText(RecipientActivity.this, "Details Successfully Submitted !", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RecipientActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(RecipientActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

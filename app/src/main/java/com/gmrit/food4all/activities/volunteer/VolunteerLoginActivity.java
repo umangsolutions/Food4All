@@ -65,8 +65,11 @@ public class VolunteerLoginActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                userLogin();
+                if(connected==true){
+                    userLogin();
+                }else {
+                    Toast.makeText(VolunteerLoginActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

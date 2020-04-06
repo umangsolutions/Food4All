@@ -56,7 +56,7 @@ public class DonationCount extends AppCompatActivity {
         connected = Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)).getState() == NetworkInfo.State.CONNECTED ||
                 Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)).getState() == NetworkInfo.State.CONNECTED;
         if (!connected) {
-            Toast.makeText(DonationCount.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DonationCount.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
         }
 
         edtphone = (EditText) findViewById(R.id.phone);
@@ -94,7 +94,7 @@ public class DonationCount extends AppCompatActivity {
                     connected = Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)).getState() == NetworkInfo.State.CONNECTED ||
                             Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)).getState() == NetworkInfo.State.CONNECTED;
                     if (!connected) {
-                        Toast.makeText(DonationCount.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DonationCount.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
                     }else{
                         Query query = myref.orderByChild("phone").equalTo(phone);
                         query.addValueEventListener(new ValueEventListener() {
