@@ -7,8 +7,7 @@
     android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".activities.general.IssuesActivity"
-    tools:ignore="Autofill">
+    tools:context=".activities.general.IssuesActivity">
 
 
     <TextView
@@ -19,36 +18,42 @@
         android:gravity="center"
         android:text="@string/suggestions_compliants"
         android:textColor="#000"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:textStyle="bold"/>
 
-    <EditText
-        android:id="@+id/e"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="16dp"
-        android:fontFamily="@font/open_sans"
-        android:hint="@string/email_id"
-        android:inputType="textEmailAddress"
-        android:textSize="20sp" />
+        android:layout_margin="9dp">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/issuesemail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:hint="Email ID"
+            android:inputType="textEmailAddress" />
 
-    <EditText
-        android:id="@+id/report"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="16dp"
-        android:fontFamily="@font/open_sans"
-        android:hint="@string/report_problems_here"
-        android:inputType="textLongMessage"
-        android:textSize="20sp" />
+        android:layout_margin="9dp">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/issuesproblem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:hint="@string/report_problems_here"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/issuessubmit"
+        android:layout_width="71dp"
+        android:layout_height="33dp"
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:background="@drawable/button"
@@ -57,16 +62,14 @@
 
     <!--        ca-app-pub-3940256099942544/6300978111-->
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginTop="25dp"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-7341014042556519/2689368944"
-        ></com.google.android.gms.ads.AdView>
+        ads:adUnitId="ca-app-pub-7341014042556519/2689368944"></com.google.android.gms.ads.AdView>
     <!--ads:adUnitId="ca-app-pub-7341014042556519/2689368944"-->
 
 

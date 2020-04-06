@@ -38,7 +38,7 @@
                 android:layout_weight="0.5">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtPhone"
+                    android:id="@+id/adminedtPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/volunteer_phone_number"
@@ -48,7 +48,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/btnSearch"
+                android:id="@+id/adminbtnSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -117,7 +117,7 @@
 
 
                 <TextView
-                    android:id="@+id/txtName"
+                    android:id="@+id/admintxtName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -125,7 +125,7 @@
 
 
                 <TextView
-                    android:id="@+id/txtPhone"
+                    android:id="@+id/admintxtPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -133,7 +133,7 @@
 
 
                 <TextView
-                    android:id="@+id/txtEmail"
+                    android:id="@+id/admintxtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -141,7 +141,7 @@
 
 
                 <TextView
-                    android:id="@+id/txtCount"
+                    android:id="@+id/admintxtCount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -150,7 +150,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/txtHigh"
+            android:id="@+id/admintxtHigh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -161,7 +161,7 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/txtNormal"
+            android:id="@+id/admintxtNormal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

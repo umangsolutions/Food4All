@@ -59,9 +59,9 @@ public class DonationCount extends AppCompatActivity {
             Toast.makeText(DonationCount.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
         }
 
-        edtphone = (EditText) findViewById(R.id.phone);
-        btnsubmit = (Button) findViewById(R.id.submit);
-        doncount = (TextView) findViewById(R.id.count);
+        edtphone = (EditText) findViewById(R.id.doncountphone);
+        btnsubmit = (Button) findViewById(R.id.doncountsubmit);
+        doncount = (TextView) findViewById(R.id.doncountdisplay);
 
         doncount.setVisibility(View.INVISIBLE);
 

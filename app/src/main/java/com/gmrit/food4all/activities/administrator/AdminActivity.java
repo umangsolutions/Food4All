@@ -45,18 +45,14 @@ public class AdminActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("Administrator");
         }
 
-        txtName = (TextView) findViewById(R.id.txtName);
-        txtPhone = (TextView) findViewById(R.id.txtPhone);
-        txtEmail = (TextView) findViewById(R.id.txtEmail);
-        txtCount = (TextView) findViewById(R.id.txtCount);
-
-
-        txtNormal = (TextView) findViewById(R.id.txtNormal);
-        txtHigh = (TextView) findViewById(R.id.txtHigh);
-
-        edtPhone = (EditText) findViewById(R.id.edtPhone);
-
-        btnSearch = (Button) findViewById(R.id.btnSearch);
+        txtName = (TextView) findViewById(R.id.admintxtName);
+        txtPhone = (TextView) findViewById(R.id.admintxtPhone);
+        txtEmail = (TextView) findViewById(R.id.admintxtEmail);
+        txtCount = (TextView) findViewById(R.id.admintxtCount);
+        txtNormal = (TextView) findViewById(R.id.admintxtNormal);
+        txtHigh = (TextView) findViewById(R.id.admintxtHigh);
+        edtPhone = (EditText) findViewById(R.id.adminedtPhone);
+        btnSearch = (Button) findViewById(R.id.adminbtnSearch);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Volunteers");
 

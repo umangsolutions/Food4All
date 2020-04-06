@@ -58,6 +58,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getSupportActionBar().hide();
         progressBar = findViewById(R.id.progressBar);
         //myAppPrefsManager=new MyAppPrefsManager(this);
         tryAgain = findViewById(R.id.tryAgain);

@@ -21,27 +21,28 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     Context context;
     List<Image> imagemodal;
 
-    public GalleryAdapter(Context c , List<Image> f) {
+    public GalleryAdapter(Context c, List<Image> f) {
         context = c;
         imagemodal = f;
     }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.gallery_card,parent,false));
+        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.gallery_card, parent, false));
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView image;
 
-        public ViewHolder(View v)
-        {
+        public ViewHolder(View v) {
             super(v);
-            image =(ImageView)v.findViewById(R.id.image);
+            image = (ImageView) v.findViewById(R.id.uplphoimage);
         }
 
-        public ImageView getImage(){ return this.image;}
+        public ImageView getImage() {
+            return this.image;
+        }
     }
 
     @Override
@@ -49,13 +50,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
         //final Image image = images.get(position);
         holder.name.setText(imagemodal.get(position).getName());
-       // holder.date.setText(imagemodal.get(position).getDate());
+        // holder.date.setText(imagemodal.get(position).getDate());
         holder.area.setText(imagemodal.get(position).getArea());
         //holder.people.setText(imagemodal.get(position).getNoofplaces());
         final String url = imagemodal.get(position).getUrl();
         Picasso.get().load(url).into(holder.gallimage);
     }
-
 
 
     @Override
@@ -66,14 +66,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView gallimage;
-        TextView name,area,people,date;
+        TextView name, area, people, date;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            name=(TextView)itemView.findViewById(R.id.name);
-            //date=(TextView)itemView.findViewById(R.id.date);
-            area=(TextView)itemView.findViewById(R.id.place);
+            name = (TextView) itemView.findViewById(R.id.name);
+            area = (TextView) itemView.findViewById(R.id.place);
             //people=(TextView)itemView.findViewById(R.id.noofpeople);
-            gallimage=(ImageView)itemView.findViewById(R.id.imag);
+            gallimage = (ImageView) itemView.findViewById(R.id.imag);
         }
     }
 

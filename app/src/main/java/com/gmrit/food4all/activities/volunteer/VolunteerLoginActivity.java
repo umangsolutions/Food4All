@@ -44,7 +44,6 @@ public class VolunteerLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         firebaseAuth = FirebaseAuth.getInstance();
-        reset = (TextView) findViewById(R.id.reset);
         this.setTitle("Volunteer Login");
         myAppPrefsManager = new MyAppPrefsManager(VolunteerLoginActivity.this);
         ConstantValues.internetCheck(VolunteerLoginActivity.this);
@@ -57,17 +56,19 @@ public class VolunteerLoginActivity extends AppCompatActivity {
         if (!connected) {
             Toast.makeText(VolunteerLoginActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
         }
+
         progressDialog = new ProgressDialog(this);
-        t1 = (EditText) findViewById(R.id.tf1);
-        t2 = (EditText) findViewById(R.id.tf2);
-        b1 = (Button) findViewById(R.id.b);
+        t1 = (EditText) findViewById(R.id.volunlogemail);
+        t2 = (EditText) findViewById(R.id.volunlogpwd);
+        b1 = (Button) findViewById(R.id.volunlogsubmit);
+        reset = (TextView) findViewById(R.id.volunlogreset);
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(connected==true){
+                if (connected == true) {
                     userLogin();
-                }else {
+                } else {
                     Toast.makeText(VolunteerLoginActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
                 }
 
@@ -77,7 +78,7 @@ public class VolunteerLoginActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.volunlogregister).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(VolunteerLoginActivity.this, VolunteerRegistrationActivity.class);
@@ -97,7 +98,6 @@ public class VolunteerLoginActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void userLogin() {
         s1 = t1.getText().toString().trim();

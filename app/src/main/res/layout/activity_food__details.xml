@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,7 +37,7 @@
             android:layout_margin="5dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/name"
+                android:id="@+id/fooddonname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans"
@@ -51,7 +52,7 @@
             android:layout_margin="5dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phone"
+                android:id="@+id/fooddonphone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans"
@@ -67,7 +68,7 @@
             android:layout_margin="5dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add"
+                android:id="@+id/fooddonadd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans"
@@ -81,7 +82,7 @@
             android:layout_margin="5dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/noofpeople"
+                android:id="@+id/fooddonfeed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans"
@@ -90,7 +91,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
-            android:id="@+id/time"
+            android:id="@+id/foodtime"
             style="@style/AppTheme.FilterSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,7 +99,7 @@
             android:entries="@array/timetaken" />
 
         <Spinner
-            android:id="@+id/spin"
+            android:id="@+id/foodspin"
             style="@style/AppTheme.FilterSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,7 +108,7 @@
 
 
         <Button
-            android:id="@+id/sub"
+            android:id="@+id/fooddonsubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

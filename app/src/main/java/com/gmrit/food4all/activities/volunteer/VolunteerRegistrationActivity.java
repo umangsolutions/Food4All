@@ -64,16 +64,18 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
-        p1 = (EditText) findViewById(R.id.p1);
-        em = (EditText) findViewById(R.id.ema);
-        phone = (EditText) findViewById(R.id.phn);
-        name = (EditText) findViewById(R.id.nam);
+
+        name = (EditText) findViewById(R.id.volunregnam);
+        em = (EditText) findViewById(R.id.volunregemail);
+        p1 = (EditText) findViewById(R.id.volunregpwd);
+        phone = (EditText) findViewById(R.id.volunregphn);
+        b = (Button) findViewById(R.id.volunregsubmit);
+        TextView singin = findViewById(R.id.volunregsignIn);
+
         volunteer = new Volunteer();
         this.setTitle("Volunteer Registration");
         reff = FirebaseDatabase.getInstance().getReference().child("Volunteers");
-        b = (Button) findViewById(R.id.button);
         //Network Service State
-        TextView singin = findViewById(R.id.signIn_text);
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {

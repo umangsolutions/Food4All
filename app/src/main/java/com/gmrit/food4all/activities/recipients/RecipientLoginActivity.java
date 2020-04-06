@@ -45,7 +45,11 @@ public class RecipientLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orphanage_login);
         this.setTitle("Recipient Login");
-        login = (TextView) findViewById(R.id.register);
+
+        usname = (EditText) findViewById(R.id.reclogusname);
+        pwd = (EditText) findViewById(R.id.reclogpwd);
+        submit = (Button) findViewById(R.id.reclogbutton);
+        login = (TextView) findViewById(R.id.reclogregister);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,11 +74,6 @@ public class RecipientLoginActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
-
-        usname = (EditText) findViewById(R.id.usname);
-        pwd = (EditText) findViewById(R.id.pwd);
-        submit = (Button) findViewById(R.id.button);
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {

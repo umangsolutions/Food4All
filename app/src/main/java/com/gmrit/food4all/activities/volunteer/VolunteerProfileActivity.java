@@ -50,10 +50,12 @@ public class VolunteerProfileActivity extends AppCompatActivity {
         ConstantValues.internetCheck(VolunteerProfileActivity.this);
         myAppPrefsManager = new MyAppPrefsManager(VolunteerProfileActivity.this);
         mail = myAppPrefsManager.getUserName();
-        name = (TextView) findViewById(R.id.name);
-        phone = (TextView) findViewById(R.id.phone);
-        email = (TextView) findViewById(R.id.email);
-        inc = (TextView) findViewById(R.id.count);
+
+        name = (TextView) findViewById(R.id.volunprofilename);
+        phone = (TextView) findViewById(R.id.volunprofilephone);
+        email = (TextView) findViewById(R.id.volunprofileemail);
+        inc = (TextView) findViewById(R.id.volunprofilecount);
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Profile");

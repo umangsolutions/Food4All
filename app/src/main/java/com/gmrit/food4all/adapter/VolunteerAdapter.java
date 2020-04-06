@@ -283,13 +283,13 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
 
         public MyViewHolder(@NonNull final View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.name);
-            phone = (TextView) itemView.findViewById(R.id.phone);
-            type = (TextView) itemView.findViewById(R.id.type);
-            address = (TextView) itemView.findViewById(R.id.address);
-            book = (Button) itemView.findViewById(R.id.book);
-            status1 = (TextView) itemView.findViewById(R.id.status);
-            timesAgo = (TextView) itemView.findViewById(R.id.timesAgo);
+            name = (TextView) itemView.findViewById(R.id.voluncardname);
+            phone = (TextView) itemView.findViewById(R.id.voluncardphone);
+            type = (TextView) itemView.findViewById(R.id.voluncardtype);
+            address = (TextView) itemView.findViewById(R.id.voluncardaddress);
+            book = (Button) itemView.findViewById(R.id.voluncardbook);
+            status1 = (TextView) itemView.findViewById(R.id.voluncardstatus);
+            timesAgo = (TextView) itemView.findViewById(R.id.voluncardtimesAgo);
 
             //book.setEnabled(true);
         }

@@ -41,9 +41,11 @@ public class IssuesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_issues);
         this.setTitle("Report Issues");
-        email = (EditText) findViewById(R.id.e);
-        report = (EditText) findViewById(R.id.report);
-        b = (Button) findViewById(R.id.button);
+
+        email = (EditText) findViewById(R.id.issuesemail);
+        report = (EditText) findViewById(R.id.issuesproblem);
+        b = (Button) findViewById(R.id.issuessubmit);
+
         firebaseAuth = FirebaseAuth.getInstance();
         rep = new Report();
         ref = FirebaseDatabase.getInstance().getReference().child("Application_Issues");
@@ -97,6 +99,7 @@ public class IssuesActivity extends AppCompatActivity {
                         rep.setReport(report.getText().toString().trim());
                         ref.push().setValue(rep);
                         Toast.makeText(IssuesActivity.this, "Thank you, We will Contact you Shortly!", Toast.LENGTH_SHORT).show();
+                        
                         connected = true;
                     } else {
                         connected = false;
@@ -115,7 +118,7 @@ public class IssuesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            this.finish();
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }

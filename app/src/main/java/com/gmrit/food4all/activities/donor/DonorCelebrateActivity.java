@@ -45,79 +45,27 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
     String admin_1, admin_2, admin_3, msg;
     DatabaseReference myref;
     private AdView mAdView;
-    boolean connected=false;
-    /*Geocoder geocoder;
-    List<Address> addresses;
-    LocationTrack locationTrack;
-    String location_address,lat,lon,knownName,city,postalCode;*/
+    boolean connected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_happy);
         this.setTitle("Celebrate Birthday");
-        don_name = (EditText) findViewById(R.id.donname);
-        don_email = (EditText) findViewById(R.id.donemail);
-        don_phone = (EditText) findViewById(R.id.donphone);
-        don_money = (EditText) findViewById(R.id.donmoney);
-        don_add = (EditText) findViewById(R.id.donaddress);
+
+        don_name = (EditText) findViewById(R.id.celebdonname);
+        don_phone = (EditText) findViewById(R.id.celebdonphone);
+        don_email = (EditText) findViewById(R.id.celebdonemail);
+        don_add = (EditText) findViewById(R.id.celebdonaddress);
         don_date = (EditText) findViewById(R.id.celebdate);
-
-        /*locationTrack = new LocationTrack(this);
-
-        lat = Double.toString(locationTrack.getLatitude());
-        lon = Double.toString(locationTrack.getLongitude());
-
-        geocoder = new Geocoder(this, Locale.getDefault());*/
-
-        submit = (Button) findViewById(R.id.submit);
+        final Spinner spinner = findViewById(R.id.celebspin);
+        don_money = (EditText) findViewById(R.id.celebdonmoney);
+        submit = (Button) findViewById(R.id.celebsubmit);
 
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-        /*don_add.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                final int DRAWABLE_LEFT = 0;
-                final int DRAWABLE_TOP = 1;
-                final int DRAWABLE_RIGHT = 2;
-                final int DRAWABLE_BOTTOM = 3;
-
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    if(event.getRawX() >= (don_add.getRight() - don_add.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        try {
-                            if(lat.equals("0.0") || lon.equals("0.0"))
-                                locationTrack.showSettingsAlert();
-                            else {
-                                //Toast.makeText(SthreeRaksha.this, "Latitude " + lat + "\n Longitude " + lon, Toast.LENGTH_SHORT).show();
-                                Log.d("Latitude", lat);
-                                Log.d("Longitude", lon);
-                                addresses = geocoder.getFromLocation(Double.parseDouble(lat),Double.parseDouble(lon),1);
-*//*
-                                knownName = addresses.get(0).getFeatureName();
-                                city = addresses.get(0).getLocality();
-                                postalCode = addresses.get(0).getPostalCode();*//*
-
-                                location_address = addresses.get(0).getAddressLine(0);
-
-                                //location_address = knownName + ", " +city + ", " +postalCode; // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                                Log.d("address",location_address);
-                                don_add.setText(location_address);
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        Toast.makeText(DonorCelebrateActivity.this, "Location set Successfully !", Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
-*/
-
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -160,7 +108,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
             }
         });
 
-        final Spinner spinner = findViewById(R.id.spin);
+
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.recipient, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -214,27 +162,16 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
                         admin_2 = "8639796138";
                         admin_3 = "6303149161";
 
-                   /* SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(admin_1, null, re, null, null);
-                    smsManager.sendTextMessage(admin_2, null, re, nu796138ll, null);
-                    smsManager.sendTextMessage(admin_3, null, re, null, null);
-*/
-                        Uri sendSmsTo = Uri.parse("smsto:"+admin_1+";"+admin_2+";"+admin_3);
+                        Uri sendSmsTo = Uri.parse("smsto:" + admin_1 + ";" + admin_2 + ";" + admin_3);
                         Intent intent = new Intent(
                                 Intent.ACTION_SENDTO, sendSmsTo);
-                        intent.putExtra("sms_body",re);
+                        intent.putExtra("sms_body", re);
                         startActivity(intent);
-                        // Toast.makeText(DonorCelebrateActivity.this, "Details Successfully Submitted !", Toast.LENGTH_SHORT).show();
-
-                    /*Intent intent1 = new Intent(DonorCelebrateActivity.this, MainActivity.class);
-                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent1);*/
                         connected = true;
                     } else {
                         connected = false;
                         Toast.makeText(DonorCelebrateActivity.this, "Internet Unavailable", Toast.LENGTH_LONG).show();
                     }
-
                     // myref = FirebaseDatabase.getInstance().getReference().child("Happy_Moments").child(key);
                 }
             }

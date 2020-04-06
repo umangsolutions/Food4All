@@ -47,12 +47,12 @@ public class RecipientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orphange);
         this.setTitle("Donation Details");
-        donname = (EditText) findViewById(R.id.donname);
-        volname = (EditText) findViewById(R.id.volname);
-        volphone = (EditText) findViewById(R.id.volphone);
-        noofpeople = (EditText) findViewById(R.id.noofpeople);
 
-        submit = (Button) findViewById(R.id.submit);
+        donname = (EditText) findViewById(R.id.recdonname);
+        volname = (EditText) findViewById(R.id.recvolname);
+        volphone = (EditText) findViewById(R.id.recvolphone);
+        noofpeople = (EditText) findViewById(R.id.recnoofpeople);
+        submit = (Button) findViewById(R.id.recsubmit);
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override

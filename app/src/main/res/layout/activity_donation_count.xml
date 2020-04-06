@@ -36,7 +36,7 @@
             android:layout_margin="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phone"
+                android:id="@+id/doncountphone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -48,7 +48,7 @@
 
 
         <Button
-            android:id="@+id/submit"
+            android:id="@+id/doncountsubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -60,7 +60,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/count"
+            android:id="@+id/doncountdisplay"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:background="@drawable/don"

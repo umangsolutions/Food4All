@@ -48,10 +48,6 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
     Button register;
     DatabaseReference databaseReference;
     Boolean connected;
-    /* Geocoder geocoder;
-     List<Address> addresses;
-     LocationTrack locationTrack;
-     String location_address, lat, lon, knownName, city, postalCode;*/
     private AdView mAdView;
 
     @Override
@@ -60,23 +56,15 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
         setContentView(R.layout.activity_orphange_registration);
         this.setTitle("Recipient Registration");
 
+        name = (EditText) findViewById(R.id.recregname);
+        final Spinner spinner = findViewById(R.id.recregspin);
+        usname = (EditText) findViewById(R.id.recregusname);
+        pwd = (EditText) findViewById(R.id.recregpwd);
+        phone = (EditText) findViewById(R.id.recregphone);
+        address = (EditText) findViewById(R.id.recregaddress);
+        register = (Button) findViewById(R.id.recregregister);
+        signin = (TextView) findViewById(R.id.recregsignin);
 
-        signin = (TextView) findViewById(R.id.signin);
-        name = (EditText) findViewById(R.id.name);
-        usname = (EditText) findViewById(R.id.usname);
-        pwd = (EditText) findViewById(R.id.pwd);
-        phone = (EditText) findViewById(R.id.phone);
-        address = (EditText) findViewById(R.id.address);
-        register = (Button) findViewById(R.id.register);
-
-        /*locationTrack = new LocationTrack(this);
-
-        lat = Double.toString(locationTrack.getLatitude());
-        lon = Double.toString(locationTrack.getLongitude());
-
-        geocoder = new Geocoder(this, Locale.getDefault());
-*/
-        final Spinner spinner = findViewById(R.id.spin);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.organization_type, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -110,45 +98,6 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        /*address.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                final int DRAWABLE_LEFT = 0;
-                final int DRAWABLE_TOP = 1;
-                final int DRAWABLE_RIGHT = 2;
-                final int DRAWABLE_BOTTOM = 3;
-
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (event.getRawX() >= (address.getRight() - address.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        try {
-                            if (lat.equals("0.0") || lon.equals("0.0"))
-                                locationTrack.showSettingsAlert();
-                            else {
-                                //Toast.makeText(SthreeRaksha.this, "Latitude " + lat + "\n Longitude " + lon, Toast.LENGTH_SHORT).show();
-                                Log.d("Latitude", lat);
-                                Log.d("Longitude", lon);
-                                addresses = geocoder.getFromLocation(Double.parseDouble(lat), Double.parseDouble(lon), 1);
-*//*
-                                knownName = addresses.get(0).getFeatureName();
-                                city = addresses.get(0).getLocality();
-                                postalCode = addresses.get(0).getPostalCode();*//*
-
-                                location_address = addresses.get(0).getAddressLine(0);
-
-                                //location_address = knownName + ", " +city + ", " +postalCode; // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                                Log.d("address", location_address);
-                                address.setText(location_address);
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        Toast.makeText(RecipientRegistrationActivity.this, "Location set Successfully !", Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });*/
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -63,10 +63,6 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
     boolean connected = false;
     FirebaseAuth mAuth;
     String name, place, address, phon, foodno, tim, currdate, codesent;
-    /*Geocoder geocoder;
-    List<Address> addresses;
-    LocationTrack locationTrack;
-    String location_address,lat,lon,knownName,city,postalCode;*/
 
     private static String TAG = "TOKENS_DATA";
 
@@ -81,21 +77,16 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food__details);
         firebaseAuth = FirebaseAuth.getInstance();
-        submit = (Button) findViewById(R.id.sub);
-        edtnam = (EditText) findViewById(R.id.name);
-        edtphone = (EditText) findViewById(R.id.phone);
-        edtadd = (EditText) findViewById(R.id.add);
-        edtfoodcanfeed = (EditText) findViewById(R.id.noofpeople);
+
+        edtnam = (EditText) findViewById(R.id.fooddonname);
+        edtphone = (EditText) findViewById(R.id.fooddonphone);
+        edtadd = (EditText) findViewById(R.id.fooddonadd);
+        edtfoodcanfeed = (EditText) findViewById(R.id.fooddonfeed);
+        final Spinner time = findViewById(R.id.foodtime);
+        final Spinner spinner = findViewById(R.id.foodspin);
+        submit = (Button) findViewById(R.id.fooddonsubmit);
 
         mAuth = FirebaseAuth.getInstance();
-
-        /*locationTrack = new LocationTrack(this);
-
-        lat = Double.toString(locationTrack.getLatitude());
-        lon = Double.toString(locationTrack.getLongitude());
-
-        geocoder = new Geocoder(this, Locale.getDefault());
-*/
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -109,59 +100,15 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
 
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/userABC1");
 
-
-        final Spinner spinner = findViewById(R.id.spin);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.placetype, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-        final Spinner time = findViewById(R.id.time);
         ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(this, R.array.timetaken, android.R.layout.simple_spinner_dropdown_item);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         time.setAdapter(adap);
         time.setOnItemSelectedListener(this);
-
-        /*edtadd.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                final int DRAWABLE_LEFT = 0;
-                final int DRAWABLE_TOP = 1;
-                final int DRAWABLE_RIGHT = 2;
-                final int DRAWABLE_BOTTOM = 3;
-
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    if(event.getRawX() >= (edtadd.getRight() - edtadd.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        try {
-                            if(lat.equals("0.0") || lon.equals("0.0"))
-                                locationTrack.showSettingsAlert();
-                            else {
-                                //Toast.makeText(SthreeRaksha.this, "Latitude " + lat + "\n Longitude " + lon, Toast.LENGTH_SHORT).show();
-                                Log.d("Latitude", lat);
-                                Log.d("Longitude", lon);
-                                addresses = geocoder.getFromLocation(Double.parseDouble(lat),Double.parseDouble(lon),1);
-*//*
-                                knownName = addresses.get(0).getFeatureName();
-                                city = addresses.get(0).getLocality();
-                                postalCode = addresses.get(0).getPostalCode();*//*
-
-                                location_address = addresses.get(0).getAddressLine(0);
-
-                                //location_address = knownName + ", " +city + ", " +postalCode; // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                                Log.d("address",location_address);
-                                edtadd.setText(location_address);
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        Toast.makeText(FoodDetailsActivity.this, "Location set Successfully !", Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });*/
-
 
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/userABC1");
 
@@ -174,8 +121,6 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                 address = edtadd.getText().toString().trim();
                 tim = time.getSelectedItem().toString();
                 foodno = edtfoodcanfeed.getText().toString().trim();
-
-                // Toast.makeText(FoodDetailsActivity.this, ""+phon, Toast.LENGTH_SHORT).show();
 
                 Date cd = Calendar.getInstance().getTime();
                 System.out.println("Current time => " + cd);
@@ -206,10 +151,10 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                             connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
                         sendVerificationCode("+91" + phon);
                         Toast.makeText(FoodDetailsActivity.this, "One Time Password has been sent to Your Mobile Number " + "+91" + phon, Toast.LENGTH_SHORT).show();
-                        connected=true;
+                        connected = true;
                     } else {
                         Toast.makeText(FoodDetailsActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
-                        connected=false;
+                        connected = false;
                     }
                 }
             }
@@ -254,7 +199,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
             Log.d(TAG, "onVerificationCompleted: " + phoneAuthCredential);
             ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                    connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED){
+                    connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
                 reff.push().setValue(new Fooddetails(name, phon, address, place, "", tim, currdate, foodno));
                 try {
 
@@ -310,7 +255,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                 Toast.makeText(FoodDetailsActivity.this, "Food Donation details Submitted Successfully !", Toast.LENGTH_SHORT).show();
                 //startActivity(new Intent(OTP_ValidationActivity.this, MainActivity.class));
                 openDialog();
-            }else{
+            } else {
                 Toast.makeText(FoodDetailsActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
             }
         }

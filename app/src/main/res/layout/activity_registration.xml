@@ -39,7 +39,7 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nam"
+                android:id="@+id/volunregnam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans"
@@ -54,7 +54,7 @@
             android:layout_margin="5dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ema"
+                android:id="@+id/volunregemail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans"
@@ -70,7 +70,7 @@
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/p1"
+                android:id="@+id/volunregpwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans"
@@ -85,7 +85,7 @@
             android:layout_margin="5dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phn"
+                android:id="@+id/volunregphn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans"
@@ -95,7 +95,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/volunregsubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -107,7 +107,7 @@
             android:textSize="17sp" />
 
         <TextView
-            android:id="@+id/signIn_text"
+            android:id="@+id/volunregsignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"

@@ -47,8 +47,8 @@ public class NearbyNGOActivity extends AppCompatActivity {
             Toast.makeText(NearbyNGOActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
         }
 
-        edtlocation = (EditText) findViewById(R.id.location);
-        btnsubmit = (Button) findViewById(R.id.button);
+        edtlocation = (EditText) findViewById(R.id.nearbyngolocation);
+        btnsubmit = (Button) findViewById(R.id.nearbyngosubmit);
 
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override

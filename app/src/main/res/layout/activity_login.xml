@@ -36,7 +36,7 @@
             android:layout_margin="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tf1"
+                android:id="@+id/volunlogemail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -52,7 +52,7 @@
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tf2"
+                android:id="@+id/volunlogpwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -64,7 +64,7 @@
 
 
         <Button
-            android:id="@+id/b"
+            android:id="@+id/volunlogsubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -76,7 +76,7 @@
             android:textSize="17sp" />
 
         <TextView
-            android:id="@+id/register"
+            android:id="@+id/volunlogregister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -87,7 +87,7 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/reset"
+            android:id="@+id/volunlogreset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

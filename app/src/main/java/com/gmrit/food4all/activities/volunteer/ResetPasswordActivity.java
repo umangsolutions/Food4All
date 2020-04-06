@@ -39,7 +39,11 @@ public class ResetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
         this.setTitle("Reset Password");
-        af = (TextView) findViewById(R.id.after);
+
+        reset = (EditText) findViewById(R.id.respwdemail);
+        send = (Button) findViewById(R.id.respwdsend);
+        af = (TextView) findViewById(R.id.respwdafter);
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         if (getSupportActionBar() != null) {
@@ -69,13 +73,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-
         if (!connected) {
-            Toast.makeText(ResetPasswordActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ResetPasswordActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
         }
-
-        send = (Button) findViewById(R.id.btn_send);
-        reset = (EditText) findViewById(R.id.res_email);
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override

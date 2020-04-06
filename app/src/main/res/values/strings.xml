@@ -22,16 +22,20 @@
         <item>Select Recipient</item>
         <item>Deaf and Dumb School</item>
         <item>Orphans Old Age Home</item>
+        <item>Orphanage</item>
+        <item>Charity Home</item>
+        <item>School for Physically Challenged</item>
     </string-array>
 
 
     <string-array name="organization_type">
         <item>Type of Recipient</item>
-        <item>Hostel</item>
-        <item>Mess</item>
+        <item>Charity Home</item>
+        <item>School for Physically Challenged</item>
         <item>Orphanages</item>
         <item>Old Age Homes</item>
     </string-array>
+
     <string name="gallery">Gallery</string>
     <string name="profile">Profile</string>
     <string name="upload">Upload Photos</string>

@@ -51,7 +51,9 @@ public class VolunteerActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Food Details");
         }
-        EditText editText = findViewById(R.id.edittext);
+
+        EditText editText = findViewById(R.id.volunedittext);
+
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

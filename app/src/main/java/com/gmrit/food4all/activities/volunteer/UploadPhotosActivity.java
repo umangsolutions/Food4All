@@ -85,11 +85,12 @@ public class UploadPhotosActivity extends AppCompatActivity {
         ConstantValues.internetCheck(UploadPhotosActivity.this);
         myAppPrefsManager = new MyAppPrefsManager(UploadPhotosActivity.this);
         email = myAppPrefsManager.getUserName();
-        imageView = (ImageView) findViewById(R.id.image);
-        upload = (Button) findViewById(R.id.upload);
-        photo = (TextView) findViewById(R.id.photo);
-        place = (EditText) findViewById(R.id.place);
-        people = (EditText) findViewById(R.id.numberofpeople);
+
+        imageView = (ImageView) findViewById(R.id.uplphoimage);
+        photo = (TextView) findViewById(R.id.uplphophoto);
+        place = (EditText) findViewById(R.id.uplphoplace);
+        people = (EditText) findViewById(R.id.uplphonumberofpeople);
+        upload = (Button) findViewById(R.id.uplphoupload);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
