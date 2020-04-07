@@ -38,7 +38,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
-        this.setTitle("Reset Password");
 
         reset = (EditText) findViewById(R.id.respwdemail);
         send = (Button) findViewById(R.id.respwdsend);

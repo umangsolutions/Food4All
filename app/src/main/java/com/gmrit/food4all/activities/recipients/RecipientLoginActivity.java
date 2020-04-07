@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gmrit.food4all.R;
+import com.gmrit.food4all.RecipientResetPassword;
 import com.gmrit.food4all.activities.administrator.AdminActivity;
 import com.gmrit.food4all.activities.volunteer.ResetPasswordActivity;
 import com.gmrit.food4all.activities.volunteer.VolunteerActivity;
@@ -87,7 +88,7 @@ public class RecipientLoginActivity extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecipientLoginActivity.this, ResetPasswordActivity.class);
+                Intent intent = new Intent(RecipientLoginActivity.this, RecipientResetPassword.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -146,9 +147,8 @@ public class RecipientLoginActivity extends AppCompatActivity {
                                         for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                            final String category = dataSnapshot1.getValue(Recipient.class).getCategory();
                                          //   Toast.makeText(RecipientLoginActivity.this, "" + category, Toast.LENGTH_SHORT).show();
-
                                             if (category.equals("Recipient")) {
-                                                userLogin(email, pw);
+                                                userLogin(email,pw);
                                             }
                                         }
                                     } else {
