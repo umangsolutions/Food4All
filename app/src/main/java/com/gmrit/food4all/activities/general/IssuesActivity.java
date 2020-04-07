@@ -41,7 +41,6 @@ public class IssuesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_issues);
-        this.setTitle("Report Issues");
 
         email = (EditText) findViewById(R.id.issuesemail);
         report = (EditText) findViewById(R.id.issuesproblem);
@@ -114,6 +113,7 @@ public class IssuesActivity extends AppCompatActivity {
         });
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Report Issues");
         }
     }
 

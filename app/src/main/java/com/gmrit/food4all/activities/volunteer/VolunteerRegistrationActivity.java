@@ -80,7 +80,7 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
             //we are connected to a network
             connected = true;
-        } else{
+        } else {
             connected = false;
             Toast.makeText(VolunteerRegistrationActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
         }
@@ -125,8 +125,8 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                     phone.setError("Phone Number is Not Valid !");
                 } else {
                     if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                            connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED){
-                        registerUser(e, p, ph, n);
+                            connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                        registerVolunteer(e, p, ph, n);
                         String msg = "Welcome  " + n + ",\nWe feel very Happy to see you Here.\nYou will be notified when there is a Donation\n\n Happy Volunteering !";
                         Intent broadcastIntent = new Intent(VolunteerRegistrationActivity.this, VolunteerRegistrationActivity.class);
                         broadcastIntent.putExtra("toastMessage", "Hi man !");
@@ -167,7 +167,7 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                         notificationManager.notify(1, builder.build());
 
                         progressDialog.dismiss();
-                    }else{
+                    } else {
                         Toast.makeText(VolunteerRegistrationActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
                     }
 
@@ -205,7 +205,7 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void registerUser(String email, String password, String ph, String n) {
+    private void registerVolunteer(String email, String password, String ph, String n) {
 
         progressDialog.setMessage("Registering, Please Wait...");
         progressDialog.show();
@@ -217,20 +217,20 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            if (!ph.isEmpty()) {
-                                /*SmsManager sms = SmsManager.getDefault();
+                            /*if (!ph.isEmpty()) {
+                                SmsManager sms = SmsManager.getDefault();
                                 String msg = "Welcome  " + n + ",\nWe feel very Happy to see you Here.\nYou will be notified when there is a Donation\n\n Happy Volunteering !";
-                                sms.sendTextMessage(ph, null, msg, null, null);*/
+                                sms.sendTextMessage(ph, null, msg, null, null);
 
 
-                                /*String intro="Welcome  \" + n + \",\\nWe feel very Happy to see you Here.\\nYou will be notified when there is a Donation\\n\\n Happy Volunteering !";
+                                String intro="Welcome  \" + n + \",\\nWe feel very Happy to see you Here.\\nYou will be notified when there is a Donation\\n\\n Happy Volunteering !";
                                 String phoneNumber=ph;
                                 Uri sms_uri = Uri.parse("smsto:" +phoneNumber);
                                 Intent sms_intent = new Intent(Intent.ACTION_VIEW, sms_uri);
                                 sms_intent.setData(sms_uri);
                                 sms_intent.putExtra("sms_body", intro);
-                                startActivity(sms_intent);*/
-                            }
+                                startActivity(sms_intent);
+                            }*/
                             Log.d(TAG, "onComplete: " + email);
                             progressDialog.dismiss();
                             reff.push().setValue(new Volunteer(n, email, ph, count));
@@ -250,7 +250,7 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                             } catch (FirebaseAuthUserCollisionException existEmail) {
                                 progressDialog.dismiss();
                                 Log.d(TAG, "onComplete: exist_email");
-                                Toast.makeText(VolunteerRegistrationActivity.this, "Email Id Already Exists", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(VolunteerRegistrationActivity.this, "Volunteer Email Id Already Exists", Toast.LENGTH_SHORT).show();
 
                             } catch (Exception e) {
                                 progressDialog.dismiss();

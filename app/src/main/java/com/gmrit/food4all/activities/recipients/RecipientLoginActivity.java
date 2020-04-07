@@ -61,7 +61,6 @@ public class RecipientLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orphanage_login);
-        this.setTitle("Recipient Login");
 
         progressDialog = new ProgressDialog(RecipientLoginActivity.this);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -172,6 +171,7 @@ public class RecipientLoginActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Recipient Login");
         }
     }
 

@@ -2,6 +2,7 @@ package com.gmrit.food4all.modals;
 
 public class Happy {
     private String name;
+    private String occasion;
     private String email;
     private String phone;
     private String money;
@@ -12,8 +13,9 @@ public class Happy {
     public Happy() {
     }
 
-    public Happy(String name, String email, String phone, String money, String recip, String address, String date) {
+    public Happy(String name, String occasion, String email, String phone, String money, String recip, String address, String date) {
         this.name = name;
+        this.occasion = occasion;
         this.email = email;
         this.phone = phone;
         this.money = money;
@@ -29,6 +31,14 @@ public class Happy {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getOccasion() {
+        return occasion;
+    }
+
+    public void setOccasion(String occasion) {
+        this.occasion = occasion;
     }
 
     public String getEmail() {

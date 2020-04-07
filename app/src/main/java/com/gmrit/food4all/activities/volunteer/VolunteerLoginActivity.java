@@ -44,7 +44,6 @@ public class VolunteerLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         firebaseAuth = FirebaseAuth.getInstance();
-        this.setTitle("Volunteer Login");
         myAppPrefsManager = new MyAppPrefsManager(VolunteerLoginActivity.this);
         ConstantValues.internetCheck(VolunteerLoginActivity.this);
 
@@ -76,6 +75,7 @@ public class VolunteerLoginActivity extends AppCompatActivity {
         });
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Volunteer Login");
         }
 
         findViewById(R.id.volunlogregister).setOnClickListener(new View.OnClickListener() {
@@ -149,7 +149,7 @@ public class VolunteerLoginActivity extends AppCompatActivity {
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 finish();
-                                Toast.makeText(VolunteerLoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(VolunteerLoginActivity.this, "Sign In Success", Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
 
 

@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sthree_raksha"
+        android:text="Emergency"
         android:layout_gravity="center_horizontal"
         android:drawableStart="@drawable/sthree_icon"
         android:textSize="28sp"

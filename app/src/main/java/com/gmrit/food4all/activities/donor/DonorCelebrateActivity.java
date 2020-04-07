@@ -40,7 +40,7 @@ import java.util.Calendar;
 public class DonorCelebrateActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     EditText don_name, don_email, don_phone, don_money, don_add, don_date;
-    String name, email, phone, money, recip, key, address, date;
+    String name, email, phone, money, recip, key, address, date, occasion;
     Button submit;
     String admin_1, admin_2, admin_3, msg;
     DatabaseReference myref;
@@ -51,9 +51,9 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_happy);
-        this.setTitle("Celebrate Birthday");
 
         don_name = (EditText) findViewById(R.id.celebdonname);
+        final Spinner spinneroccasion = findViewById(R.id.celeboccasionspin);
         don_phone = (EditText) findViewById(R.id.celebdonphone);
         don_email = (EditText) findViewById(R.id.celebdonemail);
         don_add = (EditText) findViewById(R.id.celebdonaddress);
@@ -65,6 +65,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Celebrate Your Occasion");
         }
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -108,6 +109,10 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
             }
         });
 
+        final ArrayAdapter<CharSequence> occasionadapter= ArrayAdapter.createFromResource(DonorCelebrateActivity.this,R.array.occasion, android.R.layout.simple_spinner_dropdown_item);
+        occasionadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinneroccasion.setAdapter(occasionadapter);
+        spinneroccasion.setOnItemSelectedListener(DonorCelebrateActivity.this);
 
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.recipient, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -118,6 +123,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
             @Override
             public void onClick(View v) {
                 name = don_name.getText().toString().trim();
+                occasion= spinneroccasion.getSelectedItem().toString();
                 email = don_email.getText().toString().trim();
                 phone = don_phone.getText().toString().trim();
                 money = don_money.getText().toString().trim();
@@ -129,7 +135,9 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
 
                 if (name.isEmpty()) {
                     don_name.setError("Please enter Name !");
-                } else if (phone.isEmpty()) {
+                } else if(occasion.equals("Select Occasion")){
+                    Toast.makeText(DonorCelebrateActivity.this, "Please select Occasion", Toast.LENGTH_SHORT).show();
+                }else if (phone.isEmpty()) {
                     don_phone.setError("Please enter Phone Number ");
                 } else if (phone.length() < 10) {
                     don_phone.setError("Phone Number is Invalid");
@@ -143,7 +151,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
                     Toast.makeText(DonorCelebrateActivity.this, "Please choose Date of Celebration", Toast.LENGTH_SHORT).show();
                 } else if (recip.equals("Select Recipient")) {
                     Toast.makeText(DonorCelebrateActivity.this, "Please select Recipient", Toast.LENGTH_SHORT).show();
-                } else if (money.isEmpty()) {
+                } else if (money.isEmpty() || money=="0") {
                     don_money.setError("Please enter Money");
                 } else {
 
@@ -151,11 +159,11 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
                     if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                             connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
                         //we are connected to a network
-                        Happy happy_1_modal = new Happy(name, email, phone, money, recip, address, date);
+                        Happy happy_1_modal = new Happy(name, occasion, email, phone, money, recip, address, date);
                         myref.push().setValue(happy_1_modal);
 
                         msg = "Dear Administrator,\n" + name + " is ready to donate a sum of ";
-                        String res = msg + "Rs." + money + " to " + recip;
+                        String res = msg + "Rs." + money + " to " + recip + " for " + occasion + " occasion";
                         String re = res + ", Please collect Money at " + address;
 
                         admin_1 = "9381384234";

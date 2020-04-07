@@ -21,7 +21,6 @@ public class SthreeRaksha extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sthree_raksha);
-        this.setTitle("Sthree Raksha");
         policelayout = (LinearLayout) findViewById(R.id.policelayout);
 
         policelayout.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +38,7 @@ public class SthreeRaksha extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Emergency");
         }
     }
 

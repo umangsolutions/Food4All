@@ -46,7 +46,11 @@ public class RecipientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orphange);
-        this.setTitle("Donation Details");
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Donation Details");
+        }
 
         donname = (EditText) findViewById(R.id.recdonname);
         volname = (EditText) findViewById(R.id.recvolname);

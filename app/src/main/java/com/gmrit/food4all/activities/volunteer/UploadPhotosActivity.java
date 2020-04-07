@@ -79,7 +79,6 @@ public class UploadPhotosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload__photos);
-        this.setTitle("Upload Photos");
         overridePendingTransition(0, 0);
 
         ConstantValues.internetCheck(UploadPhotosActivity.this);
@@ -94,6 +93,7 @@ public class UploadPhotosActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Upload Photos");
         }
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||

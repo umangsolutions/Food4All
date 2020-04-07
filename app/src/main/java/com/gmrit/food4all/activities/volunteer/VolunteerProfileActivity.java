@@ -45,7 +45,6 @@ public class VolunteerProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        this.setTitle("Volunteer Profile");
         overridePendingTransition(0, 0);
         ConstantValues.internetCheck(VolunteerProfileActivity.this);
         myAppPrefsManager = new MyAppPrefsManager(VolunteerProfileActivity.this);
@@ -58,7 +57,7 @@ public class VolunteerProfileActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Profile");
+            getSupportActionBar().setTitle("Volunteer Profile");
         }
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {

@@ -45,7 +45,7 @@ import java.util.Objects;
 public class RecipientRegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     TextView signin;
-   private EditText name, edtemail, pwd, phone, address;
+    private EditText name, edtemail, pwd, phone, address;
     Button register;
     DatabaseReference databaseReference;
     Boolean connected;
@@ -59,7 +59,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orphange_registration);
 
-        firebaseAuth =FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         progressDialog = new ProgressDialog(RecipientRegistrationActivity.this);
 
@@ -121,7 +121,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
             public void onClick(View v) {
                 String nam = name.getText().toString().trim();
                 String orgtype = spinner.getSelectedItem().toString();
-                String  email = edtemail.getText().toString().trim();
+                String email = edtemail.getText().toString().trim();
                 String pw = pwd.getText().toString().trim();
                 String ph = phone.getText().toString().trim();
                 String add = address.getText().toString().trim();
@@ -135,7 +135,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                     Toast.makeText(RecipientRegistrationActivity.this, "Please choose Type !", Toast.LENGTH_SHORT).show();
                 } else if (email.isEmpty()) {
                     edtemail.setError("Email ID should not be Empty");
-                } else if(!email.matches(emailPattern)) {
+                } else if (!email.matches(emailPattern)) {
                     edtemail.setError("Please enter Valid Email ID");
                 } else if (pw.isEmpty()) {
                     pwd.setError("Password should not be Empty");
@@ -150,7 +150,8 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                 } else if (add.length() < 10) {
                     address.setError("Address should be minimum of 10 Characters !");
                 } else {
-                    if (connected == true) {
+                    if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                            connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
                       /*  final ProgressDialog progressDialog = new ProgressDialog(RecipientRegistrationActivity.this);
                         progressDialog.setMessage("Registering...");
                         progressDialog.show();
@@ -166,7 +167,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                                 startActivity(intent);
                             }
                         });*/
-                      registerUser(nam,orgtype,email,pw,ph,add);
+                        registerUser(nam, orgtype, email, pw, ph, add);
                     } else {
                         Toast.makeText(RecipientRegistrationActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
                     }
@@ -175,7 +176,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
         });
     }
 
-    private void registerUser(String nam,String orgtype,String email,String password,String ph,String add) {
+    private void registerUser(String nam, String orgtype, String email, String password, String ph, String add) {
 
         progressDialog.setMessage("Registering, Please Wait...");
         progressDialog.show();
@@ -212,7 +213,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                             } catch (FirebaseAuthUserCollisionException existEmail) {
                                 progressDialog.dismiss();
                                 Log.d(TAG, "onComplete: exist_email");
-                                Toast.makeText(RecipientRegistrationActivity.this, "Email Id Already Exists", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RecipientRegistrationActivity.this, "Recipient Email Id Already Exists", Toast.LENGTH_SHORT).show();
 
                             } catch (Exception e) {
                                 progressDialog.dismiss();

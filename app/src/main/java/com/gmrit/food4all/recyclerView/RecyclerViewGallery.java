@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -24,16 +27,16 @@ import java.util.ArrayList;
 public class RecyclerViewGallery extends AppCompatActivity {
 
     DatabaseReference databaseReference;
-    String doc,deg,photo,number;
+    String doc, deg, photo, number;
     androidx.recyclerview.widget.RecyclerView recyclerView;
     ListView listView;
     ArrayList<Image> list;
     GalleryAdapter myAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view__gallery);
-
 
 
         final ProgressDialog progressDialog
@@ -48,28 +51,27 @@ public class RecyclerViewGallery extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Gallery");
         }
 
         list = new ArrayList<Image>();
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("Image_Gallery");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Image_Gallery");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                        Image d = dataSnapshot1.getValue(Image.class);
-                        list.add(d);
-                    }
-                    progressDialog.dismiss();
-                    myAdapter = new GalleryAdapter(RecyclerViewGallery.this, list);
-                    recyclerView.setAdapter(myAdapter);
-                }
-                else {
+                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                            Image d = dataSnapshot1.getValue(Image.class);
+                            list.add(d);
+                        }
+                        progressDialog.dismiss();
+                        myAdapter = new GalleryAdapter(RecyclerViewGallery.this, list);
+                        recyclerView.setAdapter(myAdapter);
+                } else {
                     progressDialog.dismiss();
                     Toast.makeText(RecyclerViewGallery.this, "No Photos to Show", Toast.LENGTH_LONG).show();
                 }
@@ -84,9 +86,8 @@ public class RecyclerViewGallery extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id= item.getItemId();
-        if (id == android.R.id.home)
-        {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);

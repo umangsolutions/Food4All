@@ -23,7 +23,6 @@ public class HungerStatisticsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        this.setTitle("Hunger Statistics");
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.activity_main);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
@@ -36,6 +35,7 @@ public class HungerStatisticsActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Hunger Statistics");
         }
     }
 

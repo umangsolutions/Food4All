@@ -18,6 +18,16 @@
         <item>5 Hours</item>
     </string-array>
 
+    <string-array name="occasion">
+        <item>Select Occasion</item>
+        <item>Birthday</item>
+        <item>Bridal Shower</item>
+        <item>Graduation</item>
+        <item>New Baby</item>
+        <item>Retirement</item>
+        <item>Wedding Anniversary</item>
+    </string-array>
+
     <string-array name="recipient">
         <item>Select Recipient</item>
         <item>Deaf and Dumb School</item>
@@ -57,7 +67,7 @@
     <string name="forgot_password">Forgot Password ?</string>
     <string name="default_notification_channel_id">admin_channel</string>
     <string name="contact_us">Contact Us</string>
-    <string name="_17341a1236_gmrit_edu_in">17341A1236@gmrit.edu.in</string>
+    <string name="_17341a1236_gmrit_edu_in">riyafoundationfood4all@gmail.com</string>
     <string name="_91_63031_49161">+91 63031 49161</string>
     <string name="department_of_information_technology">Department of Information Technology</string>
     <string name="gmr_institute_of_technology">GMR Institute of Technology \n Andhra Pradesh, India</string>
@@ -101,7 +111,7 @@
     <string name="saikiran_kopparthi">Saikiran Kopparthi</string>
     <string name="total_no_of_deliveries">Total No. of Deliveries :</string>
     <string name="enter_username">Username</string>
-    <string name="new_recipient_click_here_to_register">New Recipient ? CLick here to Register</string>
+    <string name="new_recipient_click_here_to_register">New Recipient ? Click here to Register</string>
     <string name="welcome_recipients">We Rise by lifting others</string>
     <string name="spirit_of_giving">Spirit of Giving</string>
     <string name="name_of_organization">Organization Name</string>
@@ -131,8 +141,9 @@
     <string name="please_enter_verification_code_sent_to_n_91xxxxxxx">Please enter Verification code sent to \n+91xxxxxxx</string>
     <string name="validate_otp">Validate OTP</string>
     <string name="sthree_raksha">Sthree Raksha</string>
+    <string name="emergen">Emergency Contact</string>
     <string name="contact_police">Contact Police</string>
-    <string name="stand_up_for_women_s_safety">Stand up for Women\'s Safety</string>
+    <string name="stand_up_for_women_s_safety">Stand up for Volunteer\'s Safety</string>
 
 
     <string name="address_found" translatable="false">Address found</string>
