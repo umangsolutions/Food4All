@@ -193,7 +193,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                             Log.d(TAG, "onComplete: " + email);
                             progressDialog.dismiss();
 
-                            Recipient orphanage_modal = new Recipient(nam, orgtype, email, password, ph, add);
+                            Recipient orphanage_modal = new Recipient(nam, orgtype, email, password, ph, add,"Recipient");
                             databaseReference.child(id).setValue(orphanage_modal);
 
                             Intent i = new Intent(RecipientRegistrationActivity.this, RecipientLoginActivity.class);

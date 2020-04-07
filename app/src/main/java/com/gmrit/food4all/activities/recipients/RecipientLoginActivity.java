@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gmrit.food4all.R;
 import com.gmrit.food4all.activities.administrator.AdminActivity;
+import com.gmrit.food4all.activities.volunteer.ResetPasswordActivity;
 import com.gmrit.food4all.activities.volunteer.VolunteerActivity;
 import com.gmrit.food4all.activities.volunteer.VolunteerLoginActivity;
 import com.gmrit.food4all.modals.Recipient;
@@ -43,7 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RecipientLoginActivity extends AppCompatActivity {
 
-    TextView login;
+    TextView login,reset;
     EditText edtemail, pwd;
     Button submit;
     DatabaseReference databaseReference;
@@ -65,6 +67,8 @@ public class RecipientLoginActivity extends AppCompatActivity {
 
         myAppPrefsManager = new MyAppPrefsManager(this);
 
+        reset = (TextView) findViewById(R.id.reclogreset);
+
         edtemail = (EditText) findViewById(R.id.reclogemail);
         pwd = (EditText) findViewById(R.id.reclogpwd);
         submit = (Button) findViewById(R.id.reclogbutton);
@@ -79,6 +83,15 @@ public class RecipientLoginActivity extends AppCompatActivity {
             }
         });
 
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecipientLoginActivity.this, ResetPasswordActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -102,7 +115,6 @@ public class RecipientLoginActivity extends AppCompatActivity {
             connected = false;
             Toast.makeText(RecipientLoginActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference("Organization_Details");
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +124,45 @@ public class RecipientLoginActivity extends AppCompatActivity {
                     if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                             connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
                         //we are connected to a network
-                        userLogin();
+
+                        final String email = edtemail.getText().toString().trim();
+                        final String pw = pwd.getText().toString().trim();
+
+                        if (email.isEmpty()) {
+                            edtemail.setError("Please enter Email ID");
+                            //Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
+                        }  else if (pw.isEmpty()) {
+                            Toast.makeText(RecipientLoginActivity.this, "Please enter password", Toast.LENGTH_LONG).show();
+                            //t2.setError("Please enter Password");
+                        } else {
+
+                       //     Toast.makeText(RecipientLoginActivity.this, "" + email, Toast.LENGTH_SHORT).show();
+                            databaseReference = FirebaseDatabase.getInstance().getReference("Organization_Details");
+                            Query query = databaseReference.orderByChild("email").equalTo(email);
+                            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                           final String category = dataSnapshot1.getValue(Recipient.class).getCategory();
+                                         //   Toast.makeText(RecipientLoginActivity.this, "" + category, Toast.LENGTH_SHORT).show();
+
+                                            if (category.equals("Recipient")) {
+                                                userLogin(email, pw);
+                                            }
+                                        }
+                                    } else {
+                                        Toast.makeText(RecipientLoginActivity.this, "Invalid User !!!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    Toast.makeText(RecipientLoginActivity.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
                     } else {
                         Toast.makeText(RecipientLoginActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
                     }
@@ -126,18 +176,8 @@ public class RecipientLoginActivity extends AppCompatActivity {
     }
 
 
-    private void userLogin() {
-         final String email = edtemail.getText().toString().trim();
-        final String pw = pwd.getText().toString().trim();
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
-        if (emailPattern.isEmpty()) {
-            edtemail.setError("Please enter Email ID");
-            //Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
-        }  else if (pw.isEmpty()) {
-            Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
-            //t2.setError("Please enter Password");
-        } else {
+    private void userLogin(String email,String pw) {
+                //Valid Recipient
             progressDialog.setMessage("Logging in...");
             progressDialog.setCancelable(false);
             progressDialog.setCanceledOnTouchOutside(false);
@@ -152,12 +192,6 @@ public class RecipientLoginActivity extends AppCompatActivity {
                                 Toast.makeText(RecipientLoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
 
                             } else {
-                                myAppPrefsManager.setUserLoggedIn(true);
-                                myAppPrefsManager.setUserName(email);
-
-                                // Set isLogged_in of ConstantValues
-                                ConstantValues.IS_USER_LOGGED_IN = myAppPrefsManager.isUserLoggedIn();
-
 
                                 Intent intent = new Intent(RecipientLoginActivity.this, RecipientActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -169,8 +203,6 @@ public class RecipientLoginActivity extends AppCompatActivity {
                         }
                     });
         }
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

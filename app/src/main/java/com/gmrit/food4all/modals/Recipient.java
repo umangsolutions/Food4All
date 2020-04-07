@@ -7,17 +7,19 @@ public class Recipient {
     private String password;
     private String phone;
     private String address;
+    private String category;
 
     public Recipient() {
     }
 
-    public Recipient(String org_name, String type, String email, String password, String phone, String address) {
+    public Recipient(String org_name, String type, String email, String password, String phone, String address, String category) {
         this.org_name = org_name;
         this.type = type;
         this.email = email;
         this.password = password;
         this.phone = phone;
         this.address = address;
+        this.category = category;
     }
 
     public String getOrg_name() {
@@ -66,5 +68,13 @@ public class Recipient {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
