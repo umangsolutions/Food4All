@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,7 +21,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gmrit.food4all.R;
+import com.gmrit.food4all.activities.volunteer.VolunteerLoginActivity;
+import com.gmrit.food4all.activities.volunteer.VolunteerRegistrationActivity;
 import com.gmrit.food4all.modals.Recipient;
+import com.gmrit.food4all.modals.Volunteer;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
@@ -29,27 +33,39 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 public class RecipientRegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     TextView signin;
-    EditText name, usname, pwd, phone, address;
+   private EditText name, edtemail, pwd, phone, address;
     Button register;
     DatabaseReference databaseReference;
     Boolean connected;
+    private FirebaseAuth firebaseAuth;
     private AdView mAdView;
+    private ProgressDialog progressDialog;
+    String TAG = "TOKENS_DATA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orphange_registration);
-        this.setTitle("Recipient Registration");
+
+        firebaseAuth =FirebaseAuth.getInstance();
+
+        progressDialog = new ProgressDialog(RecipientRegistrationActivity.this);
 
         name = (EditText) findViewById(R.id.recregname);
         final Spinner spinner = findViewById(R.id.recregspin);
-        usname = (EditText) findViewById(R.id.recregusname);
+        edtemail = (EditText) findViewById(R.id.recregemail);
         pwd = (EditText) findViewById(R.id.recregpwd);
         phone = (EditText) findViewById(R.id.recregphone);
         address = (EditText) findViewById(R.id.recregaddress);
@@ -88,6 +104,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Recipient Registration");
         }
 
         signin.setOnClickListener(new View.OnClickListener() {
@@ -104,18 +121,22 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
             public void onClick(View v) {
                 String nam = name.getText().toString().trim();
                 String orgtype = spinner.getSelectedItem().toString();
-                String usnam = usname.getText().toString().trim();
+                String  email = edtemail.getText().toString().trim();
                 String pw = pwd.getText().toString().trim();
                 String ph = phone.getText().toString().trim();
                 String add = address.getText().toString().trim();
                 databaseReference = FirebaseDatabase.getInstance().getReference().child("Organization_Details");
-                String id = databaseReference.push().getKey();
+
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
                 if (nam.isEmpty()) {
                     name.setError("Please enter Organization Name");
                 } else if (orgtype.isEmpty()) {
                     Toast.makeText(RecipientRegistrationActivity.this, "Please choose Type !", Toast.LENGTH_SHORT).show();
-                } else if (usnam.isEmpty()) {
-                    usname.setError("Username should not be Empty");
+                } else if (email.isEmpty()) {
+                    edtemail.setError("Email ID should not be Empty");
+                } else if(!email.matches(emailPattern)) {
+                    edtemail.setError("Please enter Valid Email ID");
                 } else if (pw.isEmpty()) {
                     pwd.setError("Password should not be Empty");
                 } else if (pw.length() < 8) {
@@ -130,12 +151,11 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                     address.setError("Address should be minimum of 10 Characters !");
                 } else {
                     if (connected == true) {
-                        final ProgressDialog progressDialog = new ProgressDialog(RecipientRegistrationActivity.this);
+                      /*  final ProgressDialog progressDialog = new ProgressDialog(RecipientRegistrationActivity.this);
                         progressDialog.setMessage("Registering...");
                         progressDialog.show();
-
-                        databaseReference = FirebaseDatabase.getInstance().getReference().child("Organization_Details").child(id);
-                        Recipient orphanage_modal = new Recipient(nam, orgtype, usnam, pw, ph, add);
+                        progressDialog.setCancelable(false);
+                        progressDialog.setCanceledOnTouchOutside(false);
                         databaseReference.setValue(orphanage_modal).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -145,13 +165,64 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                             }
-                        });
+                        });*/
+                      registerUser(nam,orgtype,email,pw,ph,add);
                     } else {
                         Toast.makeText(RecipientRegistrationActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
+    }
+
+    private void registerUser(String nam,String orgtype,String email,String password,String ph,String add) {
+
+        progressDialog.setMessage("Registering, Please Wait...");
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        String id = databaseReference.push().getKey();
+
+
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            Log.d(TAG, "onComplete: " + email);
+                            progressDialog.dismiss();
+
+                            Recipient orphanage_modal = new Recipient(nam, orgtype, email, password, ph, add);
+                            databaseReference.child(id).setValue(orphanage_modal);
+
+                            Intent i = new Intent(RecipientRegistrationActivity.this, RecipientLoginActivity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                            Toast.makeText(RecipientRegistrationActivity.this, "Recipient Registered Successfully!", Toast.LENGTH_LONG).show();
+                        } else {
+                            try {
+                                progressDialog.dismiss();
+                                throw Objects.requireNonNull(task.getException());
+                            } catch (FirebaseAuthInvalidCredentialsException malformedEmail) {
+                                progressDialog.dismiss();
+                                Log.d(TAG, "onComplete: malformed_email");
+                                Toast.makeText(RecipientRegistrationActivity.this, "Invalid Email", Toast.LENGTH_SHORT).show();
+
+                            } catch (FirebaseAuthUserCollisionException existEmail) {
+                                progressDialog.dismiss();
+                                Log.d(TAG, "onComplete: exist_email");
+                                Toast.makeText(RecipientRegistrationActivity.this, "Email Id Already Exists", Toast.LENGTH_SHORT).show();
+
+                            } catch (Exception e) {
+                                progressDialog.dismiss();
+                                Log.d(TAG, "onComplete: " + e.getMessage());
+                                Toast.makeText(RecipientRegistrationActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+                });
     }
 
     @Override

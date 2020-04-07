@@ -37,11 +37,11 @@ public class AboutActivity extends AppCompatActivity {
         }
 
 
-       /* MobileAds.initialize(this, new OnInitializationCompleteListener() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
-        });*/
+        });
 
      /*   AdView adView = new AdView(this);
         adView.setAdSize(AdSize.BANNER);

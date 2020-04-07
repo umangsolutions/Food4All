@@ -66,7 +66,6 @@
     <string name="search">Search</string>
     <string name="volunteer_name">Volunteer Name</string>
     <string name="contact_number">Contact Number</string>
-    <string name="email_id">Email ID</string>
     <string name="deliveries">Deliveries :</string>
     <string name="normal_status">Normal Status</string>
     <string name="high_status">High Status</string>
@@ -154,5 +153,6 @@
 
     <string name="admob_app_id">ca-app-pub-7341014042556519~1951002345</string>
     <string name="banner_home_footer">ca-app-pub-7341014042556519/2689368944</string>
+    <string name="email_id">Email ID</string>
 
 </resources>

@@ -73,7 +73,6 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
         TextView singin = findViewById(R.id.volunregsignIn);
 
         volunteer = new Volunteer();
-        this.setTitle("Volunteer Registration");
         reff = FirebaseDatabase.getInstance().getReference().child("Volunteers");
         //Network Service State
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -178,6 +177,7 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Volunteer Registration");
         }
     }
 

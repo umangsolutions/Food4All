@@ -3,7 +3,7 @@ package com.gmrit.food4all.modals;
 public class Recipient {
     private String org_name;
     private String type;
-    private String usname;
+    private String email;
     private String password;
     private String phone;
     private String address;
@@ -11,10 +11,10 @@ public class Recipient {
     public Recipient() {
     }
 
-    public Recipient(String org_name, String type, String usname, String password, String phone, String address) {
+    public Recipient(String org_name, String type, String email, String password, String phone, String address) {
         this.org_name = org_name;
         this.type = type;
-        this.usname = usname;
+        this.email = email;
         this.password = password;
         this.phone = phone;
         this.address = address;
@@ -36,12 +36,12 @@ public class Recipient {
         this.type = type;
     }
 
-    public String getUsname() {
-        return usname;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsname(String usname) {
-        this.usname = usname;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
