@@ -52,8 +52,8 @@
 
     <Button
         android:id="@+id/issuessubmit"
-        android:layout_width="71dp"
-        android:layout_height="33dp"
+        android:layout_width="80dp"
+        android:layout_height="45dp"
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:background="@drawable/button"
