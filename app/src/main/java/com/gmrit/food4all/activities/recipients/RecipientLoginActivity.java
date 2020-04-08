@@ -6,12 +6,10 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,13 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gmrit.food4all.R;
-import com.gmrit.food4all.RecipientResetPassword;
-import com.gmrit.food4all.activities.administrator.AdminActivity;
-import com.gmrit.food4all.activities.volunteer.ResetPasswordActivity;
-import com.gmrit.food4all.activities.volunteer.VolunteerActivity;
-import com.gmrit.food4all.activities.volunteer.VolunteerLoginActivity;
 import com.gmrit.food4all.modals.Recipient;
-import com.gmrit.food4all.utilities.ConstantValues;
 import com.gmrit.food4all.utilities.MyAppPrefsManager;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;

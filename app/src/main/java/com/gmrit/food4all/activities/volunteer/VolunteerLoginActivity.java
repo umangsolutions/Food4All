@@ -22,24 +22,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.gmrit.food4all.R;
 import com.gmrit.food4all.activities.administrator.AdminActivity;
 import com.gmrit.food4all.activities.general.SthreeRaksha;
+import com.gmrit.food4all.activities.recipients.RecipientLoginActivity;
+import com.gmrit.food4all.modals.Recipient;
+import com.gmrit.food4all.modals.Volunteer;
 import com.gmrit.food4all.utilities.ConstantValues;
 import com.gmrit.food4all.utilities.MyAppPrefsManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
 public class VolunteerLoginActivity extends AppCompatActivity {
     public Button b1, b2;
     EditText t1, t2;
-    String s1, s2;
+    String email, pwd;
     private FirebaseAuth firebaseAuth;
     MyAppPrefsManager myAppPrefsManager;
     private ProgressDialog progressDialog;
     boolean connected = false;
     TextView reset;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +78,7 @@ public class VolunteerLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (connected == true) {
-                    userLogin();
+                    Validate();
                 } else {
                     Toast.makeText(VolunteerLoginActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
                 }
@@ -101,12 +111,12 @@ public class VolunteerLoginActivity extends AppCompatActivity {
         });
     }
 
-    private void userLogin() {
-        s1 = t1.getText().toString().trim();
-        s2 = t2.getText().toString().trim();
+    private void Validate() {
+        email = t1.getText().toString().trim();
+        pwd = t2.getText().toString().trim();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-        if (s1.equals("admin@gmail.com") && s2.equals("Admin@123")) {
+        if (email.equals("admin@gmail.com") && pwd.equals("Admin@123")) {
             Intent i = new Intent(VolunteerLoginActivity.this, AdminActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
@@ -114,52 +124,80 @@ public class VolunteerLoginActivity extends AppCompatActivity {
             progressDialog.dismiss();
         }
 
-        if (s1.isEmpty()) {
+        if (email.isEmpty()) {
             t1.setError("Please enter Email ID");
             //Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
-        } else if (!s1.matches(emailPattern)) {
+        } else if (!email.matches(emailPattern)) {
             t1.setError("Email is Invalid");
-        } else if (s2.isEmpty()) {
+        } else if (pwd.isEmpty()) {
             Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
             //t2.setError("Please enter Password");
-        } else if (s2.length() < 8) {
+        } else if (pwd.length() < 8) {
             Toast.makeText(this, "Invalid Password !", Toast.LENGTH_SHORT).show();
             //t2.setError("Password should be more than 8 Characters !");
         } else {
-            progressDialog.setMessage("Logging in...");
-            progressDialog.setCancelable(false);
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
-            firebaseAuth.signInWithEmailAndPassword(s1, s2)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (!task.isSuccessful()) {
-
-                                progressDialog.dismiss();
-                                Toast.makeText(VolunteerLoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-
-                            } else {
-                                myAppPrefsManager.setUserLoggedIn(true);
-                                myAppPrefsManager.setUserName(s1);
-
-                                // Set isLogged_in of ConstantValues
-                                ConstantValues.IS_USER_LOGGED_IN = myAppPrefsManager.isUserLoggedIn();
-
-
-                                Intent intent = new Intent(VolunteerLoginActivity.this, VolunteerActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-                                finish();
-                                Toast.makeText(VolunteerLoginActivity.this, "Sign In Success", Toast.LENGTH_SHORT).show();
-                                progressDialog.dismiss();
-
-
+            databaseReference = FirebaseDatabase.getInstance().getReference("Volunteers");
+            Query query = databaseReference.orderByChild("email").equalTo(email);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                            final String category = dataSnapshot1.getValue(Volunteer.class).getCategory();
+                            //   Toast.makeText(RecipientLoginActivity.this, "" + category, Toast.LENGTH_SHORT).show();
+                            if (category.equals("Volunteer")) {
+                                userLogin(email,pwd);
                             }
                         }
-                    });
+                    } else {
+                        Toast.makeText(VolunteerLoginActivity.this, "Invalid User !!!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(VolunteerLoginActivity.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
     }
+
+    private void userLogin(String email,String pwd) {
+        progressDialog.setMessage("Logging in...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+        firebaseAuth.signInWithEmailAndPassword(email,pwd)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()) {
+
+                            progressDialog.dismiss();
+                            Toast.makeText(VolunteerLoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            myAppPrefsManager.setUserLoggedIn(true);
+                            myAppPrefsManager.setUserName(email);
+
+                            // Set isLogged_in of ConstantValues
+                            ConstantValues.IS_USER_LOGGED_IN = myAppPrefsManager.isUserLoggedIn();
+
+
+                            Intent intent = new Intent(VolunteerLoginActivity.this, VolunteerActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                            Toast.makeText(VolunteerLoginActivity.this, "Sign In Success", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+
+
+                        }
+                    }
+                });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

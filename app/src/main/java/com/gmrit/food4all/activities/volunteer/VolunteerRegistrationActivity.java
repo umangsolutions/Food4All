@@ -233,7 +233,7 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                             }*/
                             Log.d(TAG, "onComplete: " + email);
                             progressDialog.dismiss();
-                            reff.push().setValue(new Volunteer(n, email, ph, count));
+                            reff.push().setValue(new Volunteer(n, email, ph, count,"Volunteer"));
                             Intent i = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(i);

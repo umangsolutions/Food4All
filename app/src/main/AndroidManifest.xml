@@ -30,7 +30,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".RecipientResetPassword"></activity>
+        <activity android:name=".activities.recipients.RecipientResetPassword"></activity>
         <activity
             android:name=".activities.general.DonationCount"
             android:screenOrientation="portrait"

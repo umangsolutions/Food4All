@@ -36,7 +36,6 @@ public class AboutActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("About Us");
         }
 
-
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {

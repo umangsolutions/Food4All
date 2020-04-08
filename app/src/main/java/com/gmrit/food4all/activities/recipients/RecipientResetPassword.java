@@ -1,4 +1,4 @@
-package com.gmrit.food4all;
+package com.gmrit.food4all.activities.recipients;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,8 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gmrit.food4all.activities.recipients.RecipientLoginActivity;
-import com.gmrit.food4all.activities.volunteer.ResetPasswordActivity;
+import com.gmrit.food4all.R;
 import com.gmrit.food4all.modals.Recipient;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;

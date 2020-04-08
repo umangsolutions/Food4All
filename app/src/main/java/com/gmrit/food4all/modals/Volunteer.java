@@ -5,15 +5,17 @@ public class Volunteer {
     private String Email;
     private String Phone;
     private int count=0;
+    private String category;
 
     public Volunteer() {
     }
 
-    public Volunteer(String name, String email, String phone, int count) {
+    public Volunteer(String name, String email, String phone, int count, String category) {
         Name = name;
         Email = email;
         Phone = phone;
         this.count = count;
+        this.category = category;
     }
 
     public String getName() {
@@ -48,6 +50,13 @@ public class Volunteer {
         this.count = count;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String toString() {
         return  this.Phone;
