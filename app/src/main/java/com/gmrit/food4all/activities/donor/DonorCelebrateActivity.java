@@ -151,9 +151,11 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
                     Toast.makeText(DonorCelebrateActivity.this, "Please choose Date of Celebration", Toast.LENGTH_SHORT).show();
                 } else if (recip.equals("Select Recipient")) {
                     Toast.makeText(DonorCelebrateActivity.this, "Please select Recipient", Toast.LENGTH_SHORT).show();
-                } else if (money.isEmpty() || money=="0") {
+                } else if (money.isEmpty()) {
                     don_money.setError("Please enter Money");
-                } else {
+                } else if(money.equals("0") ){
+                    Toast.makeText(DonorCelebrateActivity.this, "Please enter an amount grater than 0", Toast.LENGTH_SHORT).show();
+                }else {
 
                     ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                     if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||

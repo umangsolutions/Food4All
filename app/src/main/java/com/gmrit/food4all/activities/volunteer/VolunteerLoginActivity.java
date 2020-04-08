@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gmrit.food4all.R;
 import com.gmrit.food4all.activities.administrator.AdminActivity;
+import com.gmrit.food4all.activities.general.SthreeRaksha;
 import com.gmrit.food4all.utilities.ConstantValues;
 import com.gmrit.food4all.utilities.MyAppPrefsManager;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -158,13 +160,24 @@ public class VolunteerLoginActivity extends AppCompatActivity {
                     });
         }
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_alert, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             onBackPressed();
+        }
+        if(id ==R.id.action_alertvollog){
+            Intent emergency=new Intent(VolunteerLoginActivity.this, SthreeRaksha.class);
+            emergency.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(emergency);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

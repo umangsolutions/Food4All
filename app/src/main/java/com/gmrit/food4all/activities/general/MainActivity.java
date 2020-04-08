@@ -220,11 +220,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(a);
                 break;
-            case R.id.nav_message:
-                Intent i = new Intent(MainActivity.this, HungerStatisticsActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-                break;
             case R.id.nav_gallery:
                 Intent g = new Intent(MainActivity.this, RecyclerViewGallery.class);
                 g.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -240,19 +235,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent1);
                 break;
-            case R.id.nav_sthree:
-                Intent intent2 = new Intent(MainActivity.this, SthreeRaksha.class);
-                intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent2);
-                break;
             case R.id.nav_doncount:
                 Intent intent3 = new Intent(MainActivity.this, DonationCount.class);
-                intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent3);
                 break;
             case R.id.nav_nearby:
                 Intent intent4 = new Intent(MainActivity.this, NearbyNGOActivity.class);
-                intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent4);
                 break;
         }

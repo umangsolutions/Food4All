@@ -9,16 +9,6 @@
             android:title="@string/celebrate_birthday" />
 
         <item
-            android:id="@+id/nav_sthree"
-            android:icon="@drawable/ic_warning_black_24dp"
-            android:title="@string/emergen" />
-
-        <item
-            android:id="@+id/nav_message"
-            android:icon="@drawable/ic_poll_black_24dp"
-            android:title="@string/hunger_statistics" />
-
-        <item
             android:id="@+id/nav_doncount"
             android:icon="@drawable/ic_timeline_black_24dp"
             android:title="@string/view_your_donations" />

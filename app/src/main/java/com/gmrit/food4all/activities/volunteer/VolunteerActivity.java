@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmrit.food4all.R;
+import com.gmrit.food4all.activities.general.SthreeRaksha;
 import com.gmrit.food4all.adapter.VolunteerAdapter;
 import com.gmrit.food4all.modals.Fooddetails;
 import com.gmrit.food4all.utilities.MyAppPrefsManager;
@@ -146,6 +147,13 @@ public class VolunteerActivity extends AppCompatActivity {
             myAppPrefsManager.setUserLoggedIn(false);
             myAppPrefsManager.setUserName("");
             finish();
+            return true;
+        }
+
+        if(item.getItemId()==R.id.action_alert){
+            Intent emergency=new Intent(VolunteerActivity.this, SthreeRaksha.class);
+            emergency.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(emergency);
             return true;
         }
 

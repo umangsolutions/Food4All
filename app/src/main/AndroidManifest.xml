@@ -107,10 +107,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.general.HungerStatisticsActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
             android:name=".activities.donor.FoodDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />

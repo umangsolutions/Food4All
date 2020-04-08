@@ -34,6 +34,7 @@ public class IssuesActivity extends AppCompatActivity {
     DatabaseReference ref;
     Report rep;
     public String s1, s2;
+    public String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     boolean connected = false;
     private AdView mAdView;
 
@@ -87,7 +88,10 @@ public class IssuesActivity extends AppCompatActivity {
                 s2 = report.getText().toString().trim();
                 if (s1.isEmpty()) {
                     Toast.makeText(IssuesActivity.this, "Please enter Email", Toast.LENGTH_LONG).show();
-                } else if (s2.isEmpty()) {
+                }else if(!s1.matches(emailPattern)){
+                    Toast.makeText(IssuesActivity.this, "Please enter a Valid Email ID", Toast.LENGTH_LONG).show();
+                }
+                else if (s2.isEmpty()) {
                     Toast.makeText(IssuesActivity.this, "Please enter the Problem", Toast.LENGTH_LONG).show();
                 } else {
 
