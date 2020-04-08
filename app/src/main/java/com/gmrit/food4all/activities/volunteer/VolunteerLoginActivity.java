@@ -132,9 +132,6 @@ public class VolunteerLoginActivity extends AppCompatActivity {
         } else if (pwd.isEmpty()) {
             Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
             //t2.setError("Please enter Password");
-        } else if (pwd.length() < 8) {
-            Toast.makeText(this, "Invalid Password !", Toast.LENGTH_SHORT).show();
-            //t2.setError("Password should be more than 8 Characters !");
         } else {
             databaseReference = FirebaseDatabase.getInstance().getReference("Volunteers");
             Query query = databaseReference.orderByChild("email").equalTo(email);
