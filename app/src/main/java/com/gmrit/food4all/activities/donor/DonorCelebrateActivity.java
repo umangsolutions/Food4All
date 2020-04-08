@@ -44,7 +44,6 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
     Button submit;
     String admin_1, admin_2, admin_3, msg;
     DatabaseReference myref;
-    private AdView mAdView;
     boolean connected = false;
 
     @Override
@@ -67,20 +66,6 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Celebrate Your Occasion");
         }
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
         myref = FirebaseDatabase.getInstance().getReference().child("Happy_Moments");
 
@@ -109,7 +94,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
             }
         });
 
-        final ArrayAdapter<CharSequence> occasionadapter= ArrayAdapter.createFromResource(DonorCelebrateActivity.this,R.array.occasion, android.R.layout.simple_spinner_dropdown_item);
+        final ArrayAdapter<CharSequence> occasionadapter = ArrayAdapter.createFromResource(DonorCelebrateActivity.this, R.array.occasion, android.R.layout.simple_spinner_dropdown_item);
         occasionadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinneroccasion.setAdapter(occasionadapter);
         spinneroccasion.setOnItemSelectedListener(DonorCelebrateActivity.this);
@@ -123,7 +108,7 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
             @Override
             public void onClick(View v) {
                 name = don_name.getText().toString().trim();
-                occasion= spinneroccasion.getSelectedItem().toString();
+                occasion = spinneroccasion.getSelectedItem().toString();
                 email = don_email.getText().toString().trim();
                 phone = don_phone.getText().toString().trim();
                 money = don_money.getText().toString().trim();
@@ -135,9 +120,9 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
 
                 if (name.isEmpty()) {
                     don_name.setError("Please enter Name !");
-                } else if(occasion.equals("Select Occasion")){
+                } else if (occasion.equals("Select Occasion")) {
                     Toast.makeText(DonorCelebrateActivity.this, "Please select Occasion", Toast.LENGTH_SHORT).show();
-                }else if (phone.isEmpty()) {
+                } else if (phone.isEmpty()) {
                     don_phone.setError("Please enter Phone Number ");
                 } else if (phone.length() < 10) {
                     don_phone.setError("Phone Number is Invalid");
@@ -153,9 +138,9 @@ public class DonorCelebrateActivity extends AppCompatActivity implements Adapter
                     Toast.makeText(DonorCelebrateActivity.this, "Please select Recipient", Toast.LENGTH_SHORT).show();
                 } else if (money.isEmpty()) {
                     don_money.setError("Please enter Money");
-                } else if(money.equals("0") ){
+                } else if (money.equals("0")) {
                     Toast.makeText(DonorCelebrateActivity.this, "Please enter an amount grater than 0", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
 
                     ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                     if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||

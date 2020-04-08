@@ -50,7 +50,6 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
     DatabaseReference databaseReference;
     Boolean connected;
     private FirebaseAuth firebaseAuth;
-    private AdView mAdView;
     private ProgressDialog progressDialog;
     String TAG = "TOKENS_DATA";
 
@@ -76,21 +75,6 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
@@ -194,7 +178,7 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                             Log.d(TAG, "onComplete: " + email);
                             progressDialog.dismiss();
 
-                            Recipient orphanage_modal = new Recipient(nam, orgtype, email, password, ph, add,"Recipient");
+                            Recipient orphanage_modal = new Recipient(nam, orgtype, email, password, ph, add, "Recipient");
                             databaseReference.child(id).setValue(orphanage_modal);
 
                             Intent i = new Intent(RecipientRegistrationActivity.this, RecipientLoginActivity.class);

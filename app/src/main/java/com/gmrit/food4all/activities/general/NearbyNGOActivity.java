@@ -31,8 +31,8 @@ public class NearbyNGOActivity extends AppCompatActivity {
     EditText edtlocation;
     Button btnsubmit;
     String location;
-    boolean connected=false;
-    private AdView mAdView;
+    boolean connected = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,16 +55,15 @@ public class NearbyNGOActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 location = edtlocation.getText().toString().trim();
-                if(location.isEmpty()){
+                if (location.isEmpty()) {
                     edtlocation.setError("Please enter the location");
-                }
-                else{
+                } else {
                     assert connectivityManager != null;
                     connected = Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)).getState() == NetworkInfo.State.CONNECTED ||
                             Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)).getState() == NetworkInfo.State.CONNECTED;
                     if (!connected) {
                         Toast.makeText(NearbyNGOActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
-                    }else{
+                    } else {
                         String url = "https://www.google.com/search?q=ngos%20near%20" + location;
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData(Uri.parse(url));
@@ -74,26 +73,12 @@ public class NearbyNGOActivity extends AppCompatActivity {
             }
         });
 
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("View nearby NGOs");
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();

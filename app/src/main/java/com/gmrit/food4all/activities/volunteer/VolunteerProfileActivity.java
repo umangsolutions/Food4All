@@ -38,7 +38,6 @@ public class VolunteerProfileActivity extends AppCompatActivity {
     int cou;
     DatabaseReference databaseReference;
     MyAppPrefsManager myAppPrefsManager;
-    private AdView mAdView;
     boolean connected = false;
 
     @Override
@@ -59,21 +58,6 @@ public class VolunteerProfileActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Volunteer Profile");
         }
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Volunteers");
         databaseReference.keepSynced(true);

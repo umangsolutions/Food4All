@@ -34,12 +34,12 @@ import java.util.Objects;
 public class DonationCount extends AppCompatActivity {
 
     private DatabaseReference myref;
-    private AdView mAdView;
     private EditText edtphone;
     private Button btnsubmit;
     private String phone;
     boolean connected = false;
     private TextView doncount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,29 +61,15 @@ public class DonationCount extends AppCompatActivity {
 
         doncount.setVisibility(View.INVISIBLE);
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
         myref = FirebaseDatabase.getInstance().getReference("Food_Details");
 
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 phone = edtphone.getText().toString().trim();
-                if(phone.isEmpty()) {
+                if (phone.isEmpty()) {
                     edtphone.setError("Please enter Phone Number");
-                } else if(phone.length()!=10) {
+                } else if (phone.length() != 10) {
                     edtphone.setError("Invalid Phone Number");
                 } else {
                     assert connectivityManager != null;
@@ -91,7 +77,7 @@ public class DonationCount extends AppCompatActivity {
                             Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)).getState() == NetworkInfo.State.CONNECTED;
                     if (!connected) {
                         Toast.makeText(DonationCount.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
-                    }else{
+                    } else {
                         Query query = myref.orderByChild("phone").equalTo(phone);
                         query.addValueEventListener(new ValueEventListener() {
                             @Override

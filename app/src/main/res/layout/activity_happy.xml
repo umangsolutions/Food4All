@@ -14,10 +14,10 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
             android:fontFamily="@font/open_sans"
             android:gravity="center"
             android:text="@string/celebrate"
@@ -95,28 +95,27 @@
             android:layout_margin="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/celebdonaddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:hint="@string/address"
-            android:inputType="textPostalAddress|textCapWords" />
+                android:id="@+id/celebdonaddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:hint="@string/address"
+                android:inputType="textPostalAddress|textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
-            <EditText
-                android:id="@+id/celebdate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:focusable="false"
-                android:drawableEnd="@drawable/ic_date_range_black_24dp"
-                android:fontFamily="@font/open_sans"
-                android:hint="@string/date_of_celebration"
-                android:inputType="date"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+        <EditText
+            android:id="@+id/celebdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableEnd="@drawable/ic_date_range_black_24dp"
+            android:focusable="false"
+            android:fontFamily="@font/open_sans"
+            android:hint="@string/date_of_celebration"
+            android:inputType="date"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
 
         <Spinner
@@ -154,16 +153,6 @@
             android:text="@string/submit"
             android:textColor="@color/white" />
 
-        <!--        ca-app-pub-3940256099942544/6300978111-->
-
-        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-7341014042556519/2689368944" />
-        <!--ads:adUnitId="ca-app-pub-7341014042556519/2689368944"-->
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

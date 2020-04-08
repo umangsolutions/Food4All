@@ -12,16 +12,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:fontFamily="@font/open_sans"
             android:gravity="center"
-            android:layout_marginBottom="20dp"
             android:text="@string/search_nearby_ngo_s"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="190dp"
@@ -55,23 +57,6 @@
             android:fontFamily="@font/open_sans"
             android:text="Submit"
             android:textColor="@color/white" />
-
-
-        <!--        ca-app-pub-3940256099942544/6300978111-->
-
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="15dp"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-7341014042556519/2689368944"
-            ></com.google.android.gms.ads.AdView>
-        <!--ads:adUnitId="ca-app-pub-7341014042556519/2689368944"-->
-
-
     </LinearLayout>
 
 

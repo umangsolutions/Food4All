@@ -72,7 +72,6 @@ public class UploadPhotosActivity extends AppCompatActivity {
     Boolean connected = false;
     private String pho;
     MyAppPrefsManager myAppPrefsManager;
-    private AdView mAdView;
 
 
     @Override
@@ -107,21 +106,6 @@ public class UploadPhotosActivity extends AppCompatActivity {
             System.out.println("Current time => " + cd);
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             currdate = df.format(cd);
-
-            MobileAds.initialize(this, new OnInitializationCompleteListener() {
-                @Override
-                public void onInitializationComplete(InitializationStatus initializationStatus) {
-                }
-            });
-
-            AdView adView = new AdView(this);
-            adView.setAdSize(AdSize.BANNER);
-            adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
-
-            mAdView = findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-
 
             myRef = FirebaseDatabase.getInstance().getReference("Volunteers");
             myRef.keepSynced(true);

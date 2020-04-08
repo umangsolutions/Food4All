@@ -110,12 +110,10 @@
     <string name="enter_donor_name">Enter Donor Name</string>
     <string name="saikiran_kopparthi">Saikiran Kopparthi</string>
     <string name="total_no_of_deliveries">Total No. of Deliveries :</string>
-    <string name="enter_username">Username</string>
     <string name="new_recipient_click_here_to_register">New Recipient ? Click here to Register</string>
     <string name="welcome_recipients">We Rise by lifting others</string>
     <string name="spirit_of_giving">Spirit of Giving</string>
     <string name="name_of_organization">Organization Name</string>
-    <string name="username">Username</string>
     <string name="post_donated_photo">Post Donated Photo</string>
     <string name="upload_photo">Upload Photo</string>
     <string name="enter_place">Location</string>
@@ -123,7 +121,6 @@
     <string name="posted_by">Posted By</string>
     <string name="kakinada">Kakinada</string>
     <string name="celebrate_birthday">Celebrate your Occasion</string>
-    <string name="hunger_statistics">Hunger Statistics</string>
     <string name="recipients">Recipients</string>
     <string name="about">About</string>
     <string name="report_issues">Report Issues</string>
@@ -140,18 +137,8 @@
     <string name="verification_code">Verification Code</string>
     <string name="please_enter_verification_code_sent_to_n_91xxxxxxx">Please enter Verification code sent to \n+91xxxxxxx</string>
     <string name="validate_otp">Validate OTP</string>
-    <string name="sthree_raksha">Sthree Raksha</string>
-    <string name="emergen">Emergency Contact</string>
     <string name="contact_police">Contact Police</string>
     <string name="stand_up_for_women_s_safety">Stand up for Volunteer\'s Safety</string>
-
-
-    <string name="address_found" translatable="false">Address found</string>
-
-    <string name="no_address_found" translatable="false">Sorry, no address found</string>
-    <string name="no_location_data_provided" translatable="false">No location data provided</string>
-    <string name="service_not_available" translatable="false">Sorry, the service is not available</string>
-    <string name="invalid_lat_long_used" translatable="false">Invalid latitude or longitude used</string>
 
 
     <string name="view_your_donations">View your Donations</string>
@@ -162,8 +149,6 @@
     <string name="view_your_donations_count">View your Donations Count</string>
 
 
-    <string name="admob_app_id">ca-app-pub-7341014042556519~1951002345</string>
-    <string name="banner_home_footer">ca-app-pub-7341014042556519/2689368944</string>
     <string name="email_id">Email ID</string>
 
 </resources>

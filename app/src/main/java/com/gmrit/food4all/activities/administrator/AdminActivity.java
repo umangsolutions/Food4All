@@ -34,7 +34,6 @@ public class AdminActivity extends AppCompatActivity {
     String name, email, phone;
     int count;
     DatabaseReference databaseReference;
-    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,22 +57,6 @@ public class AdminActivity extends AppCompatActivity {
 
         //keep the data in Offline Mode also
         databaseReference.keepSynced(true);
-
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override

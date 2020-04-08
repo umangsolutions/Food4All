@@ -39,7 +39,6 @@ public class RecipientResetPassword extends AppCompatActivity {
     TextView af;
     FirebaseAuth firebaseAuth;
     boolean connected = false;
-    private AdView mAdView;
     DatabaseReference databaseReference;
 
     @Override
@@ -65,21 +64,6 @@ public class RecipientResetPassword extends AppCompatActivity {
         } else {
             connected = false;
         }
-
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
         if (!connected) {
             Toast.makeText(RecipientResetPassword.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
@@ -144,12 +128,13 @@ public class RecipientResetPassword extends AppCompatActivity {
 
         });
     }
-        @Override
-        public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-            int id = item.getItemId();
-            if (id == android.R.id.home) {
-                onBackPressed();
-            }
-            return super.onOptionsItemSelected(item);
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            onBackPressed();
         }
+        return super.onOptionsItemSelected(item);
+    }
 }

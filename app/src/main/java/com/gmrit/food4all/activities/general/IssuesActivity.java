@@ -36,7 +36,6 @@ public class IssuesActivity extends AppCompatActivity {
     public String s1, s2;
     public String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     boolean connected = false;
-    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,24 +62,6 @@ public class IssuesActivity extends AppCompatActivity {
             Toast.makeText(IssuesActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
         }
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-/*
-        if (!connected) {
-            Toast.makeText(IssuesActivity.this, "Network Unavailable", Toast.LENGTH_SHORT).show();
-        }*/
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,13 +69,11 @@ public class IssuesActivity extends AppCompatActivity {
                 s2 = report.getText().toString().trim();
                 if (s1.isEmpty()) {
                     Toast.makeText(IssuesActivity.this, "Please enter Email", Toast.LENGTH_LONG).show();
-                }else if(!s1.matches(emailPattern)){
+                } else if (!s1.matches(emailPattern)) {
                     Toast.makeText(IssuesActivity.this, "Please enter a Valid Email ID", Toast.LENGTH_LONG).show();
-                }
-                else if (s2.isEmpty()) {
+                } else if (s2.isEmpty()) {
                     Toast.makeText(IssuesActivity.this, "Please enter the Problem", Toast.LENGTH_LONG).show();
                 } else {
-
                     ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                     if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                             connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
@@ -104,8 +83,8 @@ public class IssuesActivity extends AppCompatActivity {
                         ref.push().setValue(rep);
                         Toast.makeText(IssuesActivity.this, "Thank you, We will Contact you Shortly!", Toast.LENGTH_SHORT).show();
                         connected = true;
-                        Intent intent = new Intent(IssuesActivity.this,MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        Intent intent = new Intent(IssuesActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     } else {
                         connected = false;
