@@ -120,7 +120,7 @@
             android:name=".activities.general.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNav"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <meta-data
             android:name="com.google.android.gms.version"
