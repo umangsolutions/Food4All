@@ -1,64 +1,25 @@
 <resources>
     <string name="app_name">Food 4 All</string>
     <string name="title_activity_regvolunteer">regvolunteer</string>
-    <string-array name="placetype">
-        <item>Choose Type of Place</item>
-        <item>Restaurant</item>
-        <item>Commercial Place</item>
-        <item>House</item>
-        <item>Function</item>
-    </string-array>
-
-    <string-array name="timetaken">
-        <item>Cooked Before</item>
-        <item>1 Hour</item>
-        <item>2 Hours</item>
-        <item>3 Hours</item>
-        <item>4 Hours</item>
-        <item>5 Hours</item>
-    </string-array>
-
-    <string-array name="occasion">
-        <item>Select Occasion</item>
-        <item>Birthday</item>
-        <item>Bridal Shower</item>
-        <item>Graduation</item>
-        <item>New Baby</item>
-        <item>Retirement</item>
-        <item>Wedding Anniversary</item>
-    </string-array>
-
-    <string-array name="recipient">
-        <item>Select Recipient</item>
-        <item>Deaf and Dumb School</item>
-        <item>Orphans Old Age Home</item>
-        <item>Orphanage</item>
-        <item>Charity Home</item>
-        <item>School for Physically Challenged</item>
-    </string-array>
-
-
-    <string-array name="organization_type">
-        <item>Type of Recipient</item>
-        <item>Charity Home</item>
-        <item>School for Physically Challenged</item>
-        <item>Orphanages</item>
-        <item>Old Age Homes</item>
-    </string-array>
-
     <string name="gallery">Gallery</string>
-    <string name="profile">Profile</string>
-    <string name="upload">Upload Photos</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_login2">Sign in</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="profile">Profile</string>
+
+    <string name="upload">Upload Photos</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+
+
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="title_activity_login2">Sign in</string>
     <string name="enter_email">Email ID</string>
     <string name="enter_password">Password</string>
     <string name="sign_in">Sign in</string>
     <string name="new_user_click_here_to_register">New User ? Click here to Register</string>
     <string name="register">Register</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="sign_up">Sign up</string>
     <string name="submit">Submit</string>
     <string name="signout">Sign Out</string>
@@ -110,10 +71,12 @@
     <string name="enter_donor_name">Enter Donor Name</string>
     <string name="saikiran_kopparthi">Saikiran Kopparthi</string>
     <string name="total_no_of_deliveries">Total No. of Deliveries :</string>
+    <string name="enter_username">Username</string>
     <string name="new_recipient_click_here_to_register">New Recipient ? Click here to Register</string>
     <string name="welcome_recipients">We Rise by lifting others</string>
     <string name="spirit_of_giving">Spirit of Giving</string>
     <string name="name_of_organization">Organization Name</string>
+    <string name="username">Username</string>
     <string name="post_donated_photo">Post Donated Photo</string>
     <string name="upload_photo">Upload Photo</string>
     <string name="enter_place">Location</string>
@@ -121,6 +84,7 @@
     <string name="posted_by">Posted By</string>
     <string name="kakinada">Kakinada</string>
     <string name="celebrate_birthday">Celebrate your Occasion</string>
+    <string name="hunger_statistics">Hunger Statistics</string>
     <string name="recipients">Recipients</string>
     <string name="about">About</string>
     <string name="report_issues">Report Issues</string>
@@ -137,18 +101,74 @@
     <string name="verification_code">Verification Code</string>
     <string name="please_enter_verification_code_sent_to_n_91xxxxxxx">Please enter Verification code sent to \n+91xxxxxxx</string>
     <string name="validate_otp">Validate OTP</string>
+    <string name="sthree_raksha">Sthree Raksha</string>
+    <string name="emergen">Emergency Contact</string>
     <string name="contact_police">Contact Police</string>
     <string name="stand_up_for_women_s_safety">Stand up for Volunteer\'s Safety</string>
+    <string name="address_found" translatable="false">Address found</string>
+    <string name="no_address_found" translatable="false">Sorry, no address found</string>
+    <string name="no_location_data_provided" translatable="false">No location data provided</string>
+    <string name="service_not_available" translatable="false">Sorry, the service is not available</string>
+    <string name="invalid_lat_long_used" translatable="false">Invalid latitude or longitude used</string>
 
 
     <string name="view_your_donations">View your Donations</string>
+
     <string name="nearby_ngo">Nearby NGO</string>
     <string name="search_nearby_ngo_s">Search Nearby NGO\'s</string>
     <string name="enter_your_location">Enter your Location</string>
     <string name="enter_your_phone_number">Enter your Phone Number</string>
+
+
     <string name="view_your_donations_count">View your Donations Count</string>
-
-
     <string name="email_id">Email ID</string>
+    <string name="banner_home_footer">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="interstitial_full_screen">ca-app-pub-3940256099942544/1033173712</string>
+    <!--   <string name="admob_app_id">ca-app-pub-7341014042556519~1951002345</string>
+    <string name="banner_home_footer">ca-app-pub-7341014042556519/2689368944</string>-->
+    <string-array name="placetype">
+        <item>Choose Type of Place</item>
+        <item>Restaurant</item>
+        <item>Commercial Place</item>
+        <item>House</item>
+        <item>Function</item>
+    </string-array>
+    <string-array name="timetaken">
+        <item>Cooked Before</item>
+        <item>1 Hour</item>
+        <item>2 Hours</item>
+        <item>3 Hours</item>
+        <item>4 Hours</item>
+        <item>5 Hours</item>
+    </string-array>
+
+
+    <string-array name="occasion">
+        <item>Select Occasion</item>
+        <item>Birthday</item>
+        <item>Bridal Shower</item>
+        <item>Graduation</item>
+        <item>New Baby</item>
+        <item>Retirement</item>
+        <item>Wedding Anniversary</item>
+    </string-array>
+    <string-array name="recipient">
+        <item>Select Recipient</item>
+        <item>Deaf and Dumb School</item>
+        <item>Orphans Old Age Home</item>
+        <item>Orphanage</item>
+        <item>Charity Home</item>
+        <item>School for Physically Challenged</item>
+    </string-array>
+
+
+    <string-array name="organization_type">
+        <item>Type of Recipient</item>
+        <item>Charity Home</item>
+        <item>School for Physically Challenged</item>
+        <item>Orphanages</item>
+        <item>Old Age Homes</item>
+    </string-array>
 
 </resources>

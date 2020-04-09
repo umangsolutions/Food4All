@@ -29,12 +29,12 @@ import com.gmrit.food4all.modals.Banners;
 import com.gmrit.food4all.recyclerView.RecyclerViewGallery;
 import com.gmrit.food4all.utilities.ConstantValues;
 import com.gmrit.food4all.utilities.MyAppPrefsManager;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public TextView t, textView;
     MyAppPrefsManager myAppPrefsManager;
 
-    String TAG = "MAIN_ACTIVITY";
+
     boolean doubleBackToExitPressedOnce = false;
 
     SliderView sliderImage;
@@ -66,11 +66,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     List<Banners> modelList = new ArrayList<>();
 
     private AdView mAdView;
-
+    private static final String TAG = "MAIN_ACTIVITY";
+    InterstitialAd interstitialAd = null;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -94,20 +96,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         listAllFiles();
 
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+        mAdView = new AdView(MainActivity.this);
+        mAdView.setAdSize(AdSize.BANNER);
+        mAdView.setAdUnitId(getString(R.string.banner_home_footer));
+
+        mAdView = (AdView) findViewById(R.id.adView);
+
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+
+        interstitialAd= new InterstitialAd(MainActivity.this);
+        interstitialAd.setAdUnitId(getString(R.string.interstitial_full_screen));
+        AdRequest adRequest1 = new AdRequest.Builder().build();
+        interstitialAd.loadAd(adRequest1);
+
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
             @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            public void onAdLoaded() {
+
+                Log.d(TAG, "onAdLoaded: true");
+            }
+
+            @Override
+            public void onAdClosed() {
+                Log.d(TAG, "onAdClosed: true");
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Log.d(TAG, "onAdFailedToLoad: " + errorCode);
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                Log.d(TAG, "onAdLeftApplication: true");
+            }
+
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
             }
         });
-
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-7341014042556519/2689368944");
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
 
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/donateFood")
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -254,8 +286,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
 
+            if (interstitialAd.isLoaded()) {
+                interstitialAd.show();
+                interstitialAd.setAdListener(new AdListener() {
+                    @Override
+                    public void onAdClosed() {
+                        super.onAdClosed();
+                        finish();
+                    }
+                });
+            }else{
+                super.onBackPressed();
+            }
             return;
         }
 
@@ -267,10 +310,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void run() {
 
+
                 doubleBackToExitPressedOnce = false;
 
 
             }
         }, 2000);
     }
+
+
+    @Override
+    public void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
+    }
+
 }
