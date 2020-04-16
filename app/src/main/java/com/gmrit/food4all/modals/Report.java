@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Report implements Serializable {
 
-    String email;
-    String report;
+    private String email;
+    private String report;
 
     public Report() {
     }

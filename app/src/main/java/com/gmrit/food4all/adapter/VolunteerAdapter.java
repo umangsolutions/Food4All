@@ -59,8 +59,8 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
-        myAppPrefsManager=new MyAppPrefsManager(context);
-        String email=myAppPrefsManager.getUserName();
+        myAppPrefsManager = new MyAppPrefsManager(context);
+        String email = myAppPrefsManager.getUserName();
 
         myRef = FirebaseDatabase.getInstance().getReference("Volunteers");
         myRef.keepSynced(true);
@@ -86,28 +86,27 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
         holder.type.setText(place);
 
 
-       try {
+        try {
 
-           holder.address.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   String map = "http://maps.google.co.in/maps?q=" + donoradd;
-                   Intent intent1 = new Intent(Intent.ACTION_VIEW,Uri.parse(map));
-                   context.startActivity(intent1);
-               }
-           });
+            holder.address.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String map = "http://maps.google.co.in/maps?q=" + donoradd;
+                    Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
+                    context.startActivity(intent1);
+                }
+            });
 
-           holder.phone.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", donorphone, null));
-                   context.startActivity(intent);
-               }
-           });
-       } catch (SecurityException e) {
-           e.printStackTrace();
-       }
-
+            holder.phone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", donorphone, null));
+                    context.startActivity(intent);
+                }
+            });
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
 
 
         @SuppressLint("SimpleDateFormat")
@@ -144,12 +143,12 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for (DataSnapshot datas : dataSnapshot.getChildren()) {
 
-                                    String key=datas.getKey();
+                                    String key = datas.getKey();
                                     assert key != null;
 
                                     String volname = datas.getValue(Volunteer.class).getName();
                                     //volphone[0] = datas.getValue(Volunteer.class).getPhone();
-                                    String key1=myRef.push().getKey();
+                                    String key1 = myRef.push().getKey();
                                     assert key1 != null;
                                     myRef.child(key).child("bookedData").child(key1).setValue(
 
@@ -182,9 +181,6 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
                         });
 
 
-
-
-
                         openDialog(position);
 
 
@@ -192,8 +188,6 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
                        /* SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(donorphone, null, message, null, null);
 */
-
-
 
 
                     });
@@ -266,7 +260,7 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.MyVi
                         Uri sendSmsTo = Uri.parse("smsto:" + donor_no);
                         Intent intent = new Intent(
                                 Intent.ACTION_SENDTO, sendSmsTo);
-                        intent.putExtra("sms_body",message);
+                        intent.putExtra("sms_body", message);
                         context.startActivity(intent);
                         //context.startActivity(new Intent(context, MainActivity.class));
 

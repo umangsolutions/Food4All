@@ -143,7 +143,7 @@ public class VolunteerLoginActivity extends AppCompatActivity {
                             final String category = dataSnapshot1.getValue(Volunteer.class).getCategory();
                             //   Toast.makeText(RecipientLoginActivity.this, "" + category, Toast.LENGTH_SHORT).show();
                             if (category.equals("Volunteer")) {
-                                userLogin(email,pwd);
+                                userLogin(email, pwd);
                             }
                         }
                     } else {
@@ -160,12 +160,12 @@ public class VolunteerLoginActivity extends AppCompatActivity {
         }
     }
 
-    private void userLogin(String email,String pwd) {
+    private void userLogin(String email, String pwd) {
         progressDialog.setMessage("Logging in...");
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
-        firebaseAuth.signInWithEmailAndPassword(email,pwd)
+        firebaseAuth.signInWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -208,9 +208,9 @@ public class VolunteerLoginActivity extends AppCompatActivity {
         if (id == android.R.id.home) {
             onBackPressed();
         }
-        if(id ==R.id.action_alertvollog){
-            Intent emergency=new Intent(VolunteerLoginActivity.this, SthreeRaksha.class);
-            emergency.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        if (id == R.id.action_alertvollog) {
+            Intent emergency = new Intent(VolunteerLoginActivity.this, SthreeRaksha.class);
+            emergency.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(emergency);
             return true;
         }

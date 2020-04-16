@@ -3,8 +3,8 @@ package com.gmrit.food4all.modals;
 import java.io.Serializable;
 
 public class AuthorisedDonor implements Serializable {
-    String no_of_pople;
-    String time_cooked;
+    private String no_of_pople;
+    private String time_cooked;
 
     public AuthorisedDonor() {
     }

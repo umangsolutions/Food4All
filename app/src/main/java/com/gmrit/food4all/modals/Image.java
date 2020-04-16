@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class Image implements Serializable {
 
-    String name;
-    String date;
-    String noofplaces;
-    String area;
-    String url;
+    private String name;
+    private String date;
+    private String noofplaces;
+    private String area;
+    private String url;
 
     public Image() {
     }

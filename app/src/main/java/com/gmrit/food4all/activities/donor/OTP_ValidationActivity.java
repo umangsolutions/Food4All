@@ -79,15 +79,6 @@ public class OTP_ValidationActivity extends AppCompatActivity {
         tim = bundle.getString(getString(R.string.bun_time));
         currdate = bundle.getString(getString(R.string.currentdate));
 
-        Log.d(TAG, "onCreate: " + "\n" + "OTP : " + recvdotp
-                + "\n" + "name : " + name
-                + "\n" + "place : " + place
-                + "\n" + "address : " + address
-                + "\n" + "phone : " + phon
-                + "\n" + "food : " + foodno
-                + "\n" + "time : " + tim
-                + "\n" + "date : " + currdate);
-
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/userABC1");
 
         btnvalidate.setOnClickListener(new View.OnClickListener() {

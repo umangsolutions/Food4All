@@ -150,9 +150,9 @@ public class VolunteerActivity extends AppCompatActivity {
             return true;
         }
 
-        if(item.getItemId()==R.id.action_alert){
-            Intent emergency=new Intent(VolunteerActivity.this, SthreeRaksha.class);
-            emergency.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        if (item.getItemId() == R.id.action_alert) {
+            Intent emergency = new Intent(VolunteerActivity.this, SthreeRaksha.class);
+            emergency.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(emergency);
             return true;
         }

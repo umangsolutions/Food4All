@@ -29,7 +29,7 @@ import static com.gmrit.food4all.receiver.NetworkStateChangeReceiver.IS_NETWORK_
  **/
 
 
- public  class ConstantValues {
+public class ConstantValues {
 
     public static boolean IS_USER_LOGGED_IN;
     public static final String TYPE_TEXT_PLAIN = "text/plain";
@@ -46,13 +46,11 @@ import static com.gmrit.food4all.receiver.NetworkStateChangeReceiver.IS_NETWORK_
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 
-
         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(email1);
         return !matcher.matches();
 
     }
-
 
 
     public static void shareDeepLink(Activity activity, String str) {
@@ -65,13 +63,13 @@ import static com.gmrit.food4all.receiver.NetworkStateChangeReceiver.IS_NETWORK_
     }
 
     // Validating pincode
-    public static  boolean isValidPincode(String pass1) {
+    public static boolean isValidPincode(String pass1) {
 
         return pass1 == null || pass1.length() != 6;
     }
 
     // Validating password
-    public static  boolean isValidPassword1(String pass1) {
+    public static boolean isValidPassword1(String pass1) {
 
         return pass1 == null || pass1.length() <= 5;
     }
@@ -93,30 +91,31 @@ import static com.gmrit.food4all.receiver.NetworkStateChangeReceiver.IS_NETWORK_
     //Validating Address
     public static boolean validAddress(String pass1) {
 
-        String pat="^[a-zA-Z0-9]+([-/:\\s,][a-zA-Z0-9]+)*?$";
+        String pat = "^[a-zA-Z0-9]+([-/:\\s,][a-zA-Z0-9]+)*?$";
         return !pass1.matches(pat) || pass1.length() <= 2;
 
     }
-    public static  boolean validSchool(String pass1) {
+
+    public static boolean validSchool(String pass1) {
 
         return !pass1.matches("^[a-zA-Z0-9]+(\\s[a-zA-Z0-9]+)*?$") || pass1.length() <= 2;
 
     }
 
     //Validtaing Names
-    public static boolean validateFirstName( String firstName )
-    {
-        return !firstName.matches( "^[a-zA-Z]+(\\s[a-zA-Z]+)*?$" );
+    public static boolean validateFirstName(String firstName) {
+        return !firstName.matches("^[a-zA-Z]+(\\s[a-zA-Z]+)*?$");
 
     }
 
     //Validating Mobile
-      public  static boolean isValidMoblie(String pass1) {
+    public static boolean isValidMoblie(String pass1) {
 
         return pass1 == null || pass1.length() != 10;
 
     }
-    public  static boolean isValidOTP(String pass1) {
+
+    public static boolean isValidOTP(String pass1) {
 
         return pass1 == null || pass1.length() != 6;
 
@@ -128,9 +127,9 @@ import static com.gmrit.food4all.receiver.NetworkStateChangeReceiver.IS_NETWORK_
 
     public static String getFormattedDate(String str, String j) {
         @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat spf=new SimpleDateFormat("yyyy-MM-dd hh:mm:sss");
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd hh:mm:sss");
 
-        Date newDate= null;
+        Date newDate = null;
         try {
             newDate = spf.parse(j);
         } catch (ParseException e) {
@@ -158,7 +157,7 @@ import static com.gmrit.food4all.receiver.NetworkStateChangeReceiver.IS_NETWORK_
     }
 
 
-    public static void internetCheck(Activity context){
+    public static void internetCheck(Activity context) {
         IntentFilter intentFilter = new IntentFilter(NetworkStateChangeReceiver.NETWORK_AVAILABLE_ACTION);
         LocalBroadcastManager.getInstance(context).registerReceiver(new BroadcastReceiver() {
             @Override
@@ -166,12 +165,10 @@ import static com.gmrit.food4all.receiver.NetworkStateChangeReceiver.IS_NETWORK_
                 boolean isNetworkAvailable = intent.getBooleanExtra(IS_NETWORK_AVAILABLE, false);
                 String networkStatus = isNetworkAvailable ? "Available" : "Not Available";
 
-                if (networkStatus.equals("Not Available"))
-                {
+                if (networkStatus.equals("Not Available")) {
                     Toast.makeText(context, "No Internet Found", Toast.LENGTH_SHORT).show();
 
-                }
-                else {
+                } else {
                     Toast.makeText(context, " Internet Found", Toast.LENGTH_SHORT).show();
 
                 }

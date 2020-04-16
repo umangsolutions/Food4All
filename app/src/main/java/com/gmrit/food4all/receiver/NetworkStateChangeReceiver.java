@@ -20,7 +20,7 @@ public class NetworkStateChangeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent networkStateIntent = new Intent(NETWORK_AVAILABLE_ACTION);
-        networkStateIntent.putExtra(IS_NETWORK_AVAILABLE,  isConnectedToInternet(context));
+        networkStateIntent.putExtra(IS_NETWORK_AVAILABLE, isConnectedToInternet(context));
         LocalBroadcastManager.getInstance(context).sendBroadcast(networkStateIntent);
     }
 

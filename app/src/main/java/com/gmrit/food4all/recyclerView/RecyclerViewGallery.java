@@ -64,13 +64,13 @@ public class RecyclerViewGallery extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                            Image d = dataSnapshot1.getValue(Image.class);
-                            list.add(d);
-                        }
-                        progressDialog.dismiss();
-                        myAdapter = new GalleryAdapter(RecyclerViewGallery.this, list);
-                        recyclerView.setAdapter(myAdapter);
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        Image d = dataSnapshot1.getValue(Image.class);
+                        list.add(d);
+                    }
+                    progressDialog.dismiss();
+                    myAdapter = new GalleryAdapter(RecyclerViewGallery.this, list);
+                    recyclerView.setAdapter(myAdapter);
                 } else {
                     progressDialog.dismiss();
                     Toast.makeText(RecyclerViewGallery.this, "No Photos to Show", Toast.LENGTH_LONG).show();

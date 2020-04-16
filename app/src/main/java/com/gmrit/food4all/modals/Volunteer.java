@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class Volunteer implements Serializable {
 
-    String Name;
-    String Email;
-    String Phone;
-    int count=0;
-    String category;
+    private String Name;
+    private String Email;
+    private String Phone;
+    private int count=0;
+    private String category;
 
     public Volunteer() {
     }

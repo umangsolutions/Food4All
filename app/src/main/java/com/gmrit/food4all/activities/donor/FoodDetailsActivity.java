@@ -165,7 +165,6 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
                 TimeUnit.SECONDS,   // Unit of timeout
                 this,               // Activity (for callback binding)
                 mCallbacks);
-        Log.d(TAG, "sendVerificationCode: " + phoneNumber);
     }
 
 
@@ -193,7 +192,6 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-            Log.d(TAG, "onVerificationCompleted: " + phoneAuthCredential);
             ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                     connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
@@ -259,7 +257,6 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            Log.d(TAG, "onVerificationFailed: " + e.toString());
             if (e instanceof FirebaseAuthInvalidCredentialsException) {
                 // Invalid request
                 // [START_EXCLUDE]
@@ -281,7 +278,6 @@ public class FoodDetailsActivity extends AppCompatActivity implements AdapterVie
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
             codesent = s;
-            Log.d(TAG, "onCodeSent: " + s);
             goToNext();
         }
     };

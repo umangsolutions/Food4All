@@ -40,8 +40,6 @@ public class BannerAdapter extends SliderViewAdapter<BannerAdapter.SliderAdapter
     public void onBindViewHolder(SliderAdapterVH viewHolder, int position) {
         viewHolder.textViewDescription.setText("");
 
-        Log.d(TAG, "onBindViewHolder: " + dataBeans.get(position).getUrl());
-
 /*
 
         Picasso.get()

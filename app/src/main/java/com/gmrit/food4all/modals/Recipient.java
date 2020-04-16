@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class Recipient implements Serializable {
 
-    String org_name;
-    String type;
-    String email;
-    String password;
-    String phone;
-    String address;
-    String category;
+    private String org_name;
+    private String type;
+    private String email;
+    private String password;
+    private String phone;
+    private String address;
+    private String category;
 
     public Recipient() {
     }

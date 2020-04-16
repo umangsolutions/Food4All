@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         AdRequest adRequest = new AdRequest.Builder().build();
 
 
-        interstitialAd= new InterstitialAd(MainActivity.this);
+        interstitialAd = new InterstitialAd(MainActivity.this);
         interstitialAd.setAdUnitId(getString(R.string.interstitial_full_screen));
         AdRequest adRequest1 = new AdRequest.Builder().build();
         interstitialAd.loadAd(adRequest1);
@@ -116,22 +116,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onAdLoaded() {
 
-                Log.d(TAG, "onAdLoaded: true");
             }
 
             @Override
             public void onAdClosed() {
-                Log.d(TAG, "onAdClosed: true");
+
             }
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
-                Log.d(TAG, "onAdFailedToLoad: " + errorCode);
+
             }
 
             @Override
             public void onAdLeftApplication() {
-                Log.d(TAG, "onAdLeftApplication: true");
+
             }
 
 
@@ -149,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         if (!task.isSuccessful()) {
                             msg = "getString(R.string.msg_subscribe_failed)";
                         }
-                        Log.d(TAG, msg);
+
                     }
                 });
 
@@ -200,13 +199,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     modelList.clear();
                     for (StorageReference item : listResult.getItems()) {
                         // All the items under listRef.
-                        Log.d(TAG, "onSuccess1: " + item.getPath());
 
                         // [START download_via_url]
                         storageRef1.child(item.getPath()).getDownloadUrl().addOnSuccessListener(uri -> {
 
-
-                            Log.d(TAG, "listAllFiles: " + item.getName() + uri.toString());
                             modelList.add(new Banners(item.getName(), uri.toString()));
                             BannerAdapter adapter = new BannerAdapter(MainActivity.this, modelList);
                             sliderImage.setSliderAdapter(adapter);
@@ -296,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         finish();
                     }
                 });
-            }else{
+            } else {
                 super.onBackPressed();
             }
             return;

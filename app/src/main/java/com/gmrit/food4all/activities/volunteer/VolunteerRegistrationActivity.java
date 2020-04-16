@@ -217,23 +217,9 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            /*if (!ph.isEmpty()) {
-                                SmsManager sms = SmsManager.getDefault();
-                                String msg = "Welcome  " + n + ",\nWe feel very Happy to see you Here.\nYou will be notified when there is a Donation\n\n Happy Volunteering !";
-                                sms.sendTextMessage(ph, null, msg, null, null);
 
-
-                                String intro="Welcome  \" + n + \",\\nWe feel very Happy to see you Here.\\nYou will be notified when there is a Donation\\n\\n Happy Volunteering !";
-                                String phoneNumber=ph;
-                                Uri sms_uri = Uri.parse("smsto:" +phoneNumber);
-                                Intent sms_intent = new Intent(Intent.ACTION_VIEW, sms_uri);
-                                sms_intent.setData(sms_uri);
-                                sms_intent.putExtra("sms_body", intro);
-                                startActivity(sms_intent);
-                            }*/
-                            Log.d(TAG, "onComplete: " + email);
                             progressDialog.dismiss();
-                            reff.push().setValue(new Volunteer(n, email, ph, count,"Volunteer"));
+                            reff.push().setValue(new Volunteer(n, email, ph, count, "Volunteer"));
                             Intent i = new Intent(VolunteerRegistrationActivity.this, VolunteerLoginActivity.class);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(i);
@@ -244,17 +230,14 @@ public class VolunteerRegistrationActivity extends AppCompatActivity {
                                 throw Objects.requireNonNull(task.getException());
                             } catch (FirebaseAuthInvalidCredentialsException malformedEmail) {
                                 progressDialog.dismiss();
-                                Log.d(TAG, "onComplete: malformed_email");
                                 Toast.makeText(VolunteerRegistrationActivity.this, "Invalid Email", Toast.LENGTH_SHORT).show();
 
                             } catch (FirebaseAuthUserCollisionException existEmail) {
                                 progressDialog.dismiss();
-                                Log.d(TAG, "onComplete: exist_email");
                                 Toast.makeText(VolunteerRegistrationActivity.this, "Volunteer Email Id Already Exists", Toast.LENGTH_SHORT).show();
 
                             } catch (Exception e) {
                                 progressDialog.dismiss();
-                                Log.d(TAG, "onComplete: " + e.getMessage());
                                 Toast.makeText(VolunteerRegistrationActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }

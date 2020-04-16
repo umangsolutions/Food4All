@@ -136,21 +136,6 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                 } else {
                     if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                             connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-                      /*  final ProgressDialog progressDialog = new ProgressDialog(RecipientRegistrationActivity.this);
-                        progressDialog.setMessage("Registering...");
-                        progressDialog.show();
-                        progressDialog.setCancelable(false);
-                        progressDialog.setCanceledOnTouchOutside(false);
-                        databaseReference.setValue(orphanage_modal).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                progressDialog.dismiss();
-                                Toast.makeText(RecipientRegistrationActivity.this, "Registered Successfully !", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(RecipientRegistrationActivity.this, RecipientLoginActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-                            }
-                        });*/
                         registerUser(nam, orgtype, email, pw, ph, add);
                     } else {
                         Toast.makeText(RecipientRegistrationActivity.this, "Internet Unavailable", Toast.LENGTH_SHORT).show();
@@ -175,7 +160,6 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            Log.d(TAG, "onComplete: " + email);
                             progressDialog.dismiss();
 
                             Recipient orphanage_modal = new Recipient(nam, orgtype, email, password, ph, add, "Recipient");
@@ -191,17 +175,14 @@ public class RecipientRegistrationActivity extends AppCompatActivity implements 
                                 throw Objects.requireNonNull(task.getException());
                             } catch (FirebaseAuthInvalidCredentialsException malformedEmail) {
                                 progressDialog.dismiss();
-                                Log.d(TAG, "onComplete: malformed_email");
                                 Toast.makeText(RecipientRegistrationActivity.this, "Invalid Email", Toast.LENGTH_SHORT).show();
 
                             } catch (FirebaseAuthUserCollisionException existEmail) {
                                 progressDialog.dismiss();
-                                Log.d(TAG, "onComplete: exist_email");
                                 Toast.makeText(RecipientRegistrationActivity.this, "Recipient Email Id Already Exists", Toast.LENGTH_SHORT).show();
 
                             } catch (Exception e) {
                                 progressDialog.dismiss();
-                                Log.d(TAG, "onComplete: " + e.getMessage());
                                 Toast.makeText(RecipientRegistrationActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }

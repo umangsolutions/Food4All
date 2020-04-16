@@ -17,11 +17,11 @@ public class MyAppPrefsManager {
     private static final String PREF_NAME = "BLOOD_BANK";
 
 
-    private static final String USER_ID  = "user_id";
-    private static final String USER_NAME  = "user_name";
-    private static final String USER_MOBILE  = "user_mobile";
-    private static final String USER_PINCODE  = "user_pincode";
-    private static final String USER_LANGUAGE_CODE  = "language_Code";
+    private static final String USER_ID = "user_id";
+    private static final String USER_NAME = "user_name";
+    private static final String USER_MOBILE = "user_mobile";
+    private static final String USER_PINCODE = "user_pincode";
+    private static final String USER_LANGUAGE_CODE = "language_Code";
     private static final String IS_USER_LOGGED_IN = "isLogged_in";
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
     private static final String IS_PUSH_NOTIFICATIONS_ENABLED = "isPushNotificationsEnabled";
@@ -35,11 +35,7 @@ public class MyAppPrefsManager {
     static final String DD_MMM_YYYY_DATE_FORMAT = "dd MMM yyyy";
 
 
-
-
-
-
-     public MyAppPrefsManager(Context context) {
+    public MyAppPrefsManager(Context context) {
         int PRIVATE_MODE = 0;
         sharedPreferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         prefsEditor = sharedPreferences.edit();
@@ -47,14 +43,11 @@ public class MyAppPrefsManager {
     }
 
 
-
-
-
     public void setUserId(String userId) {
         prefsEditor.putString(USER_ID, userId);
         prefsEditor.commit();
     }
-    
+
     public String getUserId() {
         return sharedPreferences.getString(USER_ID, null);
     }
@@ -88,17 +81,17 @@ public class MyAppPrefsManager {
     public String getUserPincode() {
         return sharedPreferences.getString(USER_PINCODE, null);
     }
-    
+
     public void setUserLanguageCode(String langCode) {
         prefsEditor.putString(USER_LANGUAGE_CODE, langCode);
         prefsEditor.commit();
     }
-    
+
     public String getUserLanguageCode() {
         return sharedPreferences.getString(USER_LANGUAGE_CODE, "en");
     }
-    
-    
+
+
     public void setUserLoggedIn(boolean isUserLoggedIn) {
         prefsEditor.putBoolean(IS_USER_LOGGED_IN, isUserLoggedIn);
         prefsEditor.commit();

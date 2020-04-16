@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class DonorDetails implements Serializable {
 
-    String Name;
-    String Email;
-    String Phone;
-    String address;
-    String type;
+    private String Name;
+    private String Email;
+    private String Phone;
+    private String address;
+    private String type;
 
     public DonorDetails() {
     }

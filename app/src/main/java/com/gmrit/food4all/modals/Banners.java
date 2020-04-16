@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Banners implements Serializable {
 
-    String name;
-    String url;
+    private String name;
+    private String url;
 
     public Banners(String name, String url) {
         this.name = name;
