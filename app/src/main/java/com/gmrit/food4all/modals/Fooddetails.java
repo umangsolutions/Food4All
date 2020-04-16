@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class Fooddetails  implements Serializable {
 
-    String name;
-    String phone;
-    String address;
-    String place;
-    String status;
-    String time;
-    String date;
-    String no_of_people;
+    private String name;
+    private String phone;
+    private String address;
+    private String place;
+    private String status;
+    private String time;
+    private String date;
+    private String no_of_people;
 
 
     public Fooddetails() {
