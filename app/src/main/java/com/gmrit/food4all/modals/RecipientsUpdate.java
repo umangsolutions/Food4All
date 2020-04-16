@@ -1,10 +1,13 @@
 package com.gmrit.food4all.modals;
 
-public class RecipientsUpdate {
-    private String don_name;
-    private String vol_name;
-    private String vol_phone;
-    private String no_of_people;
+import java.io.Serializable;
+
+public class RecipientsUpdate implements Serializable {
+
+    String don_name;
+    String vol_name;
+    String vol_phone;
+    String no_of_people;
 
     public RecipientsUpdate() {
     }

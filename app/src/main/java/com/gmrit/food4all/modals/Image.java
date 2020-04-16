@@ -1,11 +1,14 @@
 package com.gmrit.food4all.modals;
 
-public class Image {
-    private String name;
-    private String date;
-    private String noofplaces;
-    private String area;
-    private String url;
+import java.io.Serializable;
+
+public class Image implements Serializable {
+
+    String name;
+    String date;
+    String noofplaces;
+    String area;
+    String url;
 
     public Image() {
     }

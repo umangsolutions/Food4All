@@ -1,11 +1,14 @@
 package com.gmrit.food4all.modals;
 
-public class DonorDetails {
-    private String Name;
-    private String Email;
-    private String Phone;
-    private String address;
-    private String type;
+import java.io.Serializable;
+
+public class DonorDetails implements Serializable {
+
+    String Name;
+    String Email;
+    String Phone;
+    String address;
+    String type;
 
     public DonorDetails() {
     }

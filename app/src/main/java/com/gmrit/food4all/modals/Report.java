@@ -1,6 +1,9 @@
 package com.gmrit.food4all.modals;
 
-public class Report {
+import java.io.Serializable;
+
+public class Report implements Serializable {
+
     String email;
     String report;
 

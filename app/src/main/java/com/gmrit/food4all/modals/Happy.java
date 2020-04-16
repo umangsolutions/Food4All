@@ -1,14 +1,17 @@
 package com.gmrit.food4all.modals;
 
-public class Happy {
-    private String name;
-    private String occasion;
-    private String email;
-    private String phone;
-    private String money;
-    private String recip;
-    private String address;
-    private String date;
+import java.io.Serializable;
+
+public class Happy implements Serializable {
+
+    String name;
+    String occasion;
+    String email;
+    String phone;
+    String money;
+    String recip;
+    String address;
+    String date;
 
     public Happy() {
     }

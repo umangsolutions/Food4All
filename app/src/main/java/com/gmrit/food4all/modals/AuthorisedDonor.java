@@ -1,8 +1,10 @@
 package com.gmrit.food4all.modals;
 
-public class AuthorisedDonor {
-    private String no_of_pople;
-    private String time_cooked;
+import java.io.Serializable;
+
+public class AuthorisedDonor implements Serializable {
+    String no_of_pople;
+    String time_cooked;
 
     public AuthorisedDonor() {
     }

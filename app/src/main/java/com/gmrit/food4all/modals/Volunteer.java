@@ -1,11 +1,14 @@
 package com.gmrit.food4all.modals;
 
-public class Volunteer {
-    private String Name;
-    private String Email;
-    private String Phone;
-    private int count=0;
-    private String category;
+import java.io.Serializable;
+
+public class Volunteer implements Serializable {
+
+    String Name;
+    String Email;
+    String Phone;
+    int count=0;
+    String category;
 
     public Volunteer() {
     }

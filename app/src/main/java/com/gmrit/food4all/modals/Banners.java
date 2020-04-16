@@ -1,6 +1,8 @@
 package com.gmrit.food4all.modals;
 
-public class Banners {
+import java.io.Serializable;
+
+public class Banners implements Serializable {
 
     String name;
     String url;
